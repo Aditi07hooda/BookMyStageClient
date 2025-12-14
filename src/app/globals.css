@@ -1,0 +1,149 @@
+/* ===== REVIEW TAB CONTAINER ===== */
+.review-tab-pane {
+  padding: 30px 0;
+}
+
+/* ===== WRAPPER ===== */
+.review-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* ===== SCROLL AREA ===== */
+.review-scroll {
+  max-height: 520px;
+  overflow-y: auto;
+  padding-right: 6px;
+}
+
+/* Scrollbar */
+.review-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+
+.review-scroll::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 10px;
+}
+
+/* ===== REVIEW LIST ===== */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* ===== REVIEW CARD ===== */
+.review-card {
+  display: flex;
+  gap: 16px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  transition: all 0.25s ease;
+}
+
+.review-card:hover {
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ===== AVATAR ===== */
+.review-avatar img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f3f4f6;
+}
+
+/* ===== CONTENT ===== */
+.review-content {
+  flex: 1;
+}
+
+/* ===== HEADER ===== */
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.review-user {
+  font-size: 14px;
+  font-weight: 600;
+  color: #111827;
+  word-break: break-word;
+}
+
+.review-date {
+  font-size: 12px;
+  color: #6b7280;
+  white-space: nowrap;
+}
+
+/* ===== STARS ===== */
+.review-stars {
+  display: flex;
+  gap: 4px;
+  margin: 6px 0 10px;
+}
+
+/* Golden star color */
+.review-stars svg,
+.review-stars i {
+  color: #fbbf24;
+  fill: #fbbf24;
+  font-size: 15px;
+}
+
+/* Empty star (if applicable) */
+.review-stars .empty {
+  color: #d1d5db;
+  fill: #d1d5db;
+}
+
+/* ===== REVIEW TEXT ===== */
+.review-text {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #374151;
+}
+
+/* ===== EMPTY STATE ===== */
+.review-empty {
+  text-align: center;
+  padding: 60px 0;
+  color: #6b7280;
+}
+
+.review-empty p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* ===== ADD REVIEW FORM ===== */
+.review-form {
+  margin-top: 50px;
+  padding-top: 30px;
+  border-top: 1px solid #e5e7eb;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 640px) {
+  .review-card {
+    flex-direction: column;
+  }
+
+  .review-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .review-date {
+    font-size: 11px;
+  }
+}
