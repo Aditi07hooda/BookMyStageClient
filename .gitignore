@@ -1,0 +1,12 @@
+node_modules
+.env
+.extra.txt
+src/uploads
+uploads
+temp
+youtube_ready
+client_secret.json
+token.json
+dist
+/dist
+.vscode

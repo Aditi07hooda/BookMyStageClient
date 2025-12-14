@@ -1,0 +1,16 @@
+Processing Summary:
+Folder: Dancing Event
+  ✔ Processed: 013b4be0-58b0-424a-b278-f99239a0415e.mp4
+  Total processed: 1
+  Total failed: 0
+
+Folder: Standup Comedy
+  ✔ Processed: a187a6c2-cd5d-4521-8063-c3c4995c4a51.mp4
+  ✔ Processed: a593b1c9-14e4-4ed7-8476-37a3a4ae3dbf.mp4
+  Total processed: 2
+  Total failed: 0
+
+Overall Summary:
+  Total videos processed: 3
+  Total videos failed: 0
+
