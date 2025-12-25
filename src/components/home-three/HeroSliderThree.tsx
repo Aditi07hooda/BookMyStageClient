@@ -1,11 +1,13 @@
 "use client";
 import Link from "next/link";
 import React from "react";
-import { Scrollbar, A11y, Autoplay, Pagination, EffectFade } from "swiper";
+import { Scrollbar, A11y, Autoplay, Pagination, EffectFade } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import { offerProductType } from "@/interFace/api-interFace";
 import HeroSliderPreloader from "@/preloaders/HeroSliderPreloader";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 interface productsType {
   product: offerProductType[];

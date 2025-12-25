@@ -1,12 +1,15 @@
 "use client";
 import React,{useState,useEffect} from "react";
-import { Scrollbar, A11y, Autoplay } from "swiper";
+import { Scrollbar, A11y, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import Link from "next/link";
 import Image from "next/image";
 import { SubCategoryType } from "@/interFace/api-interFace";
 import axios from "axios";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+
 const BrandSlider = () => {
   const [subCategory, setSubCategory] = useState<SubCategoryType[]>([]);
   useEffect(() => { 

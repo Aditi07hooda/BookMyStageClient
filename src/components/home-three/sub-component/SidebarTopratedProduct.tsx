@@ -37,12 +37,13 @@ const SidebarTopratedProduct = () => {
            {products?.length && (
           <div className="bd-populer__item-wrapper">
             {products.slice(0, 4)?.map((item, key) => {
-              const sum = item.rettings.reduce(
+              const rettingsArray = Array.from(item.rettings.values());
+              const sum = rettingsArray.reduce(
                 (acc: number, currentValue: number) => acc + currentValue,
                 0
               );
 
-              const rettingsLength = item.rettings.length;
+              const rettingsLength = rettingsArray.length;
               const rowRetting = rettingsLength > 0 ? sum / rettingsLength : 0;
               const averageRating = parseFloat(rowRetting.toFixed(1));
               return (

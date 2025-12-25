@@ -1,13 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Scrollbar, A11y, Autoplay } from "swiper";
+import { Scrollbar, A11y, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import axios from "axios";
 import GetRatting from "@/hooks/GetRatting";
 import { UserReviewType } from "@/interFace/api-interFace";
 import Image from "next/image";
 import defaultIcon from "../../../public/assets/img/testimonial/testimonial-1.png"
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const ProductTestSlider = () => {
   const [products, setproducts] = useState<UserReviewType[]>([]);

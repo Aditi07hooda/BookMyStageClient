@@ -1,5 +1,5 @@
 import React from 'react';
-import { EffectFade, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper';
+import { EffectFade, Pagination, Scrollbar, A11y, Autoplay, } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import CountUpContent from '../common/counter/CountUpContent';
 import thumbOne from "../../../public/assets/img/banner/slider/slider-01.jpg"

@@ -1,13 +1,15 @@
 "use client"
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { Scrollbar, A11y, Autoplay } from "swiper";
+import { Scrollbar, A11y, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import axios from "axios";
 import { CategoryType } from "@/interFace/api-interFace";
 import Image from "next/image";
 import { productsPreloader } from "@/data/preloader-data";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const CategorySlider = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);

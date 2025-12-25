@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
-import { A11y, Autoplay, Navigation } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
+import { A11y, Autoplay, Navigation } from "swiper/modules";
 import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -15,6 +14,10 @@ import useGlobalContext from "@/hooks/use-context";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
 import ProductModal from "@/components/shop/ProductModal";
 import ShopPreloader from "@/preloaders/ShopPreloader";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+
 const TrendingProductSlider = ({ trending_product_title }: any) => {
   const { setOpenModal, setModalId, openModal } = useGlobalContext();
   const dispatch = useDispatch();

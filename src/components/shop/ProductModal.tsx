@@ -4,8 +4,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Thumbs, Controller, Navigation } from "swiper";
-import "swiper/css/bundle";
+import { FreeMode, Thumbs, Controller, Navigation } from "swiper/modules";
 import useGlobalContext from "@/hooks/use-context";
 import Image from "next/image";
 import { cart_product, decrease_quantity } from "@/redux/slices/cartSlice";
@@ -19,6 +18,10 @@ import visa from "../../../public/assets/img/icon/visa.png";
 import GetRatting from "@/hooks/GetRatting";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
+
 const ProductModal = () => {
   const { modalId } = useGlobalContext();
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);

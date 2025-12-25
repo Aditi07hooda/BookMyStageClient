@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
-import { Scrollbar, A11y, Autoplay, Navigation } from "swiper";
+import { Scrollbar, A11y, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import { testimonialList } from "@/data/testimonial-data";
 import Image from "next/image";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const AboutTestSlider = () => {
   return (

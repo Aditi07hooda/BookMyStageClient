@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Scrollbar, A11y, Autoplay, Navigation } from "swiper";
+import { Scrollbar, A11y, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import { useDispatch } from "react-redux";
 import { CategoryType } from "@/interFace/api-interFace";
 import { CartProductType } from "@/interFace/interFace";
@@ -14,6 +13,9 @@ import ProductModal from "../shop/ProductModal";
 import useGlobalContext from "@/hooks/use-context";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
 import GetRatting from "@/hooks/GetRatting";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const ProductSlider = () => {
   const { setOpenModal, openModal, setModalId } = useGlobalContext();
@@ -158,13 +160,14 @@ const ProductSlider = () => {
                                 }}
                               >
                                 {products.slice(0, 5).map((item, index) => {
-                                  const sum = item.rettings.reduce(
+                                  const rettingsArray = Array.from(item.rettings.values());
+                                  const sum = rettingsArray.reduce(
                                     (acc: number, currentValue: number) =>
                                       acc + currentValue,
                                     0
                                   );
 
-                                  const rettingsLength = item.rettings.length;
+                                  const rettingsLength = rettingsArray.length;
                                   const rowRetting =
                                     rettingsLength > 0
                                       ? sum / rettingsLength

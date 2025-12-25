@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { FreeMode, Thumbs, Controller, Navigation } from "swiper";
+import { FreeMode, Thumbs, Controller, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import Breadcrumb from "../common/breadcrumb/Breadcrumb";
 import axios from "axios";
 import discover from "../../../public/assets/img/icon/discover.png";
@@ -20,6 +19,9 @@ import GetRatting from "@/hooks/GetRatting";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const ShopDetailsMain = ({ id }: any) => {
   const dispatch = useDispatch();

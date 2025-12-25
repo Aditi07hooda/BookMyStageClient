@@ -1,14 +1,16 @@
 "use client";
 import Link from "next/link";
 import React, { useState, useEffect } from "react";
-import { Scrollbar, A11y, Autoplay, Navigation } from "swiper";
+import { Scrollbar, A11y, Autoplay, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css/bundle";
 import FlashIcon from "@/sheardComponent/elements/icons/flash-icon";
 import axios from "axios";
 import { CartProductType } from "@/interFace/interFace";
 import Image from "next/image";
 import GetRatting from "@/hooks/GetRatting";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const FlashProductSlider = () => {
   const [products, setproducts] = useState<CartProductType[]>([]);

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { A11y, Autoplay, Navigation, Scrollbar } from "swiper";
-import "swiper/css/bundle";
+import { A11y, Autoplay, Navigation, Scrollbar } from "swiper/modules";
 import axios from "axios";
 import { ProductType } from "@/interFace/api-interFace";
 import Link from "next/link";
@@ -12,6 +11,9 @@ import ProductModal from "../shop/ProductModal";
 import useGlobalContext from "@/hooks/use-context";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
 import GetRatting from "@/hooks/GetRatting";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/scrollbar";
 
 const RelatedProduct = ({ category, productID }: any) => {
   const { setOpenModal, openModal, setModalId } = useGlobalContext();
