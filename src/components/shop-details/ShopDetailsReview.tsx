@@ -68,11 +68,34 @@ const ShopDetailsReview = ({ product, newReview, setnewReview }: any) => {
           >
             <div className="tabs-wrapper mt-35">
               <div className="product__details-des">
-                <p> {product?.productDetails} </p>
+                {product?.productDetails
+                  ?.split("\n")
+                  .map((line: string, index: number) => {
+                    const trimmed = line.trim();
+
+                    const isSectionHeading =
+                      trimmed === "What you get" ||
+                      trimmed === "Evaluation Parameters" ||
+                      trimmed === "Quick Rules";
+
+                    const isTagline = index === 0 && trimmed.length > 0;
+
+                    return (
+                      <p
+                        key={index}
+                        className={`
+      ${isSectionHeading || isTagline ? "fw-bold mt-3" : ""}
+      mb-1
+    `}
+                      >
+                        {line}
+                      </p>
+                    );
+                  })}
               </div>
             </div>
           </div>
-          <div className="review-tab-pane" id="nav-seller" role="tabpanel">
+          <div className="tab-pane" id="nav-seller" role="tabpanel">
             <div
               className={`review-wrapper ${
                 reviews.length > 4 ? "review-scroll" : ""

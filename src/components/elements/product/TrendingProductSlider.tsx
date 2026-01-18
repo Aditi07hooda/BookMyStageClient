@@ -25,6 +25,10 @@ const TrendingProductSlider = ({ trending_product_title }: any) => {
   const [apiEndPoint, setapiEndPoint] = useState<string>(" ");
   const [tabProduct, setTabProduct] = useState<CartProductType[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [ageCategory, setAgeCategory] = useState("");
+
   const router = useRouter();
 
   const menuData = [
@@ -405,9 +409,11 @@ const TrendingProductSlider = ({ trending_product_title }: any) => {
                                         data-toggle="tooltip"
                                         data-placement="top"
                                         title="Quick Shop"
-                                        onClick={() =>
-                                          dispatch(cart_product(item))
-                                        }
+                                        onClick={() => {
+                                          setSelectedProduct(item);
+                                          setAgeCategory("");
+                                          setShowCategoryModal(true);
+                                        }}
                                       >
                                         <i className="fal fa-cart-arrow-down"></i>
                                       </span>
@@ -538,6 +544,72 @@ const TrendingProductSlider = ({ trending_product_title }: any) => {
           </div>
         </div>
       </div>
+      {showCategoryModal && (
+        <div
+          className="modal fade show d-block"
+          style={{ background: "rgba(0,0,0,0.5)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Select Age Category</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowCategoryModal(false)}
+                />
+              </div>
+
+              <div className="modal-body">
+                <p className="mb-2 fw-medium">{selectedProduct?.productName}</p>
+
+                <select
+                  className="form-select"
+                  value={ageCategory}
+                  onChange={(e) => setAgeCategory(e.target.value)}
+                >
+                  <option value="">-- Select Category --</option>
+                  <option value="Tiny Stars">
+                    🌟 Tiny Stars (Playschool–UKG)
+                  </option>
+                  <option value="Super Kids">🚀 Super Kids (Grades 1–4)</option>
+                  <option value="Cool Champs">
+                    ⭐ Cool Champs (Grades 5–8)
+                  </option>
+                  <option value="Teen Titans">
+                    🔥 Teen Titans (Grades 9–12)
+                  </option>
+                </select>
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowCategoryModal(false)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="btn btn-primary"
+                  disabled={!ageCategory}
+                  onClick={() => {
+                    dispatch(
+                      cart_product({
+                        ...selectedProduct,
+                        ageCategory,
+                      })
+                    );
+                    setShowCategoryModal(false);
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
       <ProductModal />
     </>
   );

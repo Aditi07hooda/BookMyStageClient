@@ -19,6 +19,7 @@ import GetRatting from "@/hooks/GetRatting";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
+import { toast } from "react-toastify";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/scrollbar";
@@ -29,6 +30,7 @@ const ShopDetailsMain = ({ id }: any) => {
   const [newReview, setnewReview] = useState<boolean>(false);
   const [product, setProduct] = useState<CartProductType[]>([]);
   const [retting, setRetting] = useState<any>({});
+  const [ageCategory, setAgeCategory] = useState<"Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans" | "">("");
   const myProduct: CartProductType = product[0];
 
   useEffect(() => {
@@ -56,11 +58,19 @@ const ShopDetailsMain = ({ id }: any) => {
   const totalCart = quantity?.totalCard;
 
   const handleBookNow = () => {
-    // Implement booking logic here
-    // For now, we'll just add to cart and navigate to cart
+    if (!ageCategory) {
+      toast.error("Please select an age category");
+      return;
+    }
+
     if (myProduct) {
-      dispatch(cart_product(myProduct));
-      window.location.href = '/cart';
+      const productWithCategory: CartProductType = {
+        ...myProduct,
+        ageCategory,
+      };
+
+      dispatch(cart_product(productWithCategory));
+      window.location.href = "/cart";
     }
   };
 
@@ -175,8 +185,9 @@ const ShopDetailsMain = ({ id }: any) => {
                             <a href="#">
                               {" "}
                               ({" "}
-                              {`${retting.rettings} ${retting.rettings <= 1 ? "Rating" : "Ratings"
-                                }`}{" "}
+                              {`${retting.rettings} ${
+                                retting.rettings <= 1 ? "Rating" : "Ratings"
+                              }`}{" "}
                               )
                             </a>
                           </li>
@@ -187,52 +198,67 @@ const ShopDetailsMain = ({ id }: any) => {
                         <span>₹{myProduct?.price}.00</span>
                         <del>₹{myProduct?.oldPrice}.00</del>
                       </div>
-                      
+
                       <div className="modal-product-meta bd__product-details-menu-1">
                         <ul>
                           <li>
-                            <h4>Last Date For Submission:  {myProduct?.submissionDate} </h4>
-                            <span>
-                              {" "}
-                             Pieces Available{" "}
-                            </span>
+                            <h4>
+                              Last Date For Submission:{" "}
+                              {myProduct?.submissionDate}{" "}
+                            </h4>
                           </li>
                         </ul>
                       </div>
+                      <select
+                        className="form-select mb-3"
+                        value={ageCategory}
+                        onChange={(e) => setAgeCategory(e.target.value as "Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans" | "")}
+                      >
+                        <option value="">Select Age Category</option>
+                        <option value="Tiny Stars">
+                          🌟 Tiny Stars (Playschool–UKG)
+                        </option>
+                        <option value="Super Kids">
+                          🚀 Super Kids (Grades 1–4)
+                        </option>
+                        <option value="Cool Champs">
+                          ⭐ Cool Champs (Grades 5–8)
+                        </option>
+                        <option value="Teen Titans">
+                          🔥 Teen Titans (Grades 9–12)
+                        </option>
+                      </select>
                       <div className="product-quantity-cart mb-25">
-
-                            <div className="product-quantity-form">
-                              <form onSubmit={(e) => e.preventDefault()}>
-                                <button
-                                  onClick={() => handDecressCart(myProduct)}
-                                  className="cart-minus"
-                                >
-                                  <i className="far fa-minus"></i>
-                                </button>
-                                <input
-                                  className="cart-input"
-                                  type="text"
-                                  readOnly
-                                  value={totalCart ? totalCart : 0}
-                                />
-                                <button
-                                  className="cart-plus"
-                                  onClick={() => handleAddToCart(myProduct)}
-                                >
-                                  <i className="far fa-plus"></i>
-                                </button>
-                              </form>
-                            </div>
-                            <span data-bs-dismiss="modal" aria-label="Close">
-                              <button
-                                className="cart-btn bd-fill__btn"
-                                onClick={handleBookNow}
-                              >
-                                <i className="fal fa-shopping-bag"></i> Book Now
-                              </button>
-                            </span>{" "}
-                    
-                       
+                        <div className="product-quantity-form">
+                          <form onSubmit={(e) => e.preventDefault()}>
+                            <button
+                              onClick={() => handDecressCart(myProduct)}
+                              className="cart-minus"
+                            >
+                              <i className="far fa-minus"></i>
+                            </button>
+                            <input
+                              className="cart-input"
+                              type="text"
+                              readOnly
+                              value={totalCart ? totalCart : 0}
+                            />
+                            <button
+                              className="cart-plus"
+                              onClick={() => handleAddToCart(myProduct)}
+                            >
+                              <i className="far fa-plus"></i>
+                            </button>
+                          </form>
+                        </div>
+                        <span data-bs-dismiss="modal" aria-label="Close">
+                          <button
+                            className="cart-btn bd-fill__btn"
+                            onClick={handleBookNow}
+                          >
+                            <i className="fal fa-shopping-bag"></i> Book Now
+                          </button>
+                        </span>{" "}
                       </div>
 
                       {myProduct?.subcategoryName ? (

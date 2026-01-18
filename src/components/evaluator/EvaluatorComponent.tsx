@@ -320,6 +320,51 @@ const EvaluatorComponent: React.FC = () => {
 
   return (
     <div style={styles.container}>
+      <div
+        style={{
+          background: "#f9fafb",
+          borderLeft: "4px solid #facc15",
+          padding: "16px 20px",
+          borderRadius: "6px",
+          marginBottom: "20px",
+        }}
+      >
+        <h5
+          style={{
+            fontSize: "16px",
+            fontWeight: 600,
+            marginBottom: "10px",
+            color: "#111827",
+          }}
+        >
+          Evaluation Guidelines
+        </h5>
+
+        <ul
+          style={{
+            margin: 0,
+            paddingLeft: "18px",
+            fontSize: "14px",
+            color: "#374151",
+          }}
+        >
+          <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+            Rate each parameter from <strong>0 to 5 stars</strong> (0.5
+            increments allowed).
+          </li>
+          <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+            Use the <strong>Overall Impact</strong> score to balance strengths
+            and minor limitations.
+          </li>
+          <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+            Provide brief, constructive feedback in the text box.
+          </li>
+          <li style={{ lineHeight: 1.5 }}>
+            Be fair, age-appropriate, and consistent.
+          </li>
+        </ul>
+      </div>
+
       <div style={styles.buttonContainer}>
         {events.length > 0 ? (
           events?.map((event) => (
@@ -357,146 +402,170 @@ const EvaluatorComponent: React.FC = () => {
       ) : selectedEvent && contestants.length > 0 ? (
         <div className="container mt-4">
           <div className="row g-3 g-lg-5 w-100 align-content-center">
-            {contestants.filter(contestant => !contestant.evaluated).map((contestant, index) => {
-              const isExpanded = expandedContestant === contestant.id; // local state
+            {contestants
+              .filter((contestant) => !contestant.evaluated)
+              .map((contestant, index) => {
+                const isExpanded = expandedContestant === contestant.id; // local state
 
-              return (
-                <div className="col-md-6 col-lg-5" key={contestant.id}>
-                  <div
-                    className="card shadow-sm border-0 h-100"
-                    style={{ borderRadius: "12px", overflow: "hidden" }}
-                  >
-                    {/* Video thumbnail */}
+                return (
+                  <div className="col-md-6 col-lg-5" key={contestant.id}>
                     <div
-                      className="position-relative"
-                      style={{
-                        cursor: "pointer",
-                        height: "180px",
-                        overflow: "hidden",
-                      }}
-                      onClick={() => {
-                        setModalShow(true);
-                        setSelectedVideo(contestant.videoPath);
-                      }}
+                      className="card shadow-sm border-0 h-100"
+                      style={{ borderRadius: "12px", overflow: "hidden" }}
                     >
-                      <Image
-                        src={contestant.videoThumbnail || NoVideoSubmitted}
-                        alt="Video Thumbnail"
-                        className="card-img-top"
+                      {/* Video thumbnail */}
+                      <div
+                        className="position-relative"
                         style={{
-                          height: "100%",
-                          width: "100%",
-                          objectFit: "cover",
-                          transition: "transform 0.3s ease",
+                          cursor: "pointer",
+                          height: "180px",
+                          overflow: "hidden",
                         }}
-                        onMouseOver={(e) =>
-                          (e.currentTarget.style.transform = "scale(1.05)")
-                        }
-                        onMouseOut={(e) =>
-                          (e.currentTarget.style.transform = "scale(1)")
-                        }
-                      />
-                      <span
-                        className="position-absolute top-0 start-0 bg-dark text-white px-2 py-1 small"
-                        style={{ borderBottomRightRadius: "8px" }}
+                        onClick={() => {
+                          setModalShow(true);
+                          setSelectedVideo(contestant.videoPath);
+                        }}
                       >
-                        #{index + 1}
-                      </span>
-                    </div>
-
-                    {/* Card body */}
-                    <div className="card-body">
-                      <div className="d-flex justify-content-between align-items-center">
-                        <h6 className="card-title mb-0 fw-bold text-primary">
-                          {contestant.userEmail || `Contestant ${index + 1}`}
-                        </h6>
-
-                        {/* Dropdown toggle button */}
-                        <button
-                          className="btn btn-sm btn-outline-primary"
-                          onClick={() =>
-                            setExpandedContestant(
-                              isExpanded ? null : contestant.id
-                            )
+                        <Image
+                          src={contestant.videoThumbnail || NoVideoSubmitted}
+                          alt="Video Thumbnail"
+                          className="card-img-top"
+                          style={{
+                            height: "100%",
+                            width: "100%",
+                            objectFit: "cover",
+                            transition: "transform 0.3s ease",
+                          }}
+                          onMouseOver={(e) =>
+                            (e.currentTarget.style.transform = "scale(1.05)")
                           }
+                          onMouseOut={(e) =>
+                            (e.currentTarget.style.transform = "scale(1)")
+                          }
+                        />
+                        <span
+                          className="position-absolute top-0 start-0 bg-dark text-white px-2 py-1 small"
+                          style={{ borderBottomRightRadius: "8px" }}
                         >
-                          {isExpanded ? "Hide" : "Evaluate"}
-                        </button>
+                          #{index + 1}
+                        </span>
                       </div>
 
-                      {/* Average Rating */}
-                      {contestant.aggregateRating !== 0 && (
-                        <p className="text-success mt-1 mb-2 small">
-                          Average Rating:{" "}
-                          {contestant.aggregateRating.toFixed(2)}
-                        </p>
-                      )}
-
-                      {/* Collapsible Evaluation Form */}
-                      {isExpanded && (
-                        <div className="mt-3">
-                          {criteria.map((criterion) => (
-                            <div key={criterion} className="mb-3">
-                              <label className="form-label fw-semibold small">
-                                {criterion}
-                              </label>
-                              <div className="d-flex flex-column align-items-center">
-                                <StarRating
-                                  value={
-                                    ratings[contestant.id]?.criteria[criterion]
-                                      ?.rating ||
-                                    contestant.evaluation[0].score ||
-                                    0
-                                  }
-                                  onChange={(value) =>
-                                    handleRatingChange(
-                                      contestant.id,
-                                      criterion,
-                                      value
-                                    )
-                                  }
-                                />
-                                <textarea
-                                  value={
-                                    ratings[contestant.id]?.criteria[criterion]
-                                      ?.feedback || ""
-                                  }
-                                  onChange={(e) =>
-                                    handleFeedbackChange(
-                                      contestant.id,
-                                      criterion,
-                                      e.target.value
-                                    )
-                                  }
-                                  placeholder="Reason input..."
-                                  className="form-control mt-2"
-                                  rows={2}
-                                  style={{ fontSize: "0.9rem" }}
-                                />
-                              </div>
-                            </div>
-                          ))}
-
-                          {/* Submit Button */}
-                          <div className="text-end mt-2">
-                            <button
-                              onClick={() => handleSubmitRating(contestant.id)}
-                              className="btn btn-primary btn-sm"
+                      {/* Card body */}
+                      <div className="card-body">
+                        <div className="d-flex justify-content-between align-items-center">
+                          <div className="">
+                            <h6 className="card-title mb-0 fw-bold text-primary">
+                              {contestant.userEmail ||
+                                `Contestant ${index + 1}`}
+                            </h6>
+                            <span
+                              className="age-category-badge"
                               style={{
-                                minWidth: "100px",
-                                fontWeight: "500",
+                                marginLeft: "8px",
+                                padding: "2px 8px",
+                                fontSize: "12px",
+                                fontWeight: 500,
+                                color: "#555",
+                                backgroundColor: "#f1f1f1",
+                                borderRadius: 12,
+                                whiteSpace: "nowrap",
                               }}
                             >
-                              Submit
-                            </button>
+                              {contestant.ageCategory}
+                            </span>
                           </div>
+
+                          {/* Dropdown toggle button */}
+                          <button
+                            className="btn btn-sm btn-outline-primary"
+                            onClick={() =>
+                              setExpandedContestant(
+                                isExpanded ? null : contestant.id
+                              )
+                            }
+                          >
+                            {isExpanded ? "Hide" : "Evaluate"}
+                          </button>
                         </div>
-                      )}
+
+                        {/* Average Rating */}
+                        {contestant.aggregateRating !== 0 && (
+                          <p className="text-success mt-1 mb-2 small">
+                            Average Rating:{" "}
+                            {contestant.aggregateRating.toFixed(2)}
+                          </p>
+                        )}
+
+                        {/* Collapsible Evaluation Form */}
+                        {isExpanded && (
+                          <div className="mt-3">
+                            {criteria.map((criterion) => (
+                              <div key={criterion} className="mb-3">
+                                <label className="form-label fw-semibold small">
+                                  {criterion}
+                                </label>
+                                <div className="d-flex flex-column align-items-center">
+                                  <StarRating
+                                    value={
+                                      ratings[contestant.id]?.criteria[
+                                        criterion
+                                      ]?.rating ||
+                                      contestant.evaluation[0].score ||
+                                      0
+                                    }
+                                    onChange={(value) =>
+                                      handleRatingChange(
+                                        contestant.id,
+                                        criterion,
+                                        value
+                                      )
+                                    }
+                                  />
+                                  <textarea
+                                    value={
+                                      ratings[contestant.id]?.criteria[
+                                        criterion
+                                      ]?.feedback || ""
+                                    }
+                                    onChange={(e) =>
+                                      handleFeedbackChange(
+                                        contestant.id,
+                                        criterion,
+                                        e.target.value
+                                      )
+                                    }
+                                    placeholder="Write your review..."
+                                    className="form-control mt-2"
+                                    rows={2}
+                                    style={{ fontSize: "0.9rem" }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+
+                            {/* Submit Button */}
+                            <div className="text-end mt-2">
+                              <button
+                                onClick={() =>
+                                  handleSubmitRating(contestant.id)
+                                }
+                                className="btn btn-primary btn-sm"
+                                style={{
+                                  minWidth: "100px",
+                                  fontWeight: "500",
+                                }}
+                              >
+                                Submit
+                              </button>
+                            </div>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })}
           </div>
 
           <MyVerticallyCenteredModal

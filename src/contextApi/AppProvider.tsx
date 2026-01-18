@@ -60,6 +60,7 @@ const [eventSubmission, setEventSubmission] = useState<SubmissionInfoType>({
   certificatePath: '', 
   feedbackReportPath: '',
   evaluated: false,
+  ageCategory: "Tiny Stars"
 })
   const token =localStorage.getItem("accessToken")
   const header = {

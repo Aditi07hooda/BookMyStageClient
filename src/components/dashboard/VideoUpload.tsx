@@ -47,6 +47,42 @@ const VideoUpload: React.FC<UploadVideoProps> = ({ onSubmit }) => {
         Upload Your Video
       </h3>
 
+      <div className="video-guidelines p-4 mt-4 border rounded">
+        <h5 className="fw-bold mb-3">🎥 Video Submission Guidelines</h5>
+
+        <ul className="list-unstyled mb-3">
+          <li className="mb-2">
+            • <strong>Orientation:</strong> Record in 9:16 (vertical) for best
+            results (16:9 allowed if needed).
+          </li>
+          <li className="mb-2">
+            • <strong>Duration:</strong> Maximum 3 minutes only.
+          </li>
+          <li className="mb-2">
+            • <strong>Setup:</strong> Keep the camera stable. No movement or
+            zooming.
+          </li>
+          <li className="mb-2">
+            • <strong>Participant:</strong> Only the registered participant
+            should appear.
+          </li>
+          <li className="mb-2">
+            • <strong>Format:</strong> Upload video in MP4 format only.
+          </li>
+          <li className="mb-2">
+            • <strong>Entries:</strong> Multiple entries allowed with separate
+            registrations.
+          </li>
+          <li className="mb-2">
+            • <strong>Content:</strong> Must be appropriate and unedited.
+          </li>
+        </ul>
+
+        <p className="mt-3 fw-semibold">
+          📌 Videos are officially presented with a standard intro and outro.
+        </p>
+      </div>
+
       {/* Video Preview */}
       {previewUrl && (
         <div

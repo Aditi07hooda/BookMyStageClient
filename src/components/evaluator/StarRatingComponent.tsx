@@ -110,6 +110,20 @@ const styles = {
     backgroundColor: "#f9fafb",
     cursor: "not-allowed",
   },
+  tooltip: {
+    position: "absolute" as const,
+    top: "-28px",
+    left: "50%",
+    transform: "translateX(-50%)",
+    backgroundColor: "#111",
+    color: "#fff",
+    fontSize: "11px",
+    padding: "3px 6px",
+    borderRadius: "4px",
+    whiteSpace: "nowrap" as const,
+    pointerEvents: "none" as const,
+    zIndex: 10,
+  },
 };
 
 export const StarRating = ({
@@ -122,6 +136,7 @@ export const StarRating = ({
   disabled?: boolean;
 }) => {
   const [hoverValue, setHoverValue] = useState<number | null>(null);
+  const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
   const handleMouseMove = (
     e: React.MouseEvent<HTMLButtonElement>,
@@ -131,6 +146,7 @@ export const StarRating = ({
       const rect = e.currentTarget.getBoundingClientRect();
       const isLeftHalf = e.clientX - rect.left < rect.width / 2;
       setHoverValue(starIndex - (isLeftHalf ? 0.5 : 0));
+      setHoveredStar(starIndex);
     }
   };
 
@@ -144,6 +160,7 @@ export const StarRating = ({
       const clickedValue = starIndex - (isLeftHalf ? 0.5 : 0);
       onChange(clickedValue);
       setHoverValue(null);
+      setHoveredStar(null);
     }
   };
 
@@ -151,6 +168,8 @@ export const StarRating = ({
     const displayValue = hoverValue !== null ? hoverValue : value;
     const isFullStar = displayValue >= starIndex;
     const isHalfStar = !isFullStar && displayValue >= starIndex - 0.5;
+    const tooltipValue = hoverValue !== null ? hoverValue : value;
+const showTooltip = hoveredStar === starIndex;
 
     return (
       <button
@@ -165,6 +184,9 @@ export const StarRating = ({
           position: "relative" as "relative",
         }}
       >
+        {(hoverValue !== null || value > 0) && showTooltip && (
+          <span style={styles.tooltip}>{tooltipValue}</span>
+        )}
         <Star
           size={24}
           style={{

@@ -61,6 +61,7 @@ const CartSection = () => {
                       <tr>
                         <th className="product-thumbnail">Images</th>
                         <th className="cart-product-name">Product</th>
+                        <th className="cart-product-name">Category</th>
                         <th className="product-price">Unit Price</th>
                         <th className="product-quantity">Quantity</th>
                         <th className="product-subtotal">Total</th>
@@ -86,6 +87,7 @@ const CartSection = () => {
                               {item.productName}
                             </Link>
                           </td>
+                          <td className="product-name">{item.ageCategory}</td>
                           <td className="product-price">
                             <span className="amount">₹{item.price}</span>
                           </td>
@@ -132,23 +134,6 @@ const CartSection = () => {
                       ))}
                     </tbody>
                   </table>
-                </div>
-                <div className="row">
-                  <div className="col-12">
-                    <div className="coupon-all">
-                    
-                      <div className="coupon2">
-                        <button
-                          className="bd-border__btn"
-                          name="update_cart"
-                          type="submit"
-                          onClick={removeAllProduct}
-                        >
-                          Clear cart
-                        </button>
-                      </div>
-                    </div>
-                  </div>
                 </div>
                 <div className="row">
                   <div className="col-md-5 ml-auto">

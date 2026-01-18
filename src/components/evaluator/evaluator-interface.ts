@@ -20,6 +20,7 @@ export interface Contestant {
   evaluatedBy: string[];
   submissionDate: string;
   evaluated: boolean;
+  ageCategory: "Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans";
 }
 
 export interface EventEvaluation {

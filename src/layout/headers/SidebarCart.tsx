@@ -47,7 +47,6 @@ const SidebarCart = () => {
           <div className="cartmini__wrapper">
             <div className="cartmini__title">
               <h4>Shopping Cart</h4>
-              
             </div>
             <div className="cartmini__close">
               <button
@@ -71,7 +70,7 @@ const SidebarCart = () => {
                             <div className="cartmini__thumb">
                               <Link href={`/shop-details/${item._id}`}>
                                 <Image
-                                  width={50}
+                                  width={60}
                                   height={100}
                                   style={{ width: "100%", height: "auto" }}
                                   src={item.img}
@@ -83,6 +82,21 @@ const SidebarCart = () => {
                               <h5>
                                 <Link href={`/shop-details/${item._id}`}>
                                   {item.productName}
+                                  <span
+                                    className="age-category-badge"
+                                    style={{
+                                      marginLeft: "8px",
+                                      padding: "2px 8px",
+                                      fontSize: "12px",
+                                      fontWeight: 500,
+                                      color: "#555",
+                                      backgroundColor: "#f1f1f1",
+                                      borderRadius: 12,
+                                      whiteSpace: "nowrap",
+                                    }}
+                                  >
+                                    {item.ageCategory}
+                                  </span>
                                 </Link>
                               </h5>
                               <div className="product-quantity mt-10 mb-10">
@@ -107,7 +121,7 @@ const SidebarCart = () => {
                               </div>
                               <div className="product__sm-price-wrapper">
                                 <span className="product__sm-price">
-                                 ₹{productPrice}
+                                  ₹{productPrice}
                                 </span>
                               </div>
                             </div>
@@ -128,10 +142,18 @@ const SidebarCart = () => {
                       <span className="subtotal-price">₹{totalPrice}</span>
                     </div>
                     <div className="cartmini__checkout-btn">
-                      <Link onClick={() => setOpenCart(false)} className="bd-fill__btn w-100" href="/cart">
+                      <Link
+                        onClick={() => setOpenCart(false)}
+                        className="bd-fill__btn w-100"
+                        href="/cart"
+                      >
                         View cart
                       </Link>
-                      <Link onClick={() => setOpenCart(false)} className="bd-unfill__btn w-100" href="/checkout">
+                      <Link
+                        onClick={() => setOpenCart(false)}
+                        className="bd-unfill__btn w-100"
+                        href="/checkout"
+                      >
                         Checkout
                       </Link>
                     </div>

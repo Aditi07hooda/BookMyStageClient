@@ -54,7 +54,7 @@ const RelatedProduct = ({ category, productID }: any) => {
         <div className="col-xxl-4 col-xl-5 col-lg-4">
           <div className="bd-section__title-wrapper mb-40">
             <div className="bd-sm__section-title">
-              <h3> Related Products </h3>
+              <h3>{products.length == 0 ? "" : "Related Products"} </h3>
             </div>
           </div>
         </div>
@@ -266,7 +266,7 @@ const RelatedProduct = ({ category, productID }: any) => {
                   </>
                 ) : (
                   <>
-                    <h2>No Related Product Available</h2>
+                    <h2></h2>
                   </>
                 )}
               </Swiper>

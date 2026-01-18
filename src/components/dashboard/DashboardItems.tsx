@@ -440,12 +440,12 @@ const DashboardItems = () => {
                             <th className="product-quantity">
                               Last Date To Submission
                             </th>
-                            <th className="product-quantity">Upload Video</th>
+                            <th className="product-quantity">Submit Video</th>
                             <th className="product-quantity">
                               Download Certificate
                             </th>
                             <th className="product-quantity">
-                              Feedback Report
+                              Evaluation Report
                             </th>
                             <th className="product-quantity">Review</th>
                           </tr>
@@ -480,6 +480,21 @@ const DashboardItems = () => {
                                     href={`/shop-details/${item.eventUserId}`}
                                   >
                                     {item.eventname}
+                                    <span
+                                      className="age-category-badge"
+                                      style={{
+                                        marginLeft: "8px",
+                                        padding: "2px 8px",
+                                        fontSize: "12px",
+                                        fontWeight: 500,
+                                        color: "#555",
+                                        backgroundColor: "#f1f1f1",
+                                        borderRadius: 12,
+                                        whiteSpace: "nowrap",
+                                      }}
+                                    >
+                                      {item.ageCategory}
+                                    </span>
                                   </Link>
                                 </td>
                                 <td className="product-subtotal">
@@ -496,7 +511,7 @@ const DashboardItems = () => {
                                       data-bs-target="#uploadVideoModal"
                                       onClick={() => setEventSubmission(item)}
                                     >
-                                      Upload
+                                      Submit
                                     </button>
                                   </div>
                                 </td>

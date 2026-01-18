@@ -34,14 +34,19 @@ const GridViewProduct = ({ products, limit }: any) => {
       {products?.length ? (
         <>
           {products.slice(0, limit).map((item: any, index: number) => {
-            const sum = item?.rettings?.reduce(
+            const rettingsArray = Array.isArray(item?.rettings)
+              ? item.rettings
+              : [];
+
+            const sum = rettingsArray.reduce(
               (acc: number, currentValue: number) => acc + currentValue,
               0
             );
 
-            const rettingsLength = item?.rettings?.length;
+            const rettingsLength = rettingsArray.length;
             const rowRetting = rettingsLength > 0 ? sum / rettingsLength : 0;
             const averageRating = parseFloat(rowRetting.toFixed(1));
+
             return (
               <div
                 className="col-xxl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6"
@@ -60,37 +65,37 @@ const GridViewProduct = ({ products, limit }: any) => {
                     </Link>
                     {/* {item?.productQuantity > 0 ? (
                       <> */}
-                        <div className="bd-product__action">
-                          <span
-                            className="cart-btn"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Quick Shop"
-                            onClick={() => handleAddToCart(item)}
-                          >
-                            <i className="fal fa-cart-arrow-down"></i>
-                          </span>
-                          <span
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Quick View"
-                            data-bs-toggle="modal"
-                            data-bs-target="#productmodal"
-                            onClick={() => handleMoldalData(item._id)}
-                          >
-                            <i className="fal fa-eye"></i>
-                          </span>
-                          <span
-                            className="wishlist-btn"
-                            data-toggle="tooltip"
-                            data-placement="top"
-                            title="Quick Wishlist"
-                            onClick={() => handleAddToWishlist(item)}
-                          >
-                            <i className="fal fa-heart"></i>
-                          </span>
-                        </div>
-                      {/* </>
+                    <div className="bd-product__action">
+                      <span
+                        className="cart-btn"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Quick Shop"
+                        onClick={() => handleAddToCart(item)}
+                      >
+                        <i className="fal fa-cart-arrow-down"></i>
+                      </span>
+                      <span
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Quick View"
+                        data-bs-toggle="modal"
+                        data-bs-target="#productmodal"
+                        onClick={() => handleMoldalData(item._id)}
+                      >
+                        <i className="fal fa-eye"></i>
+                      </span>
+                      <span
+                        className="wishlist-btn"
+                        data-toggle="tooltip"
+                        data-placement="top"
+                        title="Quick Wishlist"
+                        onClick={() => handleAddToWishlist(item)}
+                      >
+                        <i className="fal fa-heart"></i>
+                      </span>
+                    </div>
+                    {/* </>
                     ) : (
                       <>
                         <div className="bd-product__action">
@@ -157,11 +162,11 @@ const GridViewProduct = ({ products, limit }: any) => {
                       <>
                         {/* {
                           item?.productQuantity > 0 ? <> */}
-                           <span className="tag-text theme-bg">
+                        <span className="tag-text theme-bg">
                           {" "}
                           {item?.productStatus}
                         </span>
-                          {/* </>
+                        {/* </>
                           :
                           <>
                           <span className="tag-text wraning-bg">
@@ -173,11 +178,10 @@ const GridViewProduct = ({ products, limit }: any) => {
                       </>
                     )}
                   </div>
-                  
                 </div>
               </div>
             );
-          })} 
+          })}
         </>
       ) : (
         <>

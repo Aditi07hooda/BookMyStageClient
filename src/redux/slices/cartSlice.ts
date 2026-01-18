@@ -19,7 +19,8 @@ export const cartSlice = createSlice({
   reducers: {
     cart_product: (state, { payload }: PayloadAction<CartProductType>) => {
       const productIndex = state.cartProducts.findIndex(
-        (item) => item._id === payload._id
+        (item) =>
+          item._id === payload._id && item.ageCategory === payload.ageCategory
       );
 
       if (productIndex >= 0) {
