@@ -1,6 +1,6 @@
 import { model, Schema, Document } from "mongoose";
 import { v4 as uuidv4 } from "uuid"; // Importing the uuid package to generate unique IDs
-import { EventSubmissionDataType, evaluationCriteria } from "./submission.interface";
+import { AgeCategory, EventSubmissionDataType, evaluationCriteria } from "./submission.interface";
 
 // Define the Mongoose schema for EventSubmission
 const EventSubmissionSchema = new Schema<EventSubmissionDataType>({
@@ -83,7 +83,12 @@ const EventSubmissionSchema = new Schema<EventSubmissionDataType>({
   videoPublicId: {
     type: String,
     required: false,
-  }
+  },
+  ageCategory: {
+    type: String,
+    enum: Object.values(AgeCategory), // 🔒 Only enum values allowed
+    required: true,
+  },
 });
 
 // Export the models

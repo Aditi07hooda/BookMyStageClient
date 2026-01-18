@@ -75,7 +75,7 @@ export const PaymentValidation = async (req: Request, res: Response) => {
     // Check if event submission already exists for the eventUserId to prevent duplicates
     for (let i = 0; i < product.totalCard; i++) {
       const newEventSubmission = new EventSubmission({
-        
+        ageCategory: product.ageCategory,
         eventUserId: product._id, // Assuming product._id is the unique ID for the product
         userEmail: EmailAddress,
         eventimg:product.img,

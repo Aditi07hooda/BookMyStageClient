@@ -25,4 +25,12 @@ export interface EventSubmissionDataType extends Document {
   aggregateRating: number;
   evaluatedBy?: string;
   videoPublicId?: string;
+  ageCategory: AgeCategory;
+}
+
+export enum AgeCategory {
+  TINY_STARS = "Tiny Stars",        // Playschool to UKG
+  SUPER_KIDS = "Super Kids",        // Grades 1 – 4
+  COOL_CHAMPS = "Cool Champs",      // Grades 5 – 8
+  TEEN_TITANS = "Teen Titans",      // Grades 9 – 12
 }

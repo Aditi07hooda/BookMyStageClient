@@ -3,9 +3,14 @@ import fs from "fs";
 import path from "path";
 import { Request, Response } from "express";
 import { EventSubmission } from "./submission.model";
-import { sendCertificateReadyEmail, sendEvaluationDoneEmail, sendSubmissionEmail } from "../email/email.controller";
+import {
+  sendCertificateReadyEmail,
+  sendEvaluationDoneEmail,
+  sendSubmissionEmail,
+} from "../email/email.controller";
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { User } from "../user/user.model";
+import { AgeCategory } from "./submission.interface";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -25,7 +30,11 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
     // Validate request data
     if (!eventId || !eventName || !files || files.length === 0) {
       console.error("Invalid request: Missing eventId, eventName, or files");
-      return res.status(400).json({ message: "Invalid request: eventId, eventName, or files missing" });
+      return res
+        .status(400)
+        .json({
+          message: "Invalid request: eventId, eventName, or files missing",
+        });
     }
 
     // Check if event with eventId exists in the database
@@ -37,7 +46,14 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
     }
 
     // Define the base directory for storing files
-    const uploadBaseDir = path.join(__dirname, "..", "..", "..", "..", "uploads"); // Base directory for storing files
+    const uploadBaseDir = path.join(
+      __dirname,
+      "..",
+      "..",
+      "..",
+      "..",
+      "uploads"
+    ); // Base directory for storing files
     const eventDir = path.join(uploadBaseDir, eventName); // Directory for the specific event
 
     // Check if directory exists; if not, create it
@@ -49,7 +65,10 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
     // Move and encrypt file names for each uploaded file
     for (const file of files) {
       const existingFilePath = path.join(eventDir, file.originalname);
-      const destPath = path.join(eventDir, `${eventId}${file.mimetype.includes("video") ? ".mp4" : ".pdf"}`); // New file path
+      const destPath = path.join(
+        eventDir,
+        `${eventId}${file.mimetype.includes("video") ? ".mp4" : ".pdf"}`
+      ); // New file path
       // If the file exists, remove the existing file
       if (fs.existsSync(existingFilePath)) {
         console.log(`Removing existing file: ${existingFilePath}`);
@@ -62,22 +81,27 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
       // Update the video path in the database with the relative path
       try {
         // Store relative path in the database
-        const relativePath = path.relative(uploadBaseDir, destPath).replace(/\\/g, "/"); // Get relative path
+        const relativePath = path
+          .relative(uploadBaseDir, destPath)
+          .replace(/\\/g, "/"); // Get relative path
         eventSubmission.videoPath = relativePath; // Store relative path in the database
 
         // Save the updated event submission with the new video path
         await eventSubmission.save();
         console.log("Database updated with video path:", relativePath);
 
-
         // await sendSubmissionEmail()
       } catch (dbError) {
         console.error("Error updating database:", dbError);
-        return res.status(500).json({ message: "Failed to update database with video path" });
+        return res
+          .status(500)
+          .json({ message: "Failed to update database with video path" });
       }
     }
 
-    res.status(200).json({ message: "Files uploaded and database updated successfully" });
+    res
+      .status(200)
+      .json({ message: "Files uploaded and database updated successfully" });
   } catch (error) {
     // Handle unknown error type safely
     if (error instanceof Error) {
@@ -104,7 +128,6 @@ export const clientSubmissionInfo = async (req: Request, res: Response) => {
     }
 
     res.status(200).send({ message: "success", data: products });
-
   } catch (e) {
     console.error("Error fetching client submissions:", e);
     // Only send an error response once.
@@ -114,7 +137,10 @@ export const clientSubmissionInfo = async (req: Request, res: Response) => {
   }
 };
 
-export const clientSubmissionInfoForOne = async (req: Request, res: Response) => {
+export const clientSubmissionInfoForOne = async (
+  req: Request,
+  res: Response
+) => {
   try {
     const product = await EventSubmission.find({ eventUserId: req.params.id });
 
@@ -135,7 +161,13 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
     }
 
     // Define valid criteria keys
-    const validCriteriaKeys = ["Criteria-1", "Criteria-2", "Criteria-3", "Criteria-4", "Criteria-5"];
+    const validCriteriaKeys = [
+      "Criteria-1",
+      "Criteria-2",
+      "Criteria-3",
+      "Criteria-4",
+      "Criteria-5",
+    ];
 
     // Validate and transform criteria into an array format
     const evaluationArray = validCriteriaKeys.map((key) => {
@@ -154,17 +186,29 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
     });
 
     if (evaluationArray.includes(null)) {
-      return res.status(400).json({ message: "Invalid evaluation criteria format" });
+      return res
+        .status(400)
+        .json({ message: "Invalid evaluation criteria format" });
     }
 
     // calculate aggregateRating
-    const totalScore = evaluationArray.reduce((sum, evalItem) => sum + evalItem?.score, 0);
+    const totalScore = evaluationArray.reduce(
+      (sum, evalItem) => sum + evalItem?.score,
+      0
+    );
     const aggregateRating = totalScore / evaluationArray.length;
 
     // Store evaluation in the database
     const updatedSubmission = await EventSubmission.findOneAndUpdate(
       { id: contestantId },
-      { $set: { evaluation: evaluationArray, evaluated:true, aggregateRating: aggregateRating, evaluatedBy: evaluatorEmailId } },
+      {
+        $set: {
+          evaluation: evaluationArray,
+          evaluated: true,
+          aggregateRating: aggregateRating,
+          evaluatedBy: evaluatorEmailId,
+        },
+      },
       { new: true }
     );
 
@@ -174,14 +218,31 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
 
     const data = await EventSubmission.findOne({ id: contestantId });
     const buyerEmail = data?.userEmail || "";
-    const name = await User.findOne({ email: buyerEmail }).then((user) => user?.name || "Participant");
+    const name = await User.findOne({ email: buyerEmail }).then(
+      (user) => user?.name || "Participant"
+    );
     const productName = data?.eventname || "";
 
-    await sendEvaluationDoneEmail(buyerEmail, name, productName, process.env.FRONTEND_URL + "/dashboard");
+    await sendEvaluationDoneEmail(
+      buyerEmail,
+      name,
+      productName,
+      process.env.FRONTEND_URL + "/dashboard"
+    );
 
-    await sendCertificateReadyEmail(buyerEmail, name, productName, process.env.FRONTEND_URL + "/dashboard");
+    await sendCertificateReadyEmail(
+      buyerEmail,
+      name,
+      productName,
+      process.env.FRONTEND_URL + "/dashboard"
+    );
 
-    return res.status(200).json({ message: "Evaluation submitted successfully", data: updatedSubmission });
+    return res
+      .status(200)
+      .json({
+        message: "Evaluation submitted successfully",
+        data: updatedSubmission,
+      });
   } catch (error) {
     console.error("Error submitting evaluation:", error);
     return res.status(500).json({ message: "Internal server error" });
@@ -264,10 +325,17 @@ export const eventVideoUpload = async (req: Request, res: Response) => {
       throw err;
     });
 
-    const userName = await User.findOne({ email: email }).then(user => user?.name || "Participant");
+    const userName = await User.findOne({ email: email }).then(
+      (user) => user?.name || "Participant"
+    );
 
-    await sendSubmissionEmail(email, userName, eventName, process.env.FRONTEND_URL+"/dashboard");
-    
+    await sendSubmissionEmail(
+      email,
+      userName,
+      eventName,
+      process.env.FRONTEND_URL + "/dashboard"
+    );
+
     return res.status(200).json({
       message: "Video uploaded & URL updated successfully",
       data: submission,
