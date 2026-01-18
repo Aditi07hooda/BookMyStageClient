@@ -14,6 +14,7 @@ export interface ProductType {
     rettings:Map<string, number>;
     productStatus:string;
     submissionDate:string;
+    productHeader:string;
   }
 
 

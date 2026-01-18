@@ -16,6 +16,7 @@ const productSchema = new Schema<ProductType>({
   rettings: { type: Map, of: Number, default: {} },
   productStatus: { type: String, required: true },
   submissionDate: { type: String, required: true, trim: true },
+  productHeader: {type: String, required: false  },
 });
 
 const OfferproductSchema = new Schema<offerProductType>({

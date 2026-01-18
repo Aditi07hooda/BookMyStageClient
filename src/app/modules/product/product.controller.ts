@@ -304,39 +304,54 @@ export const OfferProductBanner = async (req: Request, res: Response) => {
 
 export const TrendingProduct = async (req: Request, res: Response) => {
   try {
-    const products = await Product.find({});
-
-    // Calculate average rating for each product and add it to the product object
-    const productsWithAverageRating = products.map((product) => {
-      const rettingsArray = Array.from(product.rettings.values());
-      const sum = rettingsArray.reduce(
-        (acc, currentValue) => acc + currentValue,
-        0
-      );
-      const rettingsLength = rettingsArray.length;
-      const averageRating = rettingsLength > 0 ? sum / rettingsLength : 0;
-
-      return {
-        ...product.toObject(),
-        averageRating: parseFloat(averageRating.toFixed(1)),
-        numRatings: rettingsLength,
-      };
-    });
-
-    // Sort products by average rating and then by number of ratings
-    const sortedProducts = productsWithAverageRating.sort((a, b) => {
-      if (b.averageRating !== a.averageRating) {
-        return b.averageRating - a.averageRating; // Sort by average rating in descending order
-      } else if (b.numRatings !== a.numRatings) {
-        return b.numRatings - a.numRatings; // If average ratings are equal, sort by number of ratings in descending order
-      } else {
-        // If both average rating and numRatings are equal, keep the original order
-        return 0;
+    const pipeline: any[] = [
+      {
+        $addFields: {
+          productIdString: { $toString: "$_id" }
+        }
+      },
+      {
+        $lookup: {
+          from: "reviews",
+          localField: "productIdString",
+          foreignField: "productId",
+          as: "reviewsData"
+        }
+      },
+      {
+        $addFields: {
+          averageRating: {
+            $cond: {
+              if: { $gt: [{ $size: "$reviewsData" }, 0] },
+              then: { $avg: "$reviewsData.retting" },
+              else: 0
+            }
+          },
+          numRatings: { $size: "$reviewsData" }
+        }
+      },
+      {
+        $match: {
+          numRatings: { $gt: 0 }
+        }
+      },
+      {
+        $sort: {
+          averageRating: -1,
+          numRatings: -1
+        }
+      },
+      { $limit: 8 },
+      {
+        $project: {
+          reviewsData: 0,
+          productIdString: 0
+        }
       }
-    });
-    const top10Products = sortedProducts.slice(0, 10);
-
-    res.status(200).send(top10Products);
+    ];
+    
+    const trendingProducts = await Product.aggregate(pipeline);
+    res.status(200).send(trendingProducts);
   } catch (e) {
     console.error(e);
     res.status(500).send({ message: "Error fetching products" });
@@ -349,14 +364,14 @@ export const bestSellingProduct = async (req: Request, res: Response) => {
       { $unwind: "$orderProducts" },
       {
         $group: {
-          _id: "$orderProducts.productName",
+          _id: "$orderProducts._id",
+          productName: { $first: "$orderProducts.productName" },
           totalValue: {
             $sum: {
               $multiply: ["$orderProducts.totalCard", "$orderProducts.price"],
             },
           },
           totalCardSum: { $sum: "$orderProducts.totalCard" },
-          productIds: { $addToSet: "$orderProducts._id" },
         },
       },
       { $sort: { totalValue: -1 } },
@@ -364,54 +379,38 @@ export const bestSellingProduct = async (req: Request, res: Response) => {
     ];
     const bestSoldProducts = await Order.aggregate(pipeline);
 
-    const formattedProducts: formattedProductsType[] = bestSoldProducts.map(
-      (product) => {
-        const productId: string = product.productIds[0];
-        return {
-          productIds: productId,
-          totalValue: product.totalValue,
-          totalCardSum: product.totalCardSum,
-        };
-      }
-    );
-
-    const productIds = formattedProducts.map((product) => product.productIds);
+    const productIds = bestSoldProducts.map((product) => product._id);
     const products = await Product.find({ _id: { $in: productIds } });
-    const orderedProducts = formattedProducts.map((formattedProduct) =>
-      products.find(
-        (product) => product._id.toString() === formattedProduct.productIds
-      )
-    );
+    
+    // Create a map for quick lookup
+    const productMap = new Map(products.map(p => [p._id.toString(), p]));
+    
+    // Preserve order and filter out deleted products
+    const orderedProducts = bestSoldProducts
+      .map((soldProduct) => productMap.get(soldProduct._id.toString()))
+      .filter((product) => product !== undefined);
+    
     res.status(200).send(orderedProducts);
   } catch (e) {
-    res.status(500).send({ message: "custom error" });
+    console.error(e);
+    res.status(500).send({ message: "Error fetching products" });
   }
 };
 
 export const newArrival = async (req: Request, res: Response) => {
   try {
-    const product = await Product.find({}).sort({ date: -1 });
-    res.status(200).send(product);
+    const products = await Product.find({}).sort({ date: -1 }).limit(8);
+    res.status(200).send(products);
   } catch (e) {
+    console.error(e);
     res.status(500).send({ message: "Error fetching products" });
   }
 };
+
 export const Review = async (req: Request, res: Response) => {
   try {
-    const reviews = await Reviews.find({}).sort({ retting: -1, date: -1 });
-    const uniqueEmailReviews: { [email: string]: UserReviewType } = {};
-
-    reviews.forEach((review) => {
-      const email = review.email;
-      if (
-        !uniqueEmailReviews[email] ||
-        review.retting > uniqueEmailReviews[email].retting
-      ) {
-        uniqueEmailReviews[email] = review;
-      }
-    });
-    const uniqueReviews = Object.values(uniqueEmailReviews);
-    res.status(200).send(uniqueReviews);
+    const reviews = await Reviews.find({ retting: { $gte: 4 } }).sort({ retting: -1, date: -1 });
+    res.status(200).send(reviews);
   } catch (e) {
     res.status(500).send({ message: "Error fetching reviews" });
   }
