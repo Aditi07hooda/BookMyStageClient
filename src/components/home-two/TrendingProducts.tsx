@@ -23,7 +23,6 @@ const TrendingProducts = () => {
                             <FlashProductSlider />
                             <FlashBanner />
                             <ProductTestSlider />
-                            <DownloadText />
                         </div>
                     </div>
                 </div>

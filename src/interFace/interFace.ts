@@ -147,6 +147,7 @@ export interface CartProductType {
   numRatings?: number;
   submissionDate:string;
   ageCategory: "Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans";
+  productHeader?: string;
 }
 
 export interface SellProductInfoType {

@@ -44,11 +44,30 @@ const ShopDetailsMain = ({ id }: any) => {
   }, [id, setnewReview, newReview, setRetting]);
 
   const handleAddToCart = (product: CartProductType) => {
-    dispatch(cart_product(product));
+    if (!ageCategory) {
+      toast.error("Please select an age category");
+      return;
+    }
+    const productWithCategory: CartProductType = {
+        ...myProduct,
+        ageCategory,
+      };
+
+    dispatch(cart_product(productWithCategory));
   };
 
   const handDecressCart = (product: CartProductType) => {
-    dispatch(decrease_quantity(product));
+    if (!ageCategory) {
+      toast.error("Please select an age category");
+      return;
+    }
+
+    const productWithCategory: CartProductType = {
+        ...myProduct,
+        ageCategory,
+      };
+
+    dispatch(decrease_quantity(productWithCategory));
   };
 
   const cartProducts = useSelector(
@@ -193,7 +212,13 @@ const ShopDetailsMain = ({ id }: any) => {
                           </li>
                         </ul>
                       </div>
-                      <h3>{myProduct?.productName}</h3>
+                      <h3 className="mb-3 fw-bold">{myProduct?.productName}</h3>
+                      <p className="text-lg mb-3 text-muted">{myProduct?.productHeader}</p>
+                      <div className="mb-4 p-3 bg-light rounded border border-primary border-opacity-25">
+                        <p className="mb-0 fw-semibold text-dark" style={{ lineHeight: '1.8', fontSize: '0.95rem' }}>
+                          🎓 Expert Jury • 📜 Verifiable Certificate • 🏆 Awards • 📺 Platform Recognition
+                        </p>
+                      </div>
                       <div className="product-price">
                         <span>₹{myProduct?.price}.00</span>
                         <del>₹{myProduct?.oldPrice}.00</del>
