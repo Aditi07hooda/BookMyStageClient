@@ -11,6 +11,7 @@ import {
 import { v2 as cloudinary, UploadApiResponse } from "cloudinary";
 import { User } from "../user/user.model";
 import { AgeCategory } from "./submission.interface";
+import eventCriteriaMap from "../config/eventEvaluationCriteria";
 
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
@@ -30,11 +31,9 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
     // Validate request data
     if (!eventId || !eventName || !files || files.length === 0) {
       console.error("Invalid request: Missing eventId, eventName, or files");
-      return res
-        .status(400)
-        .json({
-          message: "Invalid request: eventId, eventName, or files missing",
-        });
+      return res.status(400).json({
+        message: "Invalid request: eventId, eventName, or files missing",
+      });
     }
 
     // Check if event with eventId exists in the database
@@ -52,7 +51,7 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
       "..",
       "..",
       "..",
-      "uploads"
+      "uploads",
     ); // Base directory for storing files
     const eventDir = path.join(uploadBaseDir, eventName); // Directory for the specific event
 
@@ -67,7 +66,7 @@ export const EventSubmissionFunc = async (req: Request, res: Response) => {
       const existingFilePath = path.join(eventDir, file.originalname);
       const destPath = path.join(
         eventDir,
-        `${eventId}${file.mimetype.includes("video") ? ".mp4" : ".pdf"}`
+        `${eventId}${file.mimetype.includes("video") ? ".mp4" : ".pdf"}`,
       ); // New file path
       // If the file exists, remove the existing file
       if (fs.existsSync(existingFilePath)) {
@@ -139,7 +138,7 @@ export const clientSubmissionInfo = async (req: Request, res: Response) => {
 
 export const clientSubmissionInfoForOne = async (
   req: Request,
-  res: Response
+  res: Response,
 ) => {
   try {
     const product = await EventSubmission.find({ eventUserId: req.params.id });
@@ -155,19 +154,16 @@ export const clientSubmissionInfoForOne = async (
 
 export const EvaluationSubmission = async (req: Request, res: Response) => {
   try {
-    const { evaluatorEmailId, contestantId, criteria } = req.body;
+    const { evaluatorEmailId, contestantId, criteria, eventName } = req.body;
     if (!contestantId || !criteria || typeof criteria !== "object") {
       return res.status(400).json({ message: "Invalid request data" });
     }
 
-    // Define valid criteria keys
-    const validCriteriaKeys = [
-      "Criteria-1",
-      "Criteria-2",
-      "Criteria-3",
-      "Criteria-4",
-      "Criteria-5",
-    ];
+    const validCriteriaKeys = eventCriteriaMap[eventName as keyof typeof eventCriteriaMap];
+
+    if (!validCriteriaKeys) {
+      return res.status(400).json({ message: "Invalid event type" });
+    }
 
     // Validate and transform criteria into an array format
     const evaluationArray = validCriteriaKeys.map((key) => {
@@ -194,7 +190,7 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
     // calculate aggregateRating
     const totalScore = evaluationArray.reduce(
       (sum, evalItem) => sum + evalItem?.score,
-      0
+      0,
     );
     const aggregateRating = totalScore / evaluationArray.length;
 
@@ -209,7 +205,7 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
           evaluatedBy: evaluatorEmailId,
         },
       },
-      { new: true }
+      { new: true },
     );
 
     if (!updatedSubmission) {
@@ -219,7 +215,7 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
     const data = await EventSubmission.findOne({ id: contestantId });
     const buyerEmail = data?.userEmail || "";
     const name = await User.findOne({ email: buyerEmail }).then(
-      (user) => user?.name || "Participant"
+      (user) => user?.name || "Participant",
     );
     const productName = data?.eventname || "";
 
@@ -227,22 +223,20 @@ export const EvaluationSubmission = async (req: Request, res: Response) => {
       buyerEmail,
       name,
       productName,
-      process.env.FRONTEND_URL + "/dashboard"
+      process.env.FRONTEND_URL + "/dashboard",
     );
 
     await sendCertificateReadyEmail(
       buyerEmail,
       name,
       productName,
-      process.env.FRONTEND_URL + "/dashboard"
+      process.env.FRONTEND_URL + "/dashboard",
     );
 
-    return res
-      .status(200)
-      .json({
-        message: "Evaluation submitted successfully",
-        data: updatedSubmission,
-      });
+    return res.status(200).json({
+      message: "Evaluation submitted successfully",
+      data: updatedSubmission,
+    });
   } catch (error) {
     console.error("Error submitting evaluation:", error);
     return res.status(500).json({ message: "Internal server error" });
@@ -282,7 +276,7 @@ export const eventVideoUpload = async (req: Request, res: Response) => {
             return reject(error);
           }
           resolve(result);
-        }
+        },
       );
 
       stream.end(buffer);
@@ -326,14 +320,14 @@ export const eventVideoUpload = async (req: Request, res: Response) => {
     });
 
     const userName = await User.findOne({ email: email }).then(
-      (user) => user?.name || "Participant"
+      (user) => user?.name || "Participant",
     );
 
     await sendSubmissionEmail(
       email,
       userName,
       eventName,
-      process.env.FRONTEND_URL + "/dashboard"
+      process.env.FRONTEND_URL + "/dashboard",
     );
 
     return res.status(200).json({
