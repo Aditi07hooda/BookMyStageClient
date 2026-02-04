@@ -15,6 +15,8 @@ import {
 } from "./evaluator-interface";
 import { StarRating } from "./StarRatingComponent";
 import NoVideoSubmitted from "../../../public/assets/img/event/NoVideoSubmitted.png";
+import InfoToolTipModel from "./InfoToolTipModel";
+import eventEvaluationCriteria from "../../data/eventEvaluationCriteria";
 
 const styles = {
   container: {
@@ -23,6 +25,12 @@ const styles = {
     margin: "0 auto",
     fontFamily: "system-ui, -apple-system, sans-serif",
   },
+  infoTooltip: `
+    .info-tooltip-container:hover .tooltip-text {
+      visibility: visible !important;
+      opacity: 1 !important;
+    }
+  `,
   buttonContainer: {
     display: "flex",
     justifyContent: "center",
@@ -134,8 +142,12 @@ const EvaluatorComponent: React.FC = () => {
   const [modalShow, setModalShow] = useState(false);
   const [selectedVideo, setSelectedVideo] = useState<string | null>(null);
   const [expandedContestant, setExpandedContestant] = useState<string | null>(
-    null
+    null,
   );
+  const [expandTooltip, setExpandTooltip] = useState<boolean>(false);
+  const [criteriaList, setCriteriaList] = useState<
+    { id: number; title: string; hint: string }[]
+  >([]);
 
   useEffect(() => {
     const checkEvaluatorAccess = async () => {
@@ -148,7 +160,7 @@ const EvaluatorComponent: React.FC = () => {
 
         const response = await axios.post<User>(
           `${process.env.BASE_URL}user/get-user`,
-          { token }
+          { token },
         );
 
         if (!response.data.data.evaluator) {
@@ -190,7 +202,7 @@ const EvaluatorComponent: React.FC = () => {
   const handleRatingChange = (
     contestantId: string,
     criteriaKey: string,
-    value: number
+    value: number,
   ) => {
     setRatings((prev) => ({
       ...prev,
@@ -210,7 +222,7 @@ const EvaluatorComponent: React.FC = () => {
   const handleFeedbackChange = (
     contestantId: string,
     criteriaKey: string,
-    feedback: string
+    feedback: string,
   ) => {
     setRatings((prev) => ({
       ...prev,
@@ -238,12 +250,13 @@ const EvaluatorComponent: React.FC = () => {
         ...rating,
         averageRating,
         evaluatorEmailId: evaluatorEmailId,
+        eventName: selectedEvent,
       };
       console.log("Submitting rating data:", ratingWithAverage);
 
       const res = await axios.post(
         `${process.env.BASE_URL}submission/submit-evaluation`,
-        ratingWithAverage
+        ratingWithAverage,
       );
 
       if (res.status !== 200) {
@@ -286,9 +299,14 @@ const EvaluatorComponent: React.FC = () => {
     try {
       const response = await axios.post<ApiResponse>(
         `${process.env.BASE_URL}user/all-contestants`,
-        { eventName: eventName }
+        { eventName: eventName },
       );
       setContestants(response.data.contestants || []);
+      setCriteriaList(
+        eventEvaluationCriteria[
+          eventName as keyof typeof eventEvaluationCriteria
+        ] || [],
+      );
     } catch (error) {
       console.error("Error fetching contestants:", error);
       setContestants([]);
@@ -314,6 +332,7 @@ const EvaluatorComponent: React.FC = () => {
             animation: "spin 1s linear infinite",
           }}
         />
+        <style>{styles.infoTooltip}</style>
       </div>
     );
   }
@@ -359,8 +378,36 @@ const EvaluatorComponent: React.FC = () => {
           <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
             Provide brief, constructive feedback in the text box.
           </li>
-          <li style={{ lineHeight: 1.5 }}>
+          <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
             Be fair, age-appropriate, and consistent.
+          </li>
+          <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+            The Overall Impact score reflects the complete impression of the
+            performance
+          </li>
+          <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+            Use it to:
+            <ul
+              style={{
+                marginTop: "6px",
+                paddingLeft: "30px",
+                listStyleType: "circle",
+              }}
+            >
+              <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+                Balance technical limitations against creativity or effort
+              </li>
+              <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+                Account for age-appropriate expression
+              </li>
+              <li style={{ marginBottom: "6px", lineHeight: 1.5 }}>
+                Recognize confidence, originality, and audience connection
+              </li>
+            </ul>
+          </li>
+          <li style={{ lineHeight: 1.5 }}>
+            Do not average other parameters mentally — assess impact
+            holistically
           </li>
         </ul>
       </div>
@@ -476,17 +523,48 @@ const EvaluatorComponent: React.FC = () => {
                             </span>
                           </div>
 
-                          {/* Dropdown toggle button */}
-                          <button
-                            className="btn btn-sm btn-outline-primary"
-                            onClick={() =>
-                              setExpandedContestant(
-                                isExpanded ? null : contestant.id
-                              )
-                            }
-                          >
-                            {isExpanded ? "Hide" : "Evaluate"}
-                          </button>
+                          <div className="d-flex align-items-center gap-2">
+                            {/* Info tooltip */}
+                            <div
+                              style={{
+                                position: "relative",
+                                display: "inline-block",
+                                cursor: "pointer",
+                              }}
+                              className="info-tooltip-container"
+                              onClick={() => setExpandTooltip(!expandTooltip)}
+                            >
+                              <div
+                                style={{
+                                  width: "20px",
+                                  height: "20px",
+                                  borderRadius: "50%",
+                                  backgroundColor: "#19b3e2",
+                                  color: "white",
+                                  display: "flex",
+                                  alignItems: "center",
+                                  justifyContent: "center",
+                                  fontSize: "12px",
+                                  fontWeight: "bold",
+                                  fontStyle: "italic",
+                                }}
+                              >
+                                i
+                              </div>
+                            </div>
+
+                            {/* Dropdown toggle button */}
+                            <button
+                              className="btn btn-sm btn-outline-primary"
+                              onClick={() =>
+                                setExpandedContestant(
+                                  isExpanded ? null : contestant.id,
+                                )
+                              }
+                            >
+                              {isExpanded ? "Hide" : "Evaluate"}
+                            </button>
+                          </div>
                         </div>
 
                         {/* Average Rating */}
@@ -500,16 +578,16 @@ const EvaluatorComponent: React.FC = () => {
                         {/* Collapsible Evaluation Form */}
                         {isExpanded && (
                           <div className="mt-3">
-                            {criteria.map((criterion) => (
-                              <div key={criterion} className="mb-3">
+                            {criteriaList.map((criterion) => (
+                              <div key={criterion.id} className="mb-3">
                                 <label className="form-label fw-semibold small">
-                                  {criterion}
+                                  {criterion.title}
                                 </label>
                                 <div className="d-flex flex-column align-items-center">
                                   <StarRating
                                     value={
                                       ratings[contestant.id]?.criteria[
-                                        criterion
+                                        criterion.title
                                       ]?.rating ||
                                       contestant.evaluation[0].score ||
                                       0
@@ -517,25 +595,25 @@ const EvaluatorComponent: React.FC = () => {
                                     onChange={(value) =>
                                       handleRatingChange(
                                         contestant.id,
-                                        criterion,
-                                        value
+                                        criterion.title,
+                                        value,
                                       )
                                     }
                                   />
                                   <textarea
                                     value={
                                       ratings[contestant.id]?.criteria[
-                                        criterion
+                                        criterion.title
                                       ]?.feedback || ""
                                     }
                                     onChange={(e) =>
                                       handleFeedbackChange(
                                         contestant.id,
-                                        criterion,
-                                        e.target.value
+                                        criterion.title,
+                                        e.target.value,
                                       )
                                     }
-                                    placeholder="Write your review..."
+                                    placeholder={criterion.hint}
                                     className="form-control mt-2"
                                     rows={2}
                                     style={{ fontSize: "0.9rem" }}
@@ -572,6 +650,10 @@ const EvaluatorComponent: React.FC = () => {
             show={modalShow}
             url={selectedVideo}
             onHide={() => setModalShow(false)}
+          />
+          <InfoToolTipModel
+            show={expandTooltip}
+            onHide={() => setExpandTooltip(false)}
           />
         </div>
       ) : (

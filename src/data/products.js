@@ -363,10 +363,11 @@ const productList = [
   {
     id:21,
     productImg: '/assets/img/product/banner/product-banner-01.jpg',
-    productTag: 'Organic',
-    productTitle: 'Meat & Milk',
-    productDesc: 'Premium quality meat & milk',
-    productBtn: 'Shop Now',
+    productTag: '',
+    productTitle: 'Perform',
+    productDesc: 'Showcase your talent on a digital stage.',
+    productBtn: 'Explore Performances',
+    linkTo: '/shop',
     bannerClass: 'bd-product__banner-content banner-meat',
     price: '30.00',
     priceOld: '24.00',
@@ -379,10 +380,11 @@ const productList = [
   {
     id:22,
     productImg: '/assets/img/product/banner/product-banner-02.jpg',
-    productTag: 'Organic',
-    productTitle: 'Vegetable',
-    productDesc: 'Premium quality meat & milk',
-    productBtn: 'Shop Now',
+    productTag: '',
+    productTitle: 'Get Evaluated',
+    productDesc: 'Expert jury feedback and detailed evaluation.',
+    productBtn: 'How Evaluation Works',
+    linkTo: '',
     bannerClass: 'bd-product__banner-content banner-vegetable',
     price: '30.00',
     priceOld: '24.00',
@@ -395,10 +397,11 @@ const productList = [
   {
     id:23,
     productImg: '/assets/img/product/banner/product-banner-03.jpg',
-    productTag: 'Organic',
-    productTitle: 'Food and Fruits',
-    productDesc: 'Premium quality meat & milk',
-    productBtn: 'Shop Now',
+    productTag: '',
+    productTitle: 'Get Recognized',
+    productDesc: 'Certificates, awards, and platform recognition.',
+    productBtn: 'View Recognition',
+    linkTo: '',
     bannerClass: 'bd-product__banner-content banner-fruits',
     price: '30.00',
     priceOld: '24.00',
@@ -412,7 +415,7 @@ const productList = [
   {
     id:24,
     productImg: '/assets/img/category/category-thumb-01.png',
-    productTitle: 'Fruit & Vegetable',
+    productTitle: '🌱 Tiny Stars',
     price: '30.00',
     priceOld: '24.00',
     categoryList: [
@@ -434,12 +437,14 @@ const productList = [
       {
         catTitle : 'Strawberry'
       }
-    ]
+    ],
+    subHeading: 'Playschool – UKG',
+    subDescription: 'First steps on stage through fun, expression, and confidence.',
   },
   {
     id:25,
     productImg: '/assets/img/category/category-thumb-02.png',
-    productTitle: 'Dairy Product',
+    productTitle: '🚀 Super Kids',
     price: '30.00',
     priceOld: '24.00',
     categoryList: [
@@ -461,12 +466,14 @@ const productList = [
       {
         catTitle : 'Milk'
       }
-    ]
+    ],
+    subHeading: 'Grades 1 – 4',
+    subDescription: 'Exploring talent with creativity, energy, and joyful performances.',
   },
   {
     id:26,
     productImg: '/assets/img/category/category-thumb-03.png',
-    productTitle: 'Grocery & Staple',
+    productTitle: '🔥 Cool Champs',
     price: '30.00',
     priceOld: '24.00',
     categoryList: [
@@ -488,12 +495,14 @@ const productList = [
       {
         catTitle : 'Flavor'
       }
-    ]
+    ],
+    subHeading: 'Grades 5 – 8',
+    subDescription: 'Developing skills with structured performances and expert feedback.',
   },
   {
     id:27,
     productImg: '/assets/img/category/category-thumb-04.png',
-    productTitle: 'Miscellaneous',
+    productTitle: '⚡ Teen Titans',
     price: '30.00',
     priceOld: '24.00',
     categoryList: [
@@ -515,7 +524,9 @@ const productList = [
       {
         catTitle : 'More Product'
       }
-    ]
+    ],
+    subHeading: 'Grades 9 – 12',
+    subDescription: 'Showcasing talent with confidence, depth, and competitive spirit.',
   },
   //home two category end here
   {
@@ -826,10 +837,10 @@ const productList = [
   {
     id:44,
     productImg: '/assets/img/product/banner/product-banner-04.jpg',
-    productTag: 'Organic',
-    productTitle: 'Meat & Milk',
-    productDesc: 'Premium quality meat & milk',
-    productBtn: 'Shop Now',
+    productTag: '',
+    productTitle: 'Perform',
+    productDesc: 'Showcase your talent on a digital stage.',
+    productBtn: 'Explore Performances',
     bannerClass: 'bd-product__banner-content banner-food product__content-2',
     columnClass: 'col-xxl-5 col-xl-6 col-lg-5',
     price: '28.00',
@@ -843,10 +854,10 @@ const productList = [
   {
     id:45,
     productImg: '/assets/img/product/banner/product-banner-05.jpg',
-    productTag: 'Organic',
-    productTitle: 'Vegetables',
-    productDesc: 'Premium quality Vegetables',
-    productBtn: 'Shop Now',
+    productTag: '',
+    productTitle: 'Get Evaluated',
+    productDesc: 'Expert jury feedback and detailed evaluation.',
+    productBtn: 'How Evaluation Works',
     bannerClass: 'bd-product__banner-content banner-dairy  product__content-2',
     columnClass: 'col-xxl-7 col-xl-6 col-lg-7',
     price: '15.00',
@@ -1085,10 +1096,10 @@ const productList = [
   {
     id:60,
     productImg: '/assets/img/product/banner/product-banner-11.jpg',
-    productTag: 'Organic',
-    productTitle: 'Vegetables',
-    productDesc: 'Premium quality meat & milk',
-    productBtn: 'Shop Now',
+    productTag: '',
+    productTitle: 'Get Evaluated',
+    productDesc: 'Expert jury feedback and detailed evaluation.',
+    productBtn: 'How Evaluation Works',
     bannerClass: 'bd-product__banner-content banner-meat',
     price: '16.00',
     priceOld: '24.00',

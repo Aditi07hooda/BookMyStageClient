@@ -30,7 +30,9 @@ const ShopDetailsMain = ({ id }: any) => {
   const [newReview, setnewReview] = useState<boolean>(false);
   const [product, setProduct] = useState<CartProductType[]>([]);
   const [retting, setRetting] = useState<any>({});
-  const [ageCategory, setAgeCategory] = useState<"Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans" | "">("");
+  const [ageCategory, setAgeCategory] = useState<
+    "Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans" | ""
+  >("");
   const myProduct: CartProductType = product[0];
 
   useEffect(() => {
@@ -49,9 +51,9 @@ const ShopDetailsMain = ({ id }: any) => {
       return;
     }
     const productWithCategory: CartProductType = {
-        ...myProduct,
-        ageCategory,
-      };
+      ...myProduct,
+      ageCategory,
+    };
 
     dispatch(cart_product(productWithCategory));
   };
@@ -63,15 +65,15 @@ const ShopDetailsMain = ({ id }: any) => {
     }
 
     const productWithCategory: CartProductType = {
-        ...myProduct,
-        ageCategory,
-      };
+      ...myProduct,
+      ageCategory,
+    };
 
     dispatch(decrease_quantity(productWithCategory));
   };
 
   const cartProducts = useSelector(
-    (state: RootState) => state.cart.cartProducts
+    (state: RootState) => state.cart.cartProducts,
   );
   const quantity = cartProducts.find((item) => item?._id === myProduct?._id);
   const totalCart = quantity?.totalCard;
@@ -213,11 +215,38 @@ const ShopDetailsMain = ({ id }: any) => {
                         </ul>
                       </div>
                       <h3 className="mb-3 fw-bold">{myProduct?.productName}</h3>
-                      <p className="text-lg mb-3 text-muted">{myProduct?.productHeader}</p>
-                      <div className="mb-4 p-3 bg-light rounded border border-primary border-opacity-25">
-                        <p className="mb-0 fw-semibold text-dark" style={{ lineHeight: '1.8', fontSize: '0.95rem' }}>
-                          🎓 Expert Jury • 📜 Verifiable Certificate • 🏆 Awards • 📺 Platform Recognition
-                        </p>
+                      <p className="text-lg mb-3 text-muted">
+                        {myProduct?.productHeader}
+                      </p>
+                      <div className="mb-4 p-3 bg-light rounded border border-primary border-opacity-25 w-fit">
+                        <div className="d-flex justify-content-between">
+                          <p
+                            className="mb-0 fw-semibold text-dark"
+                            style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
+                          >
+                            • 🎓 Expert Jury
+                          </p>
+                          <p
+                            className="mb-0 fw-semibold text-dark"
+                            style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
+                          >
+                            • 📜 Verifiable Certificate
+                          </p>
+                        </div>
+                        <div className="d-flex justify-content-between">
+                          <p
+                            className="mb-0 fw-semibold text-dark"
+                            style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
+                          >
+                            • 🏆 Awards
+                          </p>
+                          <p
+                            className="mb-0 fw-semibold text-dark"
+                            style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
+                          >
+                            • 📺 Platform Recognition
+                          </p>
+                        </div>
                       </div>
                       <div className="product-price">
                         <span>₹{myProduct?.price}.00</span>
@@ -237,7 +266,16 @@ const ShopDetailsMain = ({ id }: any) => {
                       <select
                         className="form-select mb-3"
                         value={ageCategory}
-                        onChange={(e) => setAgeCategory(e.target.value as "Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans" | "")}
+                        onChange={(e) =>
+                          setAgeCategory(
+                            e.target.value as
+                              | "Tiny Stars"
+                              | "Super Kids"
+                              | "Cool Champs"
+                              | "Teen Titans"
+                              | "",
+                          )
+                        }
                       >
                         <option value="">Select Age Category</option>
                         <option value="Tiny Stars">

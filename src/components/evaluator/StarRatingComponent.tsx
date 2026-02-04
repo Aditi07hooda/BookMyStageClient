@@ -138,9 +138,17 @@ export const StarRating = ({
   const [hoverValue, setHoverValue] = useState<number | null>(null);
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
 
+  const getRatingLabel = (rating: number) => {
+    if (rating <= 1) return "Needs significant improvement";
+    if (rating <= 3) return "Average / developing performance";
+    if (rating === 4) return "Strong performance";
+    if (rating >= 4.5) return "Outstanding performance";
+    return "";
+  };
+
   const handleMouseMove = (
     e: React.MouseEvent<HTMLButtonElement>,
-    starIndex: number
+    starIndex: number,
   ) => {
     if (!disabled) {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -152,7 +160,7 @@ export const StarRating = ({
 
   const handleClick = (
     starIndex: number,
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (!disabled) {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -168,25 +176,31 @@ export const StarRating = ({
     const displayValue = hoverValue !== null ? hoverValue : value;
     const isFullStar = displayValue >= starIndex;
     const isHalfStar = !isFullStar && displayValue >= starIndex - 0.5;
-    const tooltipValue = hoverValue !== null ? hoverValue : value;
-const showTooltip = hoveredStar === starIndex;
+
+    const currentValue = hoverValue !== null ? hoverValue : value;
+    const tooltipText = getRatingLabel(currentValue);
+    const showTooltip = hoveredStar === starIndex;
 
     return (
       <button
         key={starIndex}
         onClick={(e) => handleClick(starIndex, e)}
         onMouseMove={(e) => handleMouseMove(e, starIndex)}
-        onMouseLeave={() => setHoverValue(null)}
+        onMouseLeave={() => {
+          setHoverValue(null);
+          setHoveredStar(null);
+        }}
         style={{
           ...styles.starButton,
           ...(disabled ? styles.disabledStar : {}),
           color: isFullStar || isHalfStar ? "#facc15" : "#d1d5db",
-          position: "relative" as "relative",
+          position: "relative",
         }}
       >
-        {(hoverValue !== null || value > 0) && showTooltip && (
-          <span style={styles.tooltip}>{tooltipValue}</span>
+        {hoverValue !== null && showTooltip && (
+          <span style={styles.tooltip}>{tooltipText}</span>
         )}
+
         <Star
           size={24}
           style={{

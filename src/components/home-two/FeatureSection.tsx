@@ -14,44 +14,44 @@ const FeatureSection = () => {
                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <div className="bd-features__item mb-30">
                             <div className="bd-features__icon">
-                                <FeatureIconOne />
+                                🎯
                             </div>
                             <div className="bd-features__content">
-                                <h4><Link href="/shop">Free Service</Link></h4>
-                                <span>On All Order </span>
+                                <h4><Link href="/shop">Expert Evaluation</Link></h4>
+                                <span>By Experienced Jury Members</span>
                             </div>
                         </div>
                     </div>
                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <div className="bd-features__item mb-30">
                             <div className="bd-features__icon">
-                                <FeatureIconTwo />
+                                📜
                             </div>
                             <div className="bd-features__content">
-                                <h4><Link href="/shop">Easy Returns</Link></h4>
-                                <span>30 Day Returns Policy</span>
+                                <h4><Link href="/shop">Digital Certificate</Link></h4>
+                                <span>Shareable & Verifiable</span>
                             </div>
                         </div>
                     </div>
                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <div className="bd-features__item mb-30">
                             <div className="bd-features__icon">
-                                <FeatureIconThree/>
+                                🏆
                             </div>
                             <div className="bd-features__content">
-                                <h4><Link href="/shop">Secure Payment</Link></h4>
-                                <span>100% Secure Gaurantee</span>
+                                <h4><Link href="/shop">Recognition & Awards</Link></h4>
+                                <span>Top Performers Get Trophies</span>
                             </div>
                         </div>
                     </div>
                     <div className="col-xl-3 col-lg-4 col-md-6 col-sm-6">
                         <div className="bd-features__item mb-30">
                             <div className="bd-features__icon">
-                                <FeatureIconFour />
+                                🔒
                             </div>
                             <div className="bd-features__content">
-                                <h4><Link href="/shop">Special Support</Link></h4>
-                                <span>24/7 Dedicated Support</span>
+                                <h4><Link href="/shop">Safe & Secure Platform</Link></h4>
+                                <span>Child-Friendly & Trusted</span>
                             </div>
                         </div>
                     </div>

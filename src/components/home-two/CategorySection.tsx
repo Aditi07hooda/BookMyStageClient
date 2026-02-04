@@ -11,7 +11,7 @@ const CategorySection = () => {
           <div className="col-sm-6">
             <div className="bd-section__title-wrapper mb-40">
               <div className="bd-sm__section-title">
-                <h3>Browse by Category</h3>
+                <h3>Browse by Age Category</h3>
               </div>
             </div>
           </div>
@@ -41,14 +41,10 @@ const CategorySection = () => {
                     <div className="bd-categorey__content-title">
                       <h4>{item.productTitle}</h4>
                     </div>
-                    <ul>
-                      {item.categoryList?.length &&
-                        item.categoryList.map((category, num) => (
-                          <li key={num}>
-                            <Link href="/shop">{category.catTitle}</Link>
-                          </li>
-                        ))}
-                    </ul>
+                    <h5 className="pt-2">{item.subHeading}</h5>
+                    <div className="w-1/2">
+                      <p className="break-words whitespace-normal">{item.subDescription}</p>
+                    </div>
                   </div>
                 </div>
               </div>
