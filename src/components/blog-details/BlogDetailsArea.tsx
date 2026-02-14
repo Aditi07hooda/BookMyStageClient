@@ -52,7 +52,7 @@ const BlogDetailsArea = () => {
                         </div>
                       </div>
                       <div className="blog-content">
-                        <h3>{item?.title}</h3>
+                        <h2>{item?.title}</h2>
     
                         <blockquote>
                           <p>
@@ -62,45 +62,7 @@ const BlogDetailsArea = () => {
                             <cite>{item?.author}</cite>
                           </p>
                         </blockquote>
-                        <p>
-                        {item?.blogDetails}
-                        </p>
-                        {/* <div className="blog-thumb mb-25">
-                          <Image
-                            style={{ width: "100%", height: "auto" }}
-                            src={thumb}
-                            alt="blog-img"
-                          />
-                        </div>
-                        <h3>
-                          Adipisicing elit, sed do eiusmod tempor incididunt ut
-                          labore et dolore.
-                        </h3>
-                        <p>
-                          The participants will get general ideas of the land
-                          management system of business. Everyone must work, but
-                          for many of us that job isn{`’`}t just a paycheck, it
-                          {`’`}s an opportunity to express ourselves and make
-                          something better. Entrepreneurs and go-getters often
-                          feel as if they carry the weight of an entire
-                          organization on their backs, and therefore could
-                          always use a little extra motivation.
-                        </p>
-                        <p>
-                          When it comes to designing better links and sending
-                          better emails, Slava Shestopalov has a few tips on how
-                          to improve your website{`’`}s experience while
-                          accessibility in mind. There are so many websites out
-                          there that have not considered the overall usability
-                          of their visually impaired users.
-                        </p>
-                        <div className="blog__details__tag tagcloud">
-                          <span>Post Tags : </span>
-                          <Link href="/blog">Garden</Link>
-                          <Link href="/blog">Vagitable</Link>
-                          <Link href="/blog">Planting</Link>
-                          <Link href="/blog">Garden care</Link>
-                        </div> */}
+                        <div dangerouslySetInnerHTML={{ __html: item?.blogDetails }} />
                       </div>
                     </div>
                   </div>
@@ -115,7 +77,7 @@ const BlogDetailsArea = () => {
                 <BlogSidebarAbout />
                 <BlogSidebarBlogs />
                 <BlogSidebarCategory />
-                <BlogSidebarTags />
+                <BlogSidebarTags id={item?._id} />
               </div>
             </div>
           </div>

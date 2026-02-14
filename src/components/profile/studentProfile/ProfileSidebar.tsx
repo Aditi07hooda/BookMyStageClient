@@ -15,11 +15,29 @@ const ProfileSidebar = () => {
     }
     router.push("/login");
   }
+  
+  const callEvaluations = () => {
+    router.push("/evaluation");
+  }
 
   return (
     <div className="col-xl-3 col-lg-4">
       <div className="student-profile-sidebar mb-30">
         <ul className="nav nav-tabs" id="myTab" role="tablist">
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link"
+              id="profile-tab"
+              data-bs-toggle="tab"
+              data-bs-target="#profile"
+              type="button"
+              role="tab"
+              aria-controls="profile"
+              aria-selected="false"
+            >
+              <i className="fas fa-user"></i> My Profile
+            </button>
+          </li>
           <li className="nav-item" role="presentation">
             <button
               className="nav-link active"
@@ -38,20 +56,6 @@ const ProfileSidebar = () => {
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
-              id="profile-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#profile"
-              type="button"
-              role="tab"
-              aria-controls="profile"
-              aria-selected="false"
-            >
-              <i className="fas fa-user"></i> My Profile
-            </button>
-          </li>
-          <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
               id="history-tab"
               data-bs-toggle="tab"
               data-bs-target="#history"
@@ -60,23 +64,26 @@ const ProfileSidebar = () => {
               aria-controls="history"
               aria-selected="false"
             >
-              <i className="fas fa-cart-plus"></i> Order Products
+              <i className="fas fa-cart-plus"></i> My Bookings
             </button>
           </li>
-          {/* <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="upload-documents-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#upload-documents"
-              type="button"
-              role="tab"
-              aria-controls="upload-documents"
-              aria-selected="false"
-            >
-              <i className="fas fa-file-upload"></i> Upload Documents
-            </button>
-          </li> */}
+          {user?.evaluator && (
+            <li className="nav-item" role="presentation">
+              <button
+                className="nav-link"
+                id="evaluation-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#evaluation"
+                type="button"
+                role="tab"
+                aria-controls="evaluation"
+                aria-selected="false"
+                onClick={callEvaluations}
+              >
+                <i className="fas fa-clipboard-check"></i> My Evaluations
+              </button>
+            </li>
+          )}
 
           <li className="nav-item" role="presentation">
             <button
@@ -120,21 +127,6 @@ const ProfileSidebar = () => {
               <i className="fa-solid fa-file-certificate"></i>Certificates
             </button>
           </li>
-          {/* <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="comments-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#comments"
-              type="button"
-              role="tab"
-              aria-controls="comments"
-              aria-selected="false"
-            >
-              <i className="fa-solid fa-comment"></i> My Comments
-            </button>
-          </li> */}
-
           <li className="nav-item" role="presentation">
             <button
               className="nav-link"
@@ -149,28 +141,6 @@ const ProfileSidebar = () => {
               <i className="fas fa-cog"></i> Settings
             </button>
           </li>
-          {/* <li className="nav-item" role="presentation">
-            <button
-              className="nav-link"
-              id="cancel-tab"
-              data-bs-toggle="tab"
-              data-bs-target="#cancel"
-              type="button"
-              role="tab"
-              aria-controls="cancel"
-              aria-selected="false"
-            >
-              <i className="fas fa-cog"></i> Cancel Orders
-            </button>
-          </li> */}
-          {user?.role === "admin" && (
-            <li className="nav-item" role="presentation">
-              <button onClick={handleAdminPannel} className="nav-link">
-                <i className="fa-solid fa-lock"></i> Admin Pannel
-              </button>
-            </li>
-          )}
-
           <li className="nav-item" role="presentation">
             <button
               onClick={callLogout}

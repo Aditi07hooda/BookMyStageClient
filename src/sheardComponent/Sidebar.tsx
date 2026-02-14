@@ -80,7 +80,7 @@ const Sidebar = () => {
                             target="_blank"
                             href="https://www.google.com/maps/place/Dhaka/@23.7806207,90.3492859,12z/data=!3m1!4b1!4m5!3m4!1s0x3755b8b087026b81:0x8fa563bbdd5904c2!8m2!3d23.8104753!4d90.4119873"
                           >
-                            12/A, Mirnada City Tower, NYC
+                            India
                           </Link>
                         </div>
                       </li>
@@ -97,9 +97,9 @@ const Sidebar = () => {
                           <i className="fal fa-envelope"></i>
                         </div>
                         <div className="offcanvas__contact-text">
-                          <Link href="tel:+012-345-6789">
-                            <span className="mailto:support@mail.com">
-                              support@mail.com{" "}
+                          <Link href="bookmystage.in@gmail.commailto:">
+                            <span className="mailto:bookmystage.in@gmail.com">
+                              bookmystage.in@gmail.com
                             </span>
                           </Link>
                         </div>

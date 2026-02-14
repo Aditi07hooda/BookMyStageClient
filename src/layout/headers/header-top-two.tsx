@@ -92,14 +92,12 @@ const HeaderTopTwo = () => {
                             <ul><li><Link href="#"><i className="fa-brands fa-facebook-f"></i></Link></li>
                                 <li><Link href="#"><i className="fa-brands fa-twitter"></i></Link></li>
                                 <li><Link href="#"><i className="fa-brands fa-linkedin"></i></Link></li>
-                                <li><Link href="#"><i className="fa-brands fa-instagram"></i></Link></li>
-                                
+                                <li><Link href="#"><i className="fa-brands fa-instagram"></i></Link></li>    
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <hr />
         </div>
 
     );

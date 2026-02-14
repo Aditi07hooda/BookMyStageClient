@@ -12,13 +12,6 @@ const nav_menus_list:NavMenuItem[] = [
   //     { link: '/home-three', title: 'Home Style 03' },
   //   ]
   // },
-
-
-
-
-
-
-
   // commenting services and shop from navbar
   // {id:1,
   //   link: '',
@@ -48,25 +41,17 @@ const nav_menus_list:NavMenuItem[] = [
   //   ]
   // },
   {id:2,
-    link: '/dashboard',
-    title: 'Manage',
+    link: '/shop',
+    title: 'Performances',
     dropdownItems: []
   },
   {
     id:3,
-    link: '',
-    title: 'Pages',
-    hasDropdown: true,
+    link: '/shop',
+    title: 'Age Categories',
+    hasDropdown: false,
     megamenu: false,
-    dropdownItems: [
-      { link: '/about', title: 'About' },
-      { link: '/team', title: 'Team' },
-      { link: '/register', title: 'Register' },
-      { link: '/login', title: 'Login' },
-      { link: '/faq', title: 'FAQ' },
-      { link: '/privacy-policy', title: 'Privacy Policy' },
-      
-    ]
+    dropdownItems: []
   },
   {id:4,
     link: '/blog',
@@ -74,6 +59,11 @@ const nav_menus_list:NavMenuItem[] = [
     dropdownItems: []
   },
   {id:5,
+    link: '/about',
+    title: 'About Us',
+    dropdownItems: []
+  },
+  {id:6,
     link: '/contact',
     title: 'Contact',
     dropdownItems: []

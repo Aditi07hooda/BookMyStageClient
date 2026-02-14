@@ -196,12 +196,12 @@ const ContactForm = () => {
                             <h4>Email</h4>
                           </div>
                           <span>
-                            <a href="mailto:Info@example.com">
-                              Info@example.com
+                            <a href="mailto:bookmystage.in@gmail.com">
+                              bookmystage.in@gmail.com
                             </a>
                           </span>
                           <span>
-                            <a href="mailto:Info@example.com">
+                            <a href="mailto:bookmystage.in@gmail.com">
                               Contact@example.com
                             </a>
                           </span>

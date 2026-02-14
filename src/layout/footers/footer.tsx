@@ -12,6 +12,29 @@ import { CategoryType } from "@/interFace/api-interFace";
 const FooterOne = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
 
+  const categoryData = [
+    {
+      id: 1,
+      name: "How it Works",
+      link: "/how-it-works",
+    },
+    {
+      id: 2,
+      name: "FAQs",
+      link: "/faq",
+    },
+    {
+      id: 3,
+      name: "Terms And Conditions",
+      link: "/terms-and-conditions",
+    },
+    {
+      id: 4,
+      name: "Privacy Policy",
+      link: "/privacy-policy",
+    }
+  ]
+
   useEffect(() => {
     axios
       .get(`${process.env.BASE_URL}setting/category`)
@@ -34,20 +57,17 @@ const FooterOne = () => {
                     </Link>
                   </div>
                   <p>
-                    Sed perspiciatis unde omnis natus error voluptatem accusan
-                    doloreqe laudantium totam aperiam eaque sipsa quae abillo
-                    inventore
+                    Book My Stage is a digital center for performing arts where school students receive expert evaluation, meaningful feedback, and verified recognition.
                   </p>
                   <div className="bd-footer__contact">
                     <span>
-                      <Link href="mailto:Info@example.com">
+                      <Link href="mailto:bookmystage.in@gmail.com">
                         <i className="fa-regular fa-envelope"></i>
-                        Info@example.com{" "}
+                        bookmystage.in@gmail.com
                       </Link>{" "}
                     </span>
                     <span>
-                      <i className="fa-solid fa-location-dot"></i>Favicon, New
-                      York, USA - 25423
+                      <i className="fa-solid fa-location-dot"></i>India
                     </span>
                   </div>
                 </div>
@@ -61,22 +81,16 @@ const FooterOne = () => {
                 <div className="bd-footer__link">
                   <ul>
                     <li>
-                      <Link href="/about">About Our Company</Link>
+                      <Link href="/shop">Performances</Link>
                     </li>
                     <li>
-                      <Link href="/wishlist">Wishlist</Link>
+                      <Link href="/shop">Age Categories</Link>
                     </li>
                     <li>
-                      <Link href="/cart">Cart</Link>
+                      <Link href="/blog">Blogs</Link>
                     </li>
                     <li>
-                      <Link href="/shop">Flash Offers</Link>
-                    </li>
-                    <li>
-                      <Link href="/privacy-policy">Terms & Condition</Link>
-                    </li>
-                    <li>
-                      <Link href="/privacy-policy">Privacy Policy</Link>
+                      <Link href="/about">About Us</Link>
                     </li>
                   </ul>
                 </div>
@@ -89,15 +103,15 @@ const FooterOne = () => {
                 </div>
                 <div className="bd-footer__link">
                   <ul>
-                    {categories?.length ? (
+                    {categoryData?.length ? (
                       <>
-                        {categories?.map((item) => (
-                          <li key={item?._id}>
+                        {categoryData?.map((item) => (
+                          <li key={item?.id}>
                             <Link
                               className="text-capitalize"
-                              href={`/shop/${item?.categoryName}`}
+                              href={`${item.link}`}
                             >
-                              {item?.categoryName}
+                              {item?.name}
                             </Link>
                           </li>
                         ))}
@@ -144,15 +158,7 @@ const FooterOne = () => {
             <div className="col-xl-6 col-lg-6">
               <div className="bd-footer__copyright">
                 <ul>
-                  <li>All Rights Reserved</li>
-                  <li>
-                    Copyrighted by ©2023{" "}
-                    <span>
-                      <Link href="https://themeforest.net/user/bdevs/portfolio">
-                        BDevs{" "}
-                      </Link>{" "}
-                    </span>
-                  </li>
+                  <li>© 2026 Book My Stage. All rights reserved.</li>
                 </ul>
               </div>
             </div>

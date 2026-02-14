@@ -4,8 +4,8 @@ import Image from "next/image";
 import useGlobalContext from "@/hooks/use-context";
 import { blogDataType } from "@/interFace/api-interFace";
 const BlogSidebarAbout = () => {
-  const {blog} = useGlobalContext()
-  const item:blogDataType = blog[0]
+  const { blog } = useGlobalContext();
+  const item: blogDataType = blog[0];
   return (
     <div className="sidebar__widget mb-30">
       <div className="sidebar__widget-head mb-35">
@@ -24,8 +24,9 @@ const BlogSidebarAbout = () => {
         <div className="bd-sidebar__blog-text">
           <h4>{item?.author}</h4>
           <p>
-            Lorem ipsum dolor sit amet, consect etur adipisicing elit, sed do
-            eiusmod tempor incididunt ut labore.
+            Book My Stage is a digital platform that enables school students (up
+            to Grade 12) to participate in performance-based evaluations,
+            receive expert feedback, certificates, and recognition.
           </p>
         </div>
         <div className="bd-sidebar__social">

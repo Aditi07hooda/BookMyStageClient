@@ -41,7 +41,6 @@ const HeaderTwo = () => {
     <>
       <header>
         <HeaderTopTwo />
-        {/* <HeaderMiddleTwo /> */}
         <div
           id="header-sticky"
           className="bd-header__bottom-area-3 transparent__header"

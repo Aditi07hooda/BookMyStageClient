@@ -10,12 +10,10 @@ const BlogSidebarCategory = () => {
             <div className="sidebar__widget-content">
                 <div className="sidebar__category">
                     <ul>
-                        <li><Link href="/blog">Fruit and vegetables</Link></li>
-                        <li><Link href="/blog">Starchy food</Link></li>
-                        <li><Link href="/blog">Protein</Link></li>
-                        <li><Link href="/blog">Health & wellbeing</Link></li>
-                        <li><Link href="/blog">Eat Well, Your Way</Link></li>
-                        <li><Link href="/blog">Fresh vegetables</Link></li>
+                        <li><Link href="/blog">Tiny Stars (Playschool - UKG)</Link></li>
+                        <li><Link href="/blog">Super Kids (Grades 1-4)</Link></li>
+                        <li><Link href="/blog">Cool Champs (Grades 5-8)</Link></li>
+                        <li><Link href="/blog">Teen Titans (Grades 9-12)</Link></li>
                     </ul>
                 </div>
             </div>

@@ -8,7 +8,7 @@ const AboutPagetitle = () => {
                     <div className="col-xl-12">
                         <div className="bd-page__banner-content text-center">
                             <h2>About Book My Stage</h2>
-                            <span>Onlie Virtual Platform To showcase Your talent</span>
+                            <span>Online Platform To showcase Your talent</span>
                         </div>
                     </div>
                 </div>

@@ -25,7 +25,7 @@ const Wrapper = ({ children }: childrenType) => {
   return (
     <>
       <BacktoTop />
-      < WhatsAppWidget/>
+      <WhatsAppWidget/>
       {(() => {
         switch (pathName) {
           case "/":
@@ -45,7 +45,7 @@ const Wrapper = ({ children }: childrenType) => {
           case "/":
             return <FooterOne />;
           default:
-            return <FooterThree />;
+            return <FooterOne />;
         }
       })()}
     </>

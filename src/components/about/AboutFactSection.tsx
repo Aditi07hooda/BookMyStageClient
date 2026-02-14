@@ -4,27 +4,27 @@ import CountUpContent from '../common/counter/CountUpContent';
 const CounterItem = [
     {
         id: 1,
-        number: 89,
-        numberLetter: 'k+',
-        title: 'Organic Products',
+        number: 10,
+        numberLetter: '',
+        title: 'Performance Categories',
     },
     {
         id: 2,
-        number: 80,
-        numberLetter: 'k+',
-        title: 'Metric to supplied',
+        number: 5,
+        numberLetter: '',
+        title: 'Evaluation Parameters',
     },
     {
         id: 3,
-        number: 40,
-        numberLetter: 'k+',
-        title: 'Experienced Farmer',
+        number: 4,
+        numberLetter: '',
+        title: 'Age Categories',
     },
     {
         id: 4,
-        number: 25,
-        numberLetter: 'k+',
-        title: 'Organic Awards',
+        number: 3,
+        numberLetter: '',
+        title: 'Levels of Recognition',
     }
 ]
 

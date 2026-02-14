@@ -29,8 +29,8 @@ const BlogSection = () => {
         <div className="row">
           <div className="col-12">
             <div className="bd-section__title-wrapper text-center mb-55">
-              <span className="bd-sub__title">News Insight</span>
-              <h2 className="bd-section__title mb-30">News From Orgado</h2>
+              <span className="bd-sub__title">Blogs Insight</span>
+              <h2 className="bd-section__title mb-30">Blogs from BookMyStage</h2>
             </div>
           </div>
         </div>

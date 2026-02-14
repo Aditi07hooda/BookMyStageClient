@@ -51,20 +51,6 @@ const DashboardCounter = () => {
           </div>
         </div>
       </div>
-      {user?.evaluator && (
-        <Link href={`/evaluation`}>
-          <div className="col-xl-3 col-lg-5 col-md-3">
-            <div className="counter-wrapper text-center mb-30">
-              <div className="counter-icon">
-                <div className="counter-icon-wrap">{/* incon will be here */}</div>
-                <div className="count-number">
-                  <p> Evaluation </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </Link>
-      )}
     </div>
   );
 };

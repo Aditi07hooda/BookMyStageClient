@@ -1,16 +1,16 @@
+import HowItWorks from "@/components/howItWorks/HowItWorks";
 import Wrapper from "@/layout/DefaultWrapper";
 
-import DonationFormComponent from "@/components/donation/Donation";
-const Donation = () => {
+const HowItWorksPage = () => {
     return (
         <>
             <Wrapper>
                 <main>
-                    <DonationFormComponent />
+                    <HowItWorks />
                 </main>
             </Wrapper>
         </>
     );
 }
 
-export default Donation
+export default HowItWorksPage
