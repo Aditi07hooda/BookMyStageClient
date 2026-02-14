@@ -1,5 +1,5 @@
 import express from "express";
-import { allBlogs, createBlog, createComment, deleteBlog, deleteComment, getComment, getMyComment, getSingleBlog, searchBlogs, updateBannerImage, updateBlogInfo, updateComment } from "./blog.controller";
+import { allBlogs, createBlog, createComment, deleteBlog, deleteComment, getAllBlogTags, getComment, getMyComment, getSingleBlog, searchBlogs, updateBannerImage, updateBlogInfo, updateComment } from "./blog.controller";
 import verifyToken from "../../../middleware/userVerify";
 import adminVerify from "../../../middleware/adminVerify";
 
@@ -22,5 +22,6 @@ blogRoute.put("/update-comment", verifyToken, updateComment);
 blogRoute.delete("/delete-blog", adminVerify, deleteBlog);
 blogRoute.delete("/delete-comment",verifyToken, deleteComment);
 
+blogRoute.get("/all-blog-tags/:id", getAllBlogTags);
 
 export default blogRoute;

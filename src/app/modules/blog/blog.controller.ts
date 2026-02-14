@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Blog, Comment } from "./blog.model";
+import { Blog, BlogTag, Comment } from "./blog.model";
 
 export const createBlog = async (req: Request, res: Response) => {
   try {
@@ -162,6 +162,7 @@ export const getComment = async (req: Request, res: Response) => {
     res.send({ message: "custom error" });
   }
 };
+
 export const getMyComment = async (req: Request, res: Response) => {
   try {
     const comments = await Comment.find({ email: req.query.email }).sort({date:-1})
@@ -208,4 +209,19 @@ export const updateComment = async (req: Request, res: Response) => {
     res.send({ message: "custom error" });
   }
 };
+
+// tags
+export const getAllBlogTags = async (req: Request, res: Response) => {
+  try {
+    const tags = await BlogTag.find({ postId: req.params.id });
+    if (!tags) {
+      return res.status(200).send({ tags: [] });
+    }
+    res.status(200).send({
+      tags,
+    });
+  } catch (e) {
+    res.status(400).send({ message: "custom error" });
+  }
+}
 

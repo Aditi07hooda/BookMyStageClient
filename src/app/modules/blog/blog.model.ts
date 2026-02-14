@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { blogDataType, CommentType } from "./blog.interface";
+import { blogDataType, BlogTags, CommentType } from "./blog.interface";
 
 const blogScema = new Schema<blogDataType>({
   title: {
@@ -54,5 +54,12 @@ const commentSchema = new Schema<CommentType>({
   title: { type: String, trim: true },
 });
 
+const blogTags = new Schema<BlogTags>({
+  postId: { type: String, required: true },
+  primaryTags: { type: [String], required: true },
+  secondaryTags: { type: [String], required: false },
+});
+
 export const Blog = model<blogDataType>("Blog", blogScema);
 export const Comment = model<CommentType>("Comment", commentSchema);
+export const BlogTag = model<BlogTags>("BlogTag", blogTags);

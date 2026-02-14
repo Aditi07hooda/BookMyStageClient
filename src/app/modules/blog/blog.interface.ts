@@ -17,3 +17,9 @@ export interface CommentType {
   img: string;
   title: string;
 }
+
+export interface BlogTags{
+  postId: string;
+  primaryTags: string[],
+  secondaryTags: string[],
+}
