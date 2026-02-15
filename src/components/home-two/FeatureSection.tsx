@@ -16,9 +16,9 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 🎯
                             </div>
-                            <div className="bd-features__content">
-                                <h4><Link href="/shop">Expert Evaluation</Link></h4>
-                                <span>By Experienced Jury Members</span>
+                            <div className="bd-features__content text-center">
+                                <h4><Link href="/shop">Evaluation Report</Link></h4>
+                                <span>From Experienced Juries</span>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 📜
                             </div>
-                            <div className="bd-features__content">
+                            <div className="bd-features__content text-center">
                                 <h4><Link href="/shop">Digital Certificate</Link></h4>
                                 <span>Shareable & Verifiable</span>
                             </div>
@@ -38,9 +38,9 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 🏆
                             </div>
-                            <div className="bd-features__content">
+                            <div className="bd-features__content text-center">
                                 <h4><Link href="/shop">Recognition & Awards</Link></h4>
-                                <span>Top Performers Get Trophies</span>
+                                <span>For Top Performers</span>
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 🔒
                             </div>
-                            <div className="bd-features__content">
+                            <div className="bd-features__content text-center">
                                 <h4><Link href="/shop">Safe & Secure Platform</Link></h4>
                                 <span>Child-Friendly & Trusted</span>
                             </div>

@@ -33,23 +33,25 @@ const CheckOutMain = () => {
   const router = useRouter();
   const { user, header, setPaymentSuccess } = useGlobalContext();
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
+  const [parentConsent, setParentConsent] = useState(false);
+  const [recognitionConsent, setRecognitionConsent] = useState(false);
   const now = moment();
   const date = now.format("MM/DD/YY hh:mm a");
   const cartProducts = useSelector(
-    (state: RootState) => state.cart.cartProducts
+    (state: RootState) => state.cart.cartProducts,
   );
 
   const totalPrice = cartProducts.reduce(
     (total, product) => total + (product.price ?? 0) * (product.totalCard ?? 0),
-    0
+    0,
   );
-  const payment_description = cartProducts
-    .map(
-      (product) =>
-        `${product.productName} (₹${product.price} x ${product.totalCard})`
-    )
-    .join(", ") + ` | Total Price: ₹${totalPrice}`;
-
+  const payment_description =
+    cartProducts
+      .map(
+        (product) =>
+          `${product.productName} (₹${product.price} x ${product.totalCard})`,
+      )
+      .join(", ") + ` | Total Price: ₹${totalPrice}`;
 
   const handleGoToShopPage = () => {
     router.push("/shop");
@@ -90,7 +92,6 @@ const CheckOutMain = () => {
             currency: "INR",
             receipt: `receipt_${Math.random().toString(36).substring(7)}`,
           },
-
         }),
         headers: {
           "Content-Type": "application/json",
@@ -119,7 +120,7 @@ const CheckOutMain = () => {
                 response: response,
                 user: {
                   buyerEmail: data.EmailAddress,
-                  name: data.Fname+" "+data.Lname,
+                  name: data.Fname + " " + data.Lname,
                   Address: data.Address,
                   City: data.City,
                   Postcode: data.Postcode,
@@ -131,16 +132,16 @@ const CheckOutMain = () => {
                   paymentId: "",
                   shipmentStatus: "pending",
                   shipmentStatusArray: [],
-                }
+                },
               }),
               headers: {
                 "Content-Type": "application/json",
               },
-            }
+            },
           );
 
           const jsonRes = await validateRes.json();
-          if (jsonRes.msg = "success") {
+          if ((jsonRes.msg = "success")) {
             router.push("/profile");
             dispatch(clear_cart_after_payment());
             setPaymentSuccess(true);
@@ -148,7 +149,6 @@ const CheckOutMain = () => {
               position: "top-left",
             });
           }
-
         },
         prefill: {
           name: data.Fname,
@@ -176,6 +176,12 @@ const CheckOutMain = () => {
   };
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
+    if (!parentConsent) {
+      toast.error(
+        "You must confirm the Parent / Guardian Declaration before placing the order.",
+      );
+      return;
+    }
     paymentHandler(data);
   };
 
@@ -257,7 +263,6 @@ const CheckOutMain = () => {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               {/* order info */}
@@ -307,6 +312,53 @@ const CheckOutMain = () => {
                         </tr>
                       </tfoot>
                     </table>
+                    <div className="mt-4 p-3 border rounded">
+                      <h5 className="mb-3">
+                        Declaration Consent{" "}
+                        <span style={{ color: "red" }}>*</span>
+                      </h5>
+
+                      <div className="form-check mb-3">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id="parentConsent"
+                          checked={parentConsent}
+                          onChange={(e) => setParentConsent(e.target.checked)}
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="parentConsent"
+                        >
+                          I confirm that I am the parent or legal guardian of
+                          the participant, or that this submission is made with
+                          their full knowledge and consent.
+                        </label>
+                      </div>
+
+                      <h5 className="mb-3 mt-4">Recognition Consent</h5>
+
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id="recognitionConsent"
+                          checked={recognitionConsent}
+                          onChange={(e) =>
+                            setRecognitionConsent(e.target.checked)
+                          }
+                        />
+                        <label
+                          className="form-check-label"
+                          htmlFor="recognitionConsent"
+                        >
+                          I consent to Book My Stage showcasing this performance
+                          on its platform and official channels (including
+                          YouTube and social media) for recognition purposes.
+                        </label>
+                      </div>
+                    </div>
+
                     <div className="order-button-payment mt-20">
                       {cartProducts.length ? (
                         <button
@@ -317,7 +369,10 @@ const CheckOutMain = () => {
                           Place Order
                         </button>
                       ) : (
-                        <button onClick={handleGoToShopPage} className="bd-fill__btn">
+                        <button
+                          onClick={handleGoToShopPage}
+                          className="bd-fill__btn"
+                        >
                           Add Product For Checkout
                         </button>
                       )}
