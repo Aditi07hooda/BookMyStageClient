@@ -82,8 +82,6 @@ const HeaderThree = () => {
   return (
     <>
       <header>
-        <HeaderTopThree />
-        <HeaderMiddleThree />
         <div className="bd-header__border">
           <div id="header-sticky" className="bd-header__middle-inner">
             <div className="container">

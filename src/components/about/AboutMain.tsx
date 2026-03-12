@@ -12,7 +12,7 @@ const AboutMain = () => {
             <AboutSectionTwo/>
             <AboutFactSection/>
             <AboutTestSlider/>
-            <TeamSection/>
+            {/* <TeamSection/> */}
         </>
     );
 };

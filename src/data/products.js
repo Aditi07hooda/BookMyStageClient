@@ -362,7 +362,7 @@ const productList = [
   //home one end here
   {
     id:21,
-    productImg: '/assets/img/product/banner/product-banner-01.jpg',
+    productImg: '/assets/img/cards/card3.png',
     productTag: '',
     productTitle: 'Perform',
     productDesc: 'Showcase your talent on a digital stage.',
@@ -379,7 +379,7 @@ const productList = [
   },
   {
     id:22,
-    productImg: '/assets/img/product/banner/product-banner-02.jpg',
+    productImg: '/assets/img/cards/card1.png',
     productTag: '',
     productTitle: 'Get Evaluated',
     productDesc: 'Expert jury feedback and detailed evaluation.',
@@ -396,7 +396,7 @@ const productList = [
   },
   {
     id:23,
-    productImg: '/assets/img/product/banner/product-banner-03.jpg',
+    productImg: '/assets/img/cards/card2.png',
     productTag: '',
     productTitle: 'Get Recognized',
     productDesc: 'Certificates, awards, and platform recognition.',
@@ -836,7 +836,7 @@ const productList = [
   //home two trending end here
   {
     id:44,
-    productImg: '/assets/img/product/banner/product-banner-04.jpg',
+    productImg: '/assets/img/cards/card3.png',
     productTag: '',
     productTitle: 'Perform',
     productDesc: 'Showcase your talent on a digital stage.',
@@ -853,7 +853,7 @@ const productList = [
   },
   {
     id:45,
-    productImg: '/assets/img/product/banner/product-banner-05.jpg',
+    productImg: '/assets/img/cards/card1.png',
     productTag: '',
     productTitle: 'Get Evaluated',
     productDesc: 'Expert jury feedback and detailed evaluation.',
@@ -1095,7 +1095,7 @@ const productList = [
   //home three hero banner end here
   {
     id:60,
-    productImg: '/assets/img/product/banner/product-banner-11.jpg',
+    productImg: '/assets/img/cards/card1.png',
     productTag: '',
     productTitle: 'Get Evaluated',
     productDesc: 'Expert jury feedback and detailed evaluation.',
