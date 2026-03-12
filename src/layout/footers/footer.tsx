@@ -25,15 +25,15 @@ const FooterOne = () => {
     },
     {
       id: 3,
-      name: "Terms And Conditions",
+      name: "Terms & Conditions",
       link: "/terms-and-conditions",
     },
     {
       id: 4,
       name: "Privacy Policy",
       link: "/privacy-policy",
-    }
-  ]
+    },
+  ];
 
   useEffect(() => {
     axios
@@ -57,7 +57,11 @@ const FooterOne = () => {
                     </Link>
                   </div>
                   <p>
-                    Book My Stage is a digital center for performing arts where school students receive expert evaluation, meaningful feedback, and verified recognition.
+                    Book My Stage is a digital center for performing arts where
+                    school students receive expert evaluation, meaningful
+                    feedback, and recognition while reducing stage fear,
+                    building confidence and accessing performance
+                    opportunities—regardless of location.
                   </p>
                   <div className="bd-footer__contact">
                     <span>

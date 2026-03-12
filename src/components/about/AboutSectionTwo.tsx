@@ -42,7 +42,7 @@ const AboutSectionTwo = () => {
                     and growth. Our platform enables students to participate in
                     various performance categories and receive expert evaluation
                     that is age-appropriate, transparent, and focused on
-                    development rather than comparison. At Book My Stage, every
+                    development rather than comparison. <br /><br/>At Book My Stage, every
                     performance is treated as a learning opportunity. Students
                     receive detailed evaluation reports and shareable,
                     verifiable digital certificates that reflect their effort
@@ -54,7 +54,7 @@ const AboutSectionTwo = () => {
                     and every student is given the opportunity to grow with
                     confidence.
                   </p>
-                  <div className="bd-about__author">
+                  {/* <div className="bd-about__author">
                     <div className="bd-about__author-thumb">
                       <Image src={authorImg} alt="about-image" />
                     </div>
@@ -65,7 +65,7 @@ const AboutSectionTwo = () => {
                         <Image src={authorSigneture} alt="about-image" />
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

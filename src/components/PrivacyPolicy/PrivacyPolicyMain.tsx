@@ -23,7 +23,7 @@ const PrivacyPolicyMain = () => {
                     aria-selected="false"
                   >
                     <i className="fas fa-circle"></i>
-                    <span>Policy & Privacy</span>
+                    <span>Privacy Policy</span>
                   </button>
                 </li>
                 <li role="presentation">

@@ -39,7 +39,7 @@ const FeatureSection = () => {
                                 🏆
                             </div>
                             <div className="bd-features__content text-center">
-                                <h4><Link href="/shop">Recognition & Awards</Link></h4>
+                                <h4><Link href="/shop">Awards</Link></h4>
                                 <span>For Top Performers</span>
                             </div>
                         </div>
@@ -50,7 +50,7 @@ const FeatureSection = () => {
                                 🔒
                             </div>
                             <div className="bd-features__content text-center">
-                                <h4><Link href="/shop">Safe & Secure Platform</Link></h4>
+                                <h4><Link href="/shop">Safe & Secure</Link></h4>
                                 <span>Child-Friendly & Trusted</span>
                             </div>
                         </div>
