@@ -20,7 +20,7 @@ export const GoogleLoginButton = () => {
         console.log("Google token response:", tokenResponse);
         setLoading(true);
         const res = await axios.post(
-          `${process.env.NEXT_PUBLIC_BASE_URL || process.env.BASE_URL}/user/google-login`,
+          `${process.env.BASE_URL}user/google-login`,
           { token: tokenResponse.access_token }
         );
         switch (res.data.message) {
