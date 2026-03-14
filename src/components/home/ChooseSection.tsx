@@ -2,7 +2,7 @@ import React from "react";
 import timelineList from "../../data/timeline-data";
 import Image from "next/image";
 
-import thumb1 from "../../../public/assets/img/why-choose/why-choose-big.png"
+import thumb1 from "../../../public/assets/img/TeaBottle/7.png"
 
 const ChooseSection = () => {
   return (

@@ -224,13 +224,13 @@ const ShopDetailsMain = ({ id }: any) => {
                             className="mb-0 fw-semibold text-dark"
                             style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
                           >
-                            • 🎓 Expert Jury
+                            🎓 Expert Jury
                           </p>
                           <p
                             className="mb-0 fw-semibold text-dark"
                             style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
                           >
-                            • 📜 Verifiable Certificate
+                            📜 Verifiable Certificate
                           </p>
                         </div>
                         <div className="d-flex justify-content-between">
@@ -238,13 +238,13 @@ const ShopDetailsMain = ({ id }: any) => {
                             className="mb-0 fw-semibold text-dark"
                             style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
                           >
-                            • 🏆 Awards
+                            🏆 Awards
                           </p>
                           <p
                             className="mb-0 fw-semibold text-dark"
                             style={{ lineHeight: "1.8", fontSize: "0.95rem" }}
                           >
-                            • 📺 Platform Recognition
+                           📺 Platform Recognition
                           </p>
                         </div>
                       </div>
