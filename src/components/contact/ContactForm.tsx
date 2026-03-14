@@ -218,8 +218,8 @@ const ContactForm = () => {
                             <h4>Location</h4>
                           </div>
                           <p>
-                            CMRIT, Bangalore <br />
-                            Inida - 560093
+                            Bangalore <br />
+                            Inida
                           </p>
                         </div>
                       </div>

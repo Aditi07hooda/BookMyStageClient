@@ -11,6 +11,10 @@ const FlashBanner = () => {
                     <div className="bd-flash__banner-thumb w-img">
                         <Image src={thumb} alt="flash-banner" />
                     </div>
+                    <div className="bd-flash__banner-content">
+                        <h4>Recognize</h4>
+                        <h3>Award & Certificate</h3>
+                    </div>
                 </div>
             </Link>
         </div>

@@ -154,7 +154,7 @@ const RegistrationForm: React.FC = () => {
                         <input
                           id="userEmail"
                           type="text"
-                          placeholder="Phone Number"
+                          placeholder="Mobile Number"
                           {...register("phone", {
                             required: "phone is required",
                             minLength: 10,

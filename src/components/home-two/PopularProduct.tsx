@@ -23,6 +23,10 @@ const PopularProduct = () => {
                                 <div className="bd-flash__banner-thumb w-img">
                                     <Image style={{ width: "100%", height: "auto" }} src={thumb} alt="flash-banner" />
                                 </div>
+                                <div className="bd-flash__banner-content">
+                                    <h4>Evaluation Report</h4>
+                                    <h3>Verify & Share</h3>
+                                </div>
                             </div>
                         </Link>
                     </div>

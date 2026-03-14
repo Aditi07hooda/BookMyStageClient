@@ -16,8 +16,8 @@ const MasalaProductBanner = () => {
               />
             </div>
             <div className="bd-td__banner-text">
-              <span>Organic</span>
-              <h3>Fresh Masala</h3>
+              <span>Celebrate</span>
+              <h3>Your Performance</h3>
             </div>
           </div>
         

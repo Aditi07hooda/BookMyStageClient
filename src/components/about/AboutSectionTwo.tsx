@@ -39,20 +39,28 @@ const AboutSectionTwo = () => {
                     talents in a structured, safe, and meaningful way. We
                     believe that performances should be more than one-time
                     events—they should lead to learning, confidence building,
-                    and growth. Our platform enables students to participate in
-                    various performance categories and receive expert evaluation
-                    that is age-appropriate, transparent, and focused on
-                    development rather than comparison. <br /><br/>At Book My Stage, every
-                    performance is treated as a learning opportunity. Students
-                    receive detailed evaluation reports and shareable,
-                    verifiable digital certificates that reflect their effort
-                    and progress. Selected performances are recognized across
-                    age categories, while public showcasing is always
-                    consent-based. Designed with a child-first and privacy-aware
-                    approach, Book My Stage aims to become a trusted digital
-                    space where creativity is encouraged, talent is nurtured,
-                    and every student is given the opportunity to grow with
-                    confidence.
+                    and personal growth. Our platform enables students to
+                    participate in diverse performance categories and receive
+                    expert evaluation that is age-appropriate, transparent, and
+                    focused on development rather than comparison.<br /><br/>For many
+                    students, performing in front of an audience can be
+                    challenging, and opportunities to participate on stage are
+                    not always accessible. Book My Stage provides a supportive
+                    digital stage where students can perform from familiar
+                    environments, gradually overcome stage fear, and build
+                    confidence. It also creates inclusive opportunities for
+                    students—especially those from remote or underrepresented
+                    communities—to showcase their talents and receive fair
+                    recognition.<br /><br/> At Book My Stage, every performance is treated
+                    as a learning opportunity. Students receive detailed
+                    evaluation reports and shareable, verifiable digital
+                    certificates that reflect their effort and progress.
+                    Selected performances are recognized across age categories,
+                    while public showcasing is always consent-based. Designed
+                    with a child-first and privacy-aware approach, Book My Stage
+                    aims to be a trusted digital space where creativity is
+                    encouraged, talent is nurtured, and every student is given
+                    the opportunity to grow with confidence.
                   </p>
                   {/* <div className="bd-about__author">
                     <div className="bd-about__author-thumb">
