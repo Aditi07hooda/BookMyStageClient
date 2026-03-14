@@ -414,7 +414,7 @@ const productList = [
   //home two banner end here
   {
     id:24,
-    productImg: '/assets/img/category/category-thumb-01.png',
+    productImg: '/assets/img/AgeCategory/1.jpg',
     productTitle: '🌱 Tiny Stars',
     price: '30.00',
     priceOld: '24.00',
@@ -443,7 +443,7 @@ const productList = [
   },
   {
     id:25,
-    productImg: '/assets/img/category/category-thumb-02.png',
+    productImg: '/assets/img/AgeCategory/2.jpg',
     productTitle: '🚀 Super Kids',
     price: '30.00',
     priceOld: '24.00',
@@ -472,7 +472,7 @@ const productList = [
   },
   {
     id:26,
-    productImg: '/assets/img/category/category-thumb-03.png',
+    productImg: '/assets/img/AgeCategory/1.jpg',
     productTitle: '🔥 Cool Champs',
     price: '30.00',
     priceOld: '24.00',
@@ -501,7 +501,7 @@ const productList = [
   },
   {
     id:27,
-    productImg: '/assets/img/category/category-thumb-04.png',
+    productImg: '/assets/img/AgeCategory/2.jpg',
     productTitle: '⚡ Teen Titans',
     price: '30.00',
     priceOld: '24.00',

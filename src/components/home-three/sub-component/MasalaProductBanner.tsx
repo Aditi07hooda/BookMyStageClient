@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import thumb from "../../../../public/assets/img/trending/flash/trending-banner.png"
+import thumb from "../../../../public/assets/img/GeneralCards/1.jpg"
 import Image from "next/image";
 const MasalaProductBanner = () => {
   return (

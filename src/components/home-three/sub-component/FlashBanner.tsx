@@ -1,7 +1,7 @@
 
 import Link from 'next/link';
 import React from 'react';
-import thumb from "../../../../public/assets/img/trending/flash/flash-banner-01.jpg"
+import thumb from "../../../../public/assets/img/GeneralCards/2.jpg"
 import Image from 'next/image';
 const FlashBanner = () => {
     return (
