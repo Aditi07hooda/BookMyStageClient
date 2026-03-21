@@ -1,5 +1,5 @@
 import React from 'react';
-import bgImage from "../../../public/assets/img/banner/page-banner-1.jpg"
+import bgImage from "../../../public/assets/img/about/Banner.jpg"
 const AboutPagetitle = () => {
     return (
         <section className="bd-page__banner-area include-bg page-overlay" style={{ backgroundImage: `url(${bgImage.src})`}}>

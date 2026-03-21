@@ -1,5 +1,5 @@
 import React from "react";
-import thumb from "../../../public/assets/img/news/comment/comments-2.png";
+import thumb from "../../../public/assets/img/logo/footer-logo.png";
 import Image from "next/image";
 import useGlobalContext from "@/hooks/use-context";
 import { blogDataType } from "@/interFace/api-interFace";
@@ -24,9 +24,10 @@ const BlogSidebarAbout = () => {
         <div className="bd-sidebar__blog-text">
           <h4>{item?.author}</h4>
           <p>
-            Book My Stage is a digital platform that enables school students (up
-            to Grade 12) to participate in performance-based evaluations,
-            receive expert feedback, certificates, and recognition.
+            Book My Stage is a digital center for performing arts where school
+            students receive expert evaluation, meaningful feedback, and
+            recognition while reducing stage fear, building confidence and
+            accessing performance opportunities—regardless of location.
           </p>
         </div>
         <div className="bd-sidebar__social">

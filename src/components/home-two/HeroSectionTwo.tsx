@@ -1,8 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import bannerOne from "../../../public/assets/img/banner/side-ball.png";//banner-shape-1.png
-import bannerThree from "../../../public/assets/img/banner/banner-shape-2.png";//banner-shape-2.png
-import bannerFive from "../../../public/assets/img/banner/toys-banner.png"; //banner-3toys-banner.png
+import bannerOne from "../../../public/assets/img/banner/banner.png";//banner-shape-1.png
+import bannerFive from "../../../public/assets/img/banner/trophy.png"; //banner-3toys-banner.png
 import bannerTwo from "../../../public/assets/img/banner/discount-shape.png";
 import bannerFour from "../../../public/assets/img/banner/curved-arrow.png";
 import Image from "next/image";
@@ -12,7 +11,7 @@ const HeroSectionTwo = () => {
       <div className="bd-banner__shape-1">
         <Image
           src={bannerOne}
-          style={{ width: "45%", height: "auto" }}
+          style={{ width: "auto", height: "auto" }}
           alt="banner-shape"
         />
       </div>
@@ -23,7 +22,7 @@ const HeroSectionTwo = () => {
           alt="discount-shape"
         />
         <div className="discount-text">
-          <span>50%</span>off
+          <span>Live</span>Now
         </div>
       </div>
       <div className="container">
@@ -31,13 +30,6 @@ const HeroSectionTwo = () => {
           <div className="bd-singel__banner mt-70 d-flex align-items-center">
             <div className="col-xl-7 col-lg-6 col-md-6 col-12">
               <div className="bd-banner__content__wrapper p-relative">
-                <div className="bd-banner__text-shape">
-                  <Image
-                    src={bannerThree}
-                    style={{ width: "90%", height: "auto" }}
-                    alt="banner-shape"
-                  />
-                </div>
                 <div className="bd-banner__btn-shape">
                   <Image
                     src={bannerFour}
@@ -47,7 +39,7 @@ const HeroSectionTwo = () => {
                 </div>
                 <div className="bd-banner__content-2">
                   <h2>
-                  Showcase <br /> Your talent
+                  Your Talent <br /> Deserves a Stage
                   </h2>
                   <p>
                   {/* Play Your Way: Rent, Buy, Create, Repair, and Share {" "}
@@ -55,7 +47,7 @@ const HeroSectionTwo = () => {
                   </p>
                   <div className="bd-banner__btn">
                     <Link className="bd-bn__btn-1" href="/shop">
-                      Shop Now
+                      Book Now
                     </Link>
                   </div>
                 </div>

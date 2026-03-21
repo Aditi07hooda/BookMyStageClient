@@ -16,7 +16,7 @@ import "swiper/css/navigation";
 import "swiper/css/scrollbar";
 
 const RelatedProduct = ({ category, productID }: any) => {
-  const { setOpenModal, openModal, setModalId } = useGlobalContext();
+  const { setOpenModal, openModal, setModalId, limit, page } = useGlobalContext();
   const dispatch = useDispatch();
   const [products, setProducts] = useState<ProductType[]>([]);
   const handleCart = (item: any) => {
@@ -36,7 +36,7 @@ const RelatedProduct = ({ category, productID }: any) => {
     if (category) {
       axios
         .get(
-          `${process.env.BASE_URL}product/search-products?search=${category}`
+          `${process.env.BASE_URL}product/all-products?page=${page}&limit=${limit}`
         )
         .then((res) => {
           let products = res.data.products;
