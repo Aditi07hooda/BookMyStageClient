@@ -42,8 +42,16 @@ const CategorySection = () => {
                       <h4>{item.productTitle}</h4>
                     </div>
                     <h5 className="pt-2">{item.subHeading}</h5>
+                    <p className="text-sm-start">{item.subHeading2}</p>
                     <div className="w-1/2">
-                      <p className="break-words whitespace-normal">{item.subDescription}</p>
+                      {item.subDescription?.map((desc, index) => (
+                        <p
+                          key={index}
+                          className="break-words whitespace-normal"
+                        >
+                          {desc}
+                        </p>
+                      ))}
                     </div>
                   </div>
                 </div>

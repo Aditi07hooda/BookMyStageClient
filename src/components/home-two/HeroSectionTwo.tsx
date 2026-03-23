@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
-import bannerOne from "../../../public/assets/img/banner/banner.png";//banner-shape-1.png
-import bannerFive from "../../../public/assets/img/banner/trophy.png"; //banner-3toys-banner.png
+import bannerOne from "../../../public/assets/img/banner/trophy.png";//banner-shape-1.png
+import bannerFive from "../../../public/assets/img/banner/banner.png"; //banner-3toys-banner.png
 import bannerTwo from "../../../public/assets/img/banner/discount-shape.png";
 import bannerFour from "../../../public/assets/img/banner/curved-arrow.png";
 import Image from "next/image";

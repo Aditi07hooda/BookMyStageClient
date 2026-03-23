@@ -17,7 +17,7 @@ export default function RootLayout({ children }: childrenType) {
             content="width=device-width, initial-scale=1, shrink-to-fit=no"
           />
           <title>Book My Stage</title>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="./public/assets/img/logo/footer-logo.png" />
           <link
             href="https://fonts.googleapis.com/css2?family=Jost:wght@400;500;600;700;900&display=swap"
             rel="stylesheet"

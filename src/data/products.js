@@ -414,7 +414,7 @@ const productList = [
   //home two banner end here
   {
     id:24,
-    productImg: '/assets/img/AgeCategory/1.jpg',
+    productImg: '/assets/img/AgeCategory/TinyStars.jpg',
     productTitle: '🌱 Tiny Stars',
     price: '30.00',
     priceOld: '24.00',
@@ -439,11 +439,12 @@ const productList = [
       }
     ],
     subHeading: 'Playschool – UKG',
-    subDescription: 'First steps on stage through fun, expression, and confidence.',
+    subHeading2: 'First steps in fun and expression',
+    subDescription: ['🎈 Joyful participation', "😊 Comfort & expression", "👍 Encouraging feedback"],
   },
   {
     id:25,
-    productImg: '/assets/img/AgeCategory/2.jpg',
+    productImg: '/assets/img/AgeCategory/SuperKids.jpg',
     productTitle: '🚀 Super Kids',
     price: '30.00',
     priceOld: '24.00',
@@ -468,11 +469,12 @@ const productList = [
       }
     ],
     subHeading: 'Grades 1 – 4',
-    subDescription: 'Exploring talent with creativity, energy, and joyful performances.',
+    subHeading2: 'Exploring talent with confidence',
+    subDescription: ['🎨 Creative learning', '🧩 Skill basics', '💬 Guided feedback'],
   },
   {
     id:26,
-    productImg: '/assets/img/AgeCategory/1.jpg',
+    productImg: '/assets/img/AgeCategory/CoolChamps.jpg',
     productTitle: '🔥 Cool Champs',
     price: '30.00',
     priceOld: '24.00',
@@ -497,11 +499,12 @@ const productList = [
       }
     ],
     subHeading: 'Grades 5 – 8',
-    subDescription: 'Developing skills with structured performances and expert feedback.',
+    subHeading2: "Developing skills with structure",
+    subDescription: ['📈 Skill growth', '📊 Structured evaluation', '🎯 Improvement focus'],
   },
   {
     id:27,
-    productImg: '/assets/img/AgeCategory/2.jpg',
+    productImg: '/assets/img/AgeCategory/TeenTitans.jpg',
     productTitle: '⚡ Teen Titans',
     price: '30.00',
     priceOld: '24.00',
@@ -526,7 +529,8 @@ const productList = [
       }
     ],
     subHeading: 'Grades 9 – 12',
-    subDescription: 'Showcasing talent with confidence, depth, and competitive spirit.',
+    subHeading2: 'Confident and advanced performances',
+    subDescription: ['🏆 Advanced skills', '📋 Deep evaluation', '🎤 Stage readiness'],
   },
   //home two category end here
   {
