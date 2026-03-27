@@ -47,8 +47,8 @@ const nav_menus_list:NavMenuItem[] = [
   },
   {
     id:3,
-    link: '/shop',
-    title: 'Age Categories',
+    link: '/dashboard',
+    title: 'Upload',
     hasDropdown: false,
     megamenu: false,
     dropdownItems: []
