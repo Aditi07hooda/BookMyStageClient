@@ -37,7 +37,7 @@ const CategoryItem = () => {
           {categories.length ?
             categories.map((item) => (
               <li key={item._id} className="has-dropdown">
-                <Link className="text-capitalize" onMouseOver={() => handleSubCategory(item)} href="/shop">
+                <Link className="text-capitalize" onMouseOver={() => handleSubCategory(item)} href="/performances">
                   <i className={item.categoryclass}></i>
                   {item.categoryName}
                 </Link>

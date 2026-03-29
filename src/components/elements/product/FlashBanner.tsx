@@ -6,7 +6,7 @@ const FlashBanner = () => {
   return (
     <>
       <div className="col-xl-12 col-lg-12">
-        <Link href="/shop">
+        <Link href="/performances">
           <div className="bd-flash___banner-item mb-30 p-relative">
             <div className="bd-flash__banner-thumb w-img">
               <Image

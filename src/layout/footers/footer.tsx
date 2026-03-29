@@ -85,16 +85,19 @@ const FooterOne = () => {
                 <div className="bd-footer__link">
                   <ul>
                     <li>
-                      <Link href="/shop">Performances</Link>
+                      <Link href="/performances">Performances</Link>
                     </li>
                     <li>
-                      <Link href="/shop">Age Categories</Link>
+                      <Link href="/performances">Age Categories</Link>
                     </li>
                     <li>
                       <Link href="/blog">Blogs</Link>
                     </li>
                     <li>
                       <Link href="/about">About Us</Link>
+                    </li>
+                    <li>
+                      <Link href="/contact">Contact</Link>
                     </li>
                   </ul>
                 </div>

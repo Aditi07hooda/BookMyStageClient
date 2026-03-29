@@ -65,7 +65,7 @@ const CategorySlider = () => {
                           <div className="swiper-slides">
                             <div className="bd-singel__category category_div_height text-center mb-30">
                               <div className="bd-category__img">
-                                <Link href="/shop">
+                                <Link href="/performances">
                                   <Image
                                     src={item.categoryThumb}
                                     alt="cateegory-img"
@@ -77,7 +77,7 @@ const CategorySlider = () => {
                               </div>
                               <div className="bd-category__text">
                                 <span className="bd-category__title">
-                                  <Link href="/shop">{item.categoryName}</Link>
+                                  <Link href="/performances">{item.categoryName}</Link>
                                 </span>
                                 
                               </div>

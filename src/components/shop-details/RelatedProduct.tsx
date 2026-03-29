@@ -134,7 +134,7 @@ const RelatedProduct = ({ category, productID }: any) => {
                           <div className="swiper-slides">
                             <div className="bd-trending__item text-center mb-30">
                               <div className="bd-trending__product-thumb">
-                                <Link href={`/shop-details/${item._id}`}>
+                                <Link href={`/performance-details/${item._id}`}>
                                   <Image
                                     width={500}
                                     height={500}
@@ -197,7 +197,7 @@ const RelatedProduct = ({ category, productID }: any) => {
                               </div>
                               <div className="bd-teanding__content">
                                 <h4 className="bd-product__title">
-                                  <Link href={`/shop-details/${item._id}`}>
+                                  <Link href={`/performance-details/${item._id}`}>
                                     {item.productName}
                                   </Link>
                                 </h4>

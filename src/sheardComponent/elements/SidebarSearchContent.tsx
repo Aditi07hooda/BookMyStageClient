@@ -101,7 +101,7 @@ const SidebarSearchContent = () => {
                           />
                         </div>
                         <div className="single_product">
-                          <Link onClick={() => safeSetShowSidebar(false)} href={`/shop-details/${item._id}`}>
+                          <Link onClick={() => safeSetShowSidebar(false)} href={`/performance-details/${item._id}`}>
                             {item.productName}
                           </Link>
                         </div>

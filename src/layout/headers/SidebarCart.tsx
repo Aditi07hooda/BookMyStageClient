@@ -68,7 +68,7 @@ const SidebarCart = () => {
                         return (
                           <li key={index}>
                             <div className="cartmini__thumb">
-                              <Link href={`/shop-details/${item._id}`}>
+                              <Link href={`/performance-details/${item._id}`}>
                                 <Image
                                   width={60}
                                   height={100}
@@ -80,7 +80,7 @@ const SidebarCart = () => {
                             </div>
                             <div className="cartmini__content">
                               <h5>
-                                <Link href={`/shop-details/${item._id}`}>
+                                <Link href={`/performance-details/${item._id}`}>
                                   {item.productName}
                                   <span
                                     className="age-category-badge"

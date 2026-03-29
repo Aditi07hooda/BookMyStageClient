@@ -64,7 +64,7 @@ const HeaderThree = () => {
         })
         .catch((e) => console.log(e));
     }
-    if (pathName === "/shop") {
+    if (pathName === "/performances") {
       setProdcutLoadding(true)
       axios
         .get(
@@ -199,7 +199,7 @@ const HeaderThree = () => {
             </div>
           </div>
 
-          {pathName === "/shop" || pathName === "/blog" ? (
+          {pathName === "/performances" || pathName === "/blog" ? (
             <>
               <div className="bd-header__buttom d-none d-sm-block">
                 <div className="container">
@@ -237,14 +237,14 @@ const HeaderThree = () => {
                           </div>
                         </div>
                         <div className="bd-header__filterbar d-none d-md-block">
-                          {pathName === "/shop" || pathName === "/blog" ? (
+                          {pathName === "/performances" || pathName === "/blog" ? (
                             <>
                               <form className="bd-filter__input" action="#">
                                 <input
                                   type="text"
                                   placeholder={
-                                    pathName === "/shop"
-                                      ? "Search products..."
+                                    pathName === "/performances"
+                                      ? "Search performances..."
                                       : "Search Blogs..."
                                   }
                                   value={searchValue}

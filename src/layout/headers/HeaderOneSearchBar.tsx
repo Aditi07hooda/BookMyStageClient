@@ -126,7 +126,7 @@ const HeaderOneSearchBar = () => {
                           </div>
                           <div className="col-lg-10">
                             <div className="single_product">
-                              <Link href={`/shop-details/${item._id}`}>
+                              <Link href={`/performance-details/${item._id}`}>
                                 {item.productName}
                               </Link>
                             </div>

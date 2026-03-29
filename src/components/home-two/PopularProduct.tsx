@@ -18,7 +18,7 @@ const PopularProduct = () => {
                         <Popular/>
                     </div>
                     <div className="col-xxl-4 col-xl-6 col-lg-6 col-md-8">
-                        <Link href="/shop">
+                        <Link href="/performances">
                             <div className="bd-flash___banner-item mb-30 p-relative">
                                 <div className="bd-flash__banner-thumb w-img">
                                     <Image style={{ width: "100%", height: "auto" }} src={thumb} alt="flash-banner" />

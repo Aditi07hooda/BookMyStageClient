@@ -49,7 +49,7 @@ const ServiceSection = () => {
                   </div>
                   <div className="bd-step__content">
                     <h3>
-                      <Link href="/shop">{item.serviceTitle}</Link>
+                      <Link href="/performances">{item.serviceTitle}</Link>
                     </h3>
                     <p>{item.serviceDesc}</p>
                   </div>

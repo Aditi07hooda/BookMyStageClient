@@ -48,7 +48,7 @@ const ListViewProduct = ({ products, limit }: any) => {
                   <div className="col-xxl-4 col-lg-6 col-md-6">
                     <div className="bd-trending__item">
                       <div className="bd-trending__product-thumb text-center">
-                        <Link href={`/shop-details/${item?._id}`}>
+                        <Link href={`/performance-details/${item?._id}`}>
                           <Image
                             src={item?.img}
                             alt="product-img"
@@ -64,7 +64,7 @@ const ListViewProduct = ({ products, limit }: any) => {
                     <div className="bd-teanding__content mb-25">
                       <div className="bd-product__content mb-10">
                         <h4 className="bd-product__title">
-                          <Link href={`/shop-details/${item?._id}`}>
+                          <Link href={`/performance-details/${item?._id}`}>
                             {item?.productName}
                           </Link>
                         </h4>

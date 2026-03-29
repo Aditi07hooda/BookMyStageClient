@@ -46,7 +46,7 @@ const HeroSectionTwo = () => {
                     <br /> Where Every Toy Tells Your Story{" "} */}
                   </p>
                   <div className="bd-banner__btn">
-                    <Link className="bd-bn__btn-1" href="/shop">
+                    <Link className="bd-bn__btn-1" href="/performances">
                       Book Now
                     </Link>
                   </div>

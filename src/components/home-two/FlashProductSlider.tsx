@@ -83,7 +83,7 @@ const FlashProductSlider = () => {
                               </div>
                             </div>
                             <div className="bd-flash__thumb w-img">
-                              <Link href={`/shop-details/${item?._id}`}>
+                              <Link href={`/performance-details/${item?._id}`}>
                                 {" "}
                                 <Image
                                   width={500}
@@ -97,7 +97,7 @@ const FlashProductSlider = () => {
                             <div className="bd-flash__content-box">
                               <div className="bd-flash__content mb-30">
                                 <h4 className="bd-product__title">
-                                  <Link href={`/shop-details/${item?._id}`}>
+                                  <Link href={`/performance-details/${item?._id}`}>
                                     {item?.productName}
                                   </Link>
                                 </h4>
@@ -144,7 +144,7 @@ const FlashProductSlider = () => {
                                 </span>
                                 <span>
                                   <span className="available-count">
-                                    <Link href="/shop">
+                                    <Link href="/performances">
                             
                                     </Link>
                                   </span>

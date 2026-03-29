@@ -47,7 +47,7 @@ const HeroSection = () => {
                       </p>
                       <div className="bd-banner__button">
                         <div className="bd-button__inner">
-                          <Link className="bd-bn__btn-1" href="/shop">
+                          <Link className="bd-bn__btn-1" href="/performances">
                             Shop Now
                           </Link>
                         </div>

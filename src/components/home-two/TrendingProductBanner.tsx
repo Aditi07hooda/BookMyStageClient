@@ -16,9 +16,9 @@ const TrendingProductBanner = () => {
                                     <div className="bd-product__banner-inner">
                                         <div className={item.bannerClass}>
                                             <span>{item.productTag}</span>
-                                            <h3><Link href="/shop">{item.productTitle}</Link></h3>
+                                            <h3><Link href="/performances">{item.productTitle}</Link></h3>
                                             <p>{item.productDesc}</p>
-                                            <Link className="bd-bn__btn-3" href="/shop">{item.productBtn}</Link>
+                                            <Link className="bd-bn__btn-3" href="/performances">{item.productBtn}</Link>
                                         </div>
                                     </div>
                                 </div>

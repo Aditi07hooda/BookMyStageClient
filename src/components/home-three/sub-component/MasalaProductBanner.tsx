@@ -5,7 +5,7 @@ import Image from "next/image";
 const MasalaProductBanner = () => {
   return (
     <>
-      <Link href="/shop-details">
+      <Link href="/performance-details">
         
           <div className="bd-trending__banner p-relative mb-50">
             <div className="bd-trending__banner-thumb w-img">

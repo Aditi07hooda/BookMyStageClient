@@ -140,7 +140,7 @@ const UserReviews = () => {
               <div className="student-profile-reviews-course-title">
                 <h5>
                   {" "}
-                  <Link href={`/shop-details/${item?.productId}`}>
+                  <Link href={`/performance-details/${item?.productId}`}>
                     {item?.productName
                       ? item?.productName
                       : "Product Name Not Set"}

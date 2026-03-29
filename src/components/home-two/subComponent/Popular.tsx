@@ -24,7 +24,7 @@ const Popular = () => {
             <h3>Popular</h3>
           </div>
           <div className="bd-section__arrow">
-            <Link href="/shop">
+            <Link href="/performances">
               View All <i className="fa-regular fa-arrow-right-long"></i>
             </Link>
           </div>
@@ -47,7 +47,7 @@ const Popular = () => {
                 return (
                   <div className="bd-populer__item" key={num}>
                     <div className="bd-populer__thumb">
-                      <Link href={`/shop-details/${item?._id}`}>
+                      <Link href={`/performance-details/${item?._id}`}>
                         <Image
                           width={50}
                           height={60}
@@ -59,7 +59,7 @@ const Popular = () => {
                     </div>
                     <div className="bd-populer__info">
                       <h4 className="bd-product__title">
-                        <Link href={`/shop-details/${item?._id}`}>
+                        <Link href={`/performance-details/${item?._id}`}>
                           {item?.productName}
                         </Link>
                       </h4>

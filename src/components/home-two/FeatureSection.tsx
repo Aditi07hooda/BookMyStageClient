@@ -17,7 +17,7 @@ const FeatureSection = () => {
                                 🎯
                             </div>
                             <div className="bd-features__content text-center">
-                                <h4><Link href="/shop">Evaluation Report</Link></h4>
+                                <h4><Link href="/performances">Evaluation Report</Link></h4>
                                 <span>From Experienced Juries</span>
                             </div>
                         </div>
@@ -28,7 +28,7 @@ const FeatureSection = () => {
                                 📜
                             </div>
                             <div className="bd-features__content text-center">
-                                <h4><Link href="/shop">Digital Certificate</Link></h4>
+                                <h4><Link href="/performances">Digital Certificate</Link></h4>
                                 <span>Shareable & Verifiable</span>
                             </div>
                         </div>
@@ -39,7 +39,7 @@ const FeatureSection = () => {
                                 🏆
                             </div>
                             <div className="bd-features__content text-center">
-                                <h4><Link href="/shop">Awards</Link></h4>
+                                <h4><Link href="/performances">Awards</Link></h4>
                                 <span>For Top Performers</span>
                             </div>
                         </div>
@@ -50,7 +50,7 @@ const FeatureSection = () => {
                                 🔒
                             </div>
                             <div className="bd-features__content text-center">
-                                <h4><Link href="/shop">Safe & Secure</Link></h4>
+                                <h4><Link href="/performances">Safe & Secure</Link></h4>
                                 <span>Child-Friendly & Trusted</span>
                             </div>
                         </div>

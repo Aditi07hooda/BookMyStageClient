@@ -54,7 +54,7 @@ const GridViewProduct = ({ products, limit }: any) => {
               >
                 <div className="bd-trending__item text-center mb-30 position-relative">
                   <div className="bd-trending__product-thumb border-5">
-                    <Link href={`/shop-details/${item?._id}`}>
+                    <Link href={`/performance-details/${item?._id}`}>
                       <Image
                         src={item?.img}
                         alt="product-img"
@@ -115,7 +115,7 @@ const GridViewProduct = ({ products, limit }: any) => {
                   </div>
                   <div className="bd-teanding__content">
                     <h4 className="bd-product__title">
-                      <Link href={`/shop-details/${item?._id}`}>
+                      <Link href={`/performance-details/${item?._id}`}>
                         {item?.productName}
                       </Link>
                     </h4>

@@ -1,92 +1,199 @@
-import Link from "next/link";
-import React from "react";
-import footerlogo from "../../../public/assets/img/logo/footer-logo.png";
 import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import footerLogo from "../../../public/assets/img/logo/footer-logo.png";
+import support from "../../../public/assets/img/icon/support.png";
+import discover from "../../../public/assets/img/icon/discover.png";
+import masterCard from "../../../public/assets/img/icon/mastercard.png";
+import paypal from "../../../public/assets/img/icon/paypal.png";
+import visa from "../../../public/assets/img/icon/visa.png";
+import axios from "axios";
+import { CategoryType } from "@/interFace/api-interFace";
 const FooterThree = () => {
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+
+  const categoryData = [
+    {
+      id: 1,
+      name: "How it Works",
+      link: "/how-it-works",
+    },
+    {
+      id: 2,
+      name: "FAQs",
+      link: "/faq",
+    },
+    {
+      id: 3,
+      name: "Terms & Conditions",
+      link: "/terms-and-conditions",
+    },
+    {
+      id: 4,
+      name: "Privacy Policy",
+      link: "/privacy-policy",
+    },
+  ];
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.BASE_URL}setting/category`)
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
   return (
     <footer>
-      <div className="bd-footer__area grey-bg pt-100 pb-60">
-        <div className="bd-footer__style-2">
-          <div className="container">
-            <div className="row justify-content-center">
-              <div className="col-12">
-                <div className="bd-footer__widget text-center mb-40">
+      <section className="bd-footer__area grey-bg pt-100 pb-40">
+        <div className="container">
+          <div className="row">
+            <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div className="bd-footer__widget footer-col-1 mb-60">
+                <div className="bd-footer__info">
                   <div className="bd-footer__logo">
                     <Link href="/">
-                      <Image src={footerlogo} alt="footer-logo" />
+                      <Image src={footerLogo} alt="footer-logo" />
                     </Link>
                   </div>
-                </div>
-                <div className="bd-footer__widget text-center mb-40">
-                  <div className="bd-footer__link">
-                    <ul>
-                      <li>
-                        <Link href="/about">About Our Company</Link>
-                      </li>
-                      <li>
-                        <Link href="/shop">Latest Products</Link>
-                      </li>
-                      <li>
-                        <Link href="/checkout">Payment Type</Link>
-                      </li>
-                      <li>
-                        <Link href="/about">Awards Winnings</Link>
-                      </li>
-                      <li>
-                        <Link href="/about">World Media Partner</Link>
-                      </li>
-                      <li>
-                        <Link href="/shop">Flash Offers</Link>
-                      </li>
-                    </ul>
+                  <p>
+                    Book My Stage is a digital center for performing arts where
+                    school students receive expert evaluation, meaningful
+                    feedback, and recognition while reducing stage fear,
+                    building confidence and accessing performance
+                    opportunities—regardless of location.
+                  </p>
+                  <div className="bd-footer__contact">
+                    <span>
+                      <Link href="mailto:bookmystage.in@gmail.com">
+                        <i className="fa-regular fa-envelope"></i>
+                        bookmystage.in@gmail.com
+                      </Link>{" "}
+                    </span>
+                    <span>
+                      <i className="fa-solid fa-location-dot"></i>India
+                    </span>
                   </div>
                 </div>
-                <div className="bd-footer__widget text-center mb-40">
-                  <div className="bd-footer__social">
-                    <Link href="https://www.facebook.com/" target="_blank">
-                      <i className="fab fa-facebook-f"></i>
-                    </Link>
-
-                    <Link href="https://twitter.com/?lang=en" title="Twitter">
-                      <i className="fab fa-twitter"></i>
-                    </Link>
-
-                    <Link
-                      href="https://www.linkedin.com/"
-                      title="Linkedin"
-                      target="_blank"
-                    >
-                      <i className="fab fa-linkedin"></i>
-                    </Link>
-
-                    <Link
-                      href="https://www.instagram.com/"
-                      target="_blank"
-                      title="Instagram"
-                    >
-                      <i className="fab fa-instagram"></i>
-                    </Link>
+              </div>
+            </div>
+            <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div className="bd-footer__widget footer-col-2 mb-60">
+                <div className="bd-footer__widget-title">
+                  <h4>Quick Links</h4>
+                </div>
+                <div className="bd-footer__link">
+                  <ul>
+                    <li>
+                      <Link href="/performances">Performances</Link>
+                    </li>
+                    <li>
+                      <Link href="/performances">Age Categories</Link>
+                    </li>
+                    <li>
+                      <Link href="/blog">Blogs</Link>
+                    </li>
+                    <li>
+                      <Link href="/about">About Us</Link>
+                    </li>
+                    <li>
+                      <Link href="/contact">Contact</Link>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div className="bd-footer__widget footer-col-3 mb-60">
+                <div className="bd-footer__widget-title">
+                  <h4>Categories</h4>
+                </div>
+                <div className="bd-footer__link">
+                  <ul>
+                    {categoryData?.length ? (
+                      <>
+                        {categoryData?.map((item) => (
+                          <li key={item?.id}>
+                            <Link
+                              className="text-capitalize"
+                              href={`${item.link}`}
+                            >
+                              {item?.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </>
+                    ) : (
+                      <></>
+                    )}
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div className="col-xl-3 col-lg-6 col-md-6 col-sm-6">
+              <div className="bd-footer__widget mb-60">
+                <div className="bd-footer__widget-title">
+                  <h4>Newsletter</h4>
+                </div>
+                <div className="bd-footer__subcribe p-relative mb-40">
+                  <form action="#">
+                    <input type="text" placeholder="Enter Your Email" />
+                    <button className="bd-footer__s-btn">
+                      <i className="fa-solid fa-arrow-right-long"></i>
+                    </button>
+                  </form>
+                </div>
+                <div className="bd-footer__support-wrapper">
+                  <div className="bd-fotter__support-icon">
+                    <Image src={support} alt="support-img" />
+                  </div>
+                  <div className="bd-footer__support-inner">
+                    <span>8:30 AM - 9:30 PM</span>
+                    <h4>
+                      <Link href="tel:+58569502352">+585 695 023 52 </Link>{" "}
+                    </h4>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      </section>
       <div className="bd-sub__fotter">
         <div className="container">
           <div className="row align-items-center">
-            <div className="col-12">
-              <div className="bd-footer__copyright text-center">
+            <div className="col-xl-6 col-lg-6">
+              <div className="bd-footer__copyright">
                 <ul>
-                  <li>All Rights Reserved</li>
+                  <li>© 2026 Book My Stage. All rights reserved.</li>
+                </ul>
+              </div>
+            </div>
+            <div className="col-xl-6 col-lg-6">
+              <div className="bd-footer__payment">
+                <ul>
                   <li>
-                    Copyrighted by ©2023{" "}
-                    <span>
-                      <Link href="https://themeforest.net/user/bdevs/portfolio">
-                        BDevs
-                      </Link>
-                    </span>
+                    <span>We Support</span>
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <Image src={discover} alt="discover" />{" "}
+                    </Link>{" "}
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <Image src={masterCard} alt="mastercard" />{" "}
+                    </Link>{" "}
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <Image src={paypal} alt="paypal" />{" "}
+                    </Link>{" "}
+                  </li>
+                  <li>
+                    <Link href="#">
+                      <Image src={visa} alt="visa" />{" "}
+                    </Link>{" "}
                   </li>
                 </ul>
               </div>

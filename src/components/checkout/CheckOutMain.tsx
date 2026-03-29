@@ -54,7 +54,7 @@ const CheckOutMain = () => {
       .join(", ") + ` | Total Price: ₹${totalPrice}`;
 
   const handleGoToShopPage = () => {
-    router.push("/shop");
+    router.push("/performances");
   };
 
   useEffect(() => {

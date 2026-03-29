@@ -182,7 +182,7 @@ const ProductSlider = () => {
                                         <div className="bd-product__item text-center p-relative mb-30">
                                           <div className="bd-product__thumb w-img">
                                             <Link
-                                              href={`/shop-details/${item._id}`}
+                                              href={`/performance-details/${item._id}`}
                                             >
                                               <Image
                                                 width={500}
@@ -260,7 +260,7 @@ const ProductSlider = () => {
                                           <div className="bd-product__content">
                                             <h4 className="bd-product__title">
                                               <Link
-                                                href={`/shop-details/${item._id}`}
+                                                href={`/performance-details/${item._id}`}
                                               >
                                                 {item.productName}
                                               </Link>

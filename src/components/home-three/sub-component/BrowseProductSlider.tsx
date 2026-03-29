@@ -59,7 +59,7 @@ const BrowseProductSlider = () => {
   }, [page, limit, setProducts]);
 
   const handleCallApi = () => {
-    router.push("/shop");
+    router.push("/performances");
   };
 
   useEffect(() => {
@@ -132,7 +132,7 @@ const BrowseProductSlider = () => {
                 </nav>
               </div>
               <div className="bd-trending__btn">
-                <Link className="bd-bn__btn-2" href="/shop">
+                <Link className="bd-bn__btn-2" href="/performances">
                   View All
                 </Link>
               </div>
@@ -176,7 +176,7 @@ const BrowseProductSlider = () => {
                                 >
                                   <div className="bd-trending__item text-center mb-30 position-relative">
                                     <div className="bd-trending__product-thumb">
-                                      <Link href={`/shop-details/${item?._id}`}>
+                                      <Link href={`/performance-details/${item?._id}`}>
                                         <Image
                                           width={500}
                                           height={500}
@@ -247,7 +247,7 @@ const BrowseProductSlider = () => {
                                     <div className="bd-teanding__content">
                                       <h4 className="bd-product__title">
                                         <Link
-                                          href={`/shop-details/${item?._id}`}
+                                          href={`/performance-details/${item?._id}`}
                                         >
                                           {item?.productName}
                                         </Link>
@@ -351,7 +351,7 @@ const BrowseProductSlider = () => {
                             >
                               <div className="bd-trending__item text-center mb-30 position-relative">
                                 <div className="bd-trending__product-thumb">
-                                  <Link href={`/shop-details/${item?._id}`}>
+                                  <Link href={`/performance-details/${item?._id}`}>
                                     <Image
                                       width={500}
                                       height={500}
@@ -418,7 +418,7 @@ const BrowseProductSlider = () => {
                                 </div>
                                 <div className="bd-teanding__content">
                                   <h4 className="bd-product__title">
-                                    <Link href={`/shop-details/${item?._id}`}>
+                                    <Link href={`/performance-details/${item?._id}`}>
                                       {item?.productName}
                                     </Link>
                                   </h4>

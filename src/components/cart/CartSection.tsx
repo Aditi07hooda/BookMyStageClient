@@ -72,7 +72,7 @@ const CartSection = () => {
                       {cartProducts.map((item, index) => (
                         <tr key={index}>
                           <td className="product-thumbnail">
-                            <Link href={`/shop-details/${item._id}`}>
+                            <Link href={`/performance-details/${item._id}`}>
                               <Image
                                 src={item.img}
                                 width={50}
@@ -83,7 +83,7 @@ const CartSection = () => {
                             </Link>
                           </td>
                           <td className="product-name">
-                            <Link href={`/shop-details/${item._id}`}>
+                            <Link href={`/performance-details/${item._id}`}>
                               {item.productName}
                             </Link>
                           </td>

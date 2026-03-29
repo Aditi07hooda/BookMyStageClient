@@ -17,7 +17,7 @@ const CategorySection = () => {
           </div>
           <div className="col-sm-6">
             <div className="bd-trending__btn text-sm-end mb-40">
-              <Link className="bd-bn__btn-2" href="/shop">
+              <Link className="bd-bn__btn-2" href="/performances">
                 View All Category
               </Link>
             </div>

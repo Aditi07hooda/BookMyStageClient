@@ -26,7 +26,7 @@ const SidebarTopratedProduct = () => {
             <h3>Top Rated</h3>
           </div>
           <div className="bd-section__arrow">
-            <Link href="/shop">
+            <Link href="/performances">
               View All<i className="fa-regular fa-arrow-right-long"></i>
             </Link>
           </div>
@@ -49,7 +49,7 @@ const SidebarTopratedProduct = () => {
               return (
                 <div className="bd-populer__item" key={key}>
                   <div className="bd-populer__thumb">
-                    <Link href={`/shop-details/${item._id}`}>
+                    <Link href={`/performance-details/${item._id}`}>
                       <Image
                         src={item.img}
                         alt="product-img"
@@ -61,7 +61,7 @@ const SidebarTopratedProduct = () => {
                   </div>
                   <div className="bd-populer__info">
                     <h4 className="bd-product__title">
-                      <Link href={`/shop-details/${item._id}`}>
+                      <Link href={`/performance-details/${item._id}`}>
                         {item.productName}
                       </Link>
                     </h4>

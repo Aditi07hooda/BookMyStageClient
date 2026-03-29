@@ -170,7 +170,7 @@ const OrderTrackModal: React.FC = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Link href={`/shop-details/${eventSubmission.eventUserId}`}>
+                    <Link href={`/performance-details/${eventSubmission.eventUserId}`}>
                       {eventSubmission.eventimg && (
                         <Image
                           src={eventSubmission.eventimg}

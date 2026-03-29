@@ -191,7 +191,7 @@ const TrackOrderMain = () => {
                                             <tr key={index}>
                                               <td className="product-thumbnail">
                                                 <Link
-                                                  href={`/shop-details/${itm.productId}`}
+                                                  href={`/performance-details/${itm.productId}`}
                                                 >
                                                   <Image
                                                     src={itm.img}
@@ -207,7 +207,7 @@ const TrackOrderMain = () => {
                                               </td>
                                               <td className="product-name">
                                                 <Link
-                                                  href={`/shop-details/${itm._id}`}
+                                                  href={`/performance-details/${itm._id}`}
                                                 >
                                                   {itm.productName}
                                                 </Link>

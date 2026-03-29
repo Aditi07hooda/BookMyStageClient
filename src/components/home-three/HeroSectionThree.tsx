@@ -34,7 +34,7 @@ const HeroSectionThree = () => {
                         <div className="bd-product__banner-inner">
                           <div className="bd-product__banner-content banner-oil product__content-3">
                             <h3 className="bd-product__title">
-                              <Link href={`/shop-details/${item.productId}`}>
+                              <Link href={`/performance-details/${item.productId}`}>
                                 {item.productName}
                               </Link>
                             </h3>
@@ -48,7 +48,7 @@ const HeroSectionThree = () => {
                             </div>
                             <Link
                               className="bd-bn__btn-3"
-                              href={`/shop-details/${item.productId}`}
+                              href={`/performance-details/${item.productId}`}
                             >
                               Shop Now
                             </Link>

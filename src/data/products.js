@@ -367,7 +367,7 @@ const productList = [
     productTitle: 'Perform',
     productDesc: 'Showcase your talent on a digital stage.',
     productBtn: 'Explore Performances',
-    linkTo: '/shop',
+    linkTo: '/performances',
     bannerClass: 'bd-product__banner-content banner-meat',
     price: '30.00',
     priceOld: '24.00',

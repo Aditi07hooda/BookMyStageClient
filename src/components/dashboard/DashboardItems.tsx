@@ -464,7 +464,7 @@ const DashboardItems = () => {
                               <tr key={item.id}>
                                 <td className="product-thumbnail">
                                   <Link
-                                    href={`/shop-details/${item.eventUserId}`}
+                                    href={`/performance-details/${item.eventUserId}`}
                                   >
                                     <Image
                                       src={item.eventimg}
@@ -477,7 +477,7 @@ const DashboardItems = () => {
                                 </td>
                                 <td className="product-name">
                                   <Link
-                                    href={`/shop-details/${item.eventUserId}`}
+                                    href={`/performance-details/${item.eventUserId}`}
                                   >
                                     {item.eventname}
                                     <span

@@ -15,10 +15,10 @@ const HurryupBanner = () => {
             <div className="bd-product__banner-content banner-food  product__content-2">
               <span>Fresh and pure</span>
               <h3>
-                <Link href="/shop">Food and Fruits</Link>
+                <Link href="/performances">Food and Fruits</Link>
               </h3>
               <p>Feed your family fresh</p>
-              <Link className="bd-bn__btn-3" href="/shop">
+              <Link className="bd-bn__btn-3" href="/performances">
                 Shop Now
               </Link>
             </div>

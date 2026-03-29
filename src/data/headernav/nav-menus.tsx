@@ -30,7 +30,7 @@ const nav_menus_list:NavMenuItem[] = [
   //   hasDropdown: true,
   //   megamenu: false,
   //   dropdownItems: [
-  //     { link: '/shop', title: 'Shop' },
+  //     { link: '/performances', title: 'Shop' },
   //     { link: '/wishlist', title: 'Wishlist' },
   //     { link: '/cart', title: 'Cart' },
   //     { link: '/checkout', title: 'Checkout' },
@@ -41,7 +41,7 @@ const nav_menus_list:NavMenuItem[] = [
   //   ]
   // },
   {id:2,
-    link: '/shop',
+    link: '/performances',
     title: 'Performances',
     dropdownItems: []
   },

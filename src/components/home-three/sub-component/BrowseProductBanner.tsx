@@ -14,11 +14,11 @@ const BrowseProductBanner = () => {
                         <div className="bd-product__banner-inner">
                             <div className="bd-product__banner-content product__content-5">
                                 <span>{item.productTag}</span>
-                                <h3><Link href="/shop">{item.productTitle}</Link></h3>
+                                <h3><Link href="/performances">{item.productTitle}</Link></h3>
                                 <div className="product__banner-price">
                                     <h4>${item.price}</h4>
                                 </div>
-                                <Link className="bd-bn__btn-5" href="/shop">{item.productBtn}</Link>
+                                <Link className="bd-bn__btn-5" href="/performances">{item.productBtn}</Link>
                             </div>
                         </div>
                     </div>
