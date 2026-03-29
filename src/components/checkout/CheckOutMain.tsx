@@ -188,201 +188,208 @@ const CheckOutMain = () => {
   return (
     <>
       <section className="checkout-area pt-115 pb-100">
-        <div className="container small-container">
-          <div className="coupon-accordion">
-            <h3>
-              Hi, {user?.name} <span id="showlogin"> Welcome To Orgado </span>
-            </h3>
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)} method="POST">
-            <div className="row">
-              <div className="col-lg-6">
-                <div className="checkbox-form">
-                  <h3>Billing To</h3>
-                  <div className="row">
-                    <div className="col-md-12">
-                      <div className="checkout-form-list">
-                        <label>
-                          Name <span className="required">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          defaultValue={user?.email && user.name}
-                          placeholder="Enter Your Name"
-                          {...register("Fname", {
-                            required: "Name is required",
-                          })}
-                        />
-                        {errors.Fname && (
-                          <span className="error-message">
-                            {errors.Fname.message}
-                          </span>
-                        )}
+        {user != null ? (
+          <div className="container small-container">
+            <div className="coupon-accordion">
+              <h3>
+                Hi, {user?.name} <span id="showlogin"> Welcome To Orgado </span>
+              </h3>
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)} method="POST">
+              <div className="row">
+                <div className="col-lg-6">
+                  <div className="checkbox-form">
+                    <h3>Billing To</h3>
+                    <div className="row">
+                      <div className="col-md-12">
+                        <div className="checkout-form-list">
+                          <label>
+                            Name <span className="required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            defaultValue={user?.email && user.name}
+                            placeholder="Enter Your Name"
+                            {...register("Fname", {
+                              required: "Name is required",
+                            })}
+                          />
+                          {errors.Fname && (
+                            <span className="error-message">
+                              {errors.Fname.message}
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="checkout-form-list">
-                        <label>
-                          Email Address <span className="required">*</span>
-                        </label>
-                        <input
-                          type="email"
-                          defaultValue={user?.email && user.email}
-                          readOnly
-                          placeholder=""
-                          {...register("EmailAddress", {
-                            required: "Email is required",
-                          })}
-                        />
-                        {errors.EmailAddress && (
-                          <span className="error-message">
-                            {errors.EmailAddress.message}
-                          </span>
-                        )}
+                      <div className="col-md-12">
+                        <div className="checkout-form-list">
+                          <label>
+                            Email Address <span className="required">*</span>
+                          </label>
+                          <input
+                            type="email"
+                            defaultValue={user?.email && user.email}
+                            readOnly
+                            placeholder=""
+                            {...register("EmailAddress", {
+                              required: "Email is required",
+                            })}
+                          />
+                          {errors.EmailAddress && (
+                            <span className="error-message">
+                              {errors.EmailAddress.message}
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-md-12">
-                      <div className="checkout-form-list">
-                        <label>
-                          Phone <span className="required">*</span>
-                        </label>
-                        <input
-                          type="text"
-                          defaultValue={user?.email && user.phone}
-                          placeholder="Phone Number"
-                          {...register("Phone", {
-                            required: "Phone is required",
-                          })}
-                        />
-                        {errors.Phone && (
-                          <span className="error-message">
-                            {errors.Phone.message}
-                          </span>
-                        )}
+                      <div className="col-md-12">
+                        <div className="checkout-form-list">
+                          <label>
+                            Phone <span className="required">*</span>
+                          </label>
+                          <input
+                            type="text"
+                            defaultValue={user?.email && user.phone}
+                            placeholder="Phone Number"
+                            {...register("Phone", {
+                              required: "Phone is required",
+                            })}
+                          />
+                          {errors.Phone && (
+                            <span className="error-message">
+                              {errors.Phone.message}
+                            </span>
+                          )}
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* order info */}
-              <div className="col-lg-6">
-                <div className="your-order mb-30 ">
-                  <h3>Your order</h3>
-                  <div className="your-order-table table-responsive">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th className="product-name">Product</th>
-                          <th className="product-total">Total</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {cartProducts.map((item, index) => (
-                          <tr className="cart_item" key={index}>
-                            <td className="product-name">
-                              {item.productName}{" "}
-                              <strong className="product-quantity">
-                                {" "}
-                                × {item?.totalCard}
-                              </strong>
-                            </td>
-                            <td className="product-total">
-                              <span className="amount">
-                                ₹{item?.totalCard * item.price}
-                              </span>
+                {/* order info */}
+                <div className="col-lg-6">
+                  <div className="your-order mb-30 ">
+                    <h3>Your order</h3>
+                    <div className="your-order-table table-responsive">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th className="product-name">Product</th>
+                            <th className="product-total">Total</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {cartProducts.map((item, index) => (
+                            <tr className="cart_item" key={index}>
+                              <td className="product-name">
+                                {item.productName}{" "}
+                                <strong className="product-quantity">
+                                  {" "}
+                                  × {item?.totalCard}
+                                </strong>
+                              </td>
+                              <td className="product-total">
+                                <span className="amount">
+                                  ₹{item?.totalCard * item.price}
+                                </span>
+                              </td>
+                            </tr>
+                          ))}
+                        </tbody>
+                        <tfoot>
+                          <tr className="cart-subtotal">
+                            <th>Cart Subtotal</th>
+                            <td>
+                              <span className="amount">₹{totalPrice}</span>
                             </td>
                           </tr>
-                        ))}
-                      </tbody>
-                      <tfoot>
-                        <tr className="cart-subtotal">
-                          <th>Cart Subtotal</th>
-                          <td>
-                            <span className="amount">₹{totalPrice}</span>
-                          </td>
-                        </tr>
-                        <tr className="order-total">
-                          <th>Order Total</th>
-                          <td>
-                            <strong>
-                              <span className="amount">₹{totalPrice}</span>
-                            </strong>
-                          </td>
-                        </tr>
-                      </tfoot>
-                    </table>
-                    <div className="mt-4 p-3 border rounded">
-                      <h5 className="mb-3">
-                        Declaration Consent{" "}
-                        <span style={{ color: "red" }}>*</span>
-                      </h5>
+                          <tr className="order-total">
+                            <th>Order Total</th>
+                            <td>
+                              <strong>
+                                <span className="amount">₹{totalPrice}</span>
+                              </strong>
+                            </td>
+                          </tr>
+                        </tfoot>
+                      </table>
+                      <div className="mt-4 p-3 border rounded">
+                        <h5 className="mb-3">
+                          Declaration Consent{" "}
+                          <span style={{ color: "red" }}>*</span>
+                        </h5>
 
-                      <div className="form-check mb-3">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id="parentConsent"
-                          checked={parentConsent}
-                          onChange={(e) => setParentConsent(e.target.checked)}
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="parentConsent"
-                        >
-                          I confirm that I am the parent or legal guardian of
-                          the participant, or that this submission is made with
-                          their full knowledge and consent.
-                        </label>
+                        <div className="form-check mb-3">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="parentConsent"
+                            checked={parentConsent}
+                            onChange={(e) => setParentConsent(e.target.checked)}
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="parentConsent"
+                          >
+                            I confirm that I am the parent or legal guardian of
+                            the participant, or that this submission is made
+                            with their full knowledge and consent.
+                          </label>
+                        </div>
+
+                        <h5 className="mb-3 mt-4">Recognition Consent</h5>
+
+                        <div className="form-check">
+                          <input
+                            className="form-check-input"
+                            type="checkbox"
+                            id="recognitionConsent"
+                            checked={recognitionConsent}
+                            onChange={(e) =>
+                              setRecognitionConsent(e.target.checked)
+                            }
+                          />
+                          <label
+                            className="form-check-label"
+                            htmlFor="recognitionConsent"
+                          >
+                            I consent to Book My Stage showcasing this
+                            performance on its platform and official channels
+                            (including YouTube and social media) for recognition
+                            purposes.
+                          </label>
+                        </div>
                       </div>
 
-                      <h5 className="mb-3 mt-4">Recognition Consent</h5>
-
-                      <div className="form-check">
-                        <input
-                          className="form-check-input"
-                          type="checkbox"
-                          id="recognitionConsent"
-                          checked={recognitionConsent}
-                          onChange={(e) =>
-                            setRecognitionConsent(e.target.checked)
-                          }
-                        />
-                        <label
-                          className="form-check-label"
-                          htmlFor="recognitionConsent"
-                        >
-                          I consent to Book My Stage showcasing this performance
-                          on its platform and official channels (including
-                          YouTube and social media) for recognition purposes.
-                        </label>
+                      <div className="order-button-payment mt-20">
+                        {cartProducts.length ? (
+                          <button
+                            type="submit"
+                            className="bd-fill__btn"
+                            disabled={!razorpayLoaded}
+                          >
+                            Place Order
+                          </button>
+                        ) : (
+                          <button
+                            onClick={handleGoToShopPage}
+                            className="bd-fill__btn"
+                          >
+                            Add Product For Checkout
+                          </button>
+                        )}
                       </div>
-                    </div>
-
-                    <div className="order-button-payment mt-20">
-                      {cartProducts.length ? (
-                        <button
-                          type="submit"
-                          className="bd-fill__btn"
-                          disabled={!razorpayLoaded}
-                        >
-                          Place Order
-                        </button>
-                      ) : (
-                        <button
-                          onClick={handleGoToShopPage}
-                          className="bd-fill__btn"
-                        >
-                          Add Product For Checkout
-                        </button>
-                      )}
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </form>
-        </div>
+            </form>
+          </div>
+        ) : (
+          <div className="container small-container">
+            <p>Please Login to register for the performance!!</p>
+          </div>
+        )}
       </section>
     </>
   );
