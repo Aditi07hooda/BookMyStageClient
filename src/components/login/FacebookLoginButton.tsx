@@ -17,7 +17,7 @@ const FacebookLoginButton = () => {
       const data = response;
       console.log("Facebook credential:", data);
       const res = await axios.post(
-        "http://localhost:5000/user/facebook-login",
+        "${process.env.BASE_URL}user/facebook-login",
         {
           accessToken: response.accessToken,
         }
