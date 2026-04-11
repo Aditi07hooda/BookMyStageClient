@@ -165,8 +165,31 @@ const CheckOutMain = () => {
       };
 
       const rzp1 = new window.Razorpay(options);
-      rzp1.on("payment.failed", function (response: any) {
-        alert(`Payment Failed: ${response.error.reason}`);
+      rzp1.on("payment.failed", async function (response: any) {
+         const validateRes = await fetch(
+            `${process.env.BASE_URL}payment/order/failure`,
+            {
+              method: "POST",
+              body: JSON.stringify({
+                response: response,
+                user: {
+                  buyerEmail: data.EmailAddress,
+                  name: data.Fname + " " + data.Lname,
+                  EmailAddress: data.EmailAddress,
+                  totalPrice,
+                  orderProducts: cartProducts,
+                },
+              }),
+              headers: {
+                "Content-Type": "application/json",
+              },
+            },
+          );
+
+          const jsonRes = await validateRes.json();
+          toast.error(`Payment Failed`, {
+              position: "top-left",
+            });
       });
 
       rzp1.open();
