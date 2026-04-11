@@ -188,6 +188,40 @@ export const sendTransactionEmail = async (
   }
 };
 
+export const sendFailedTransactionEmail = async (
+  buyerEmail: string,
+  name: string,
+  totalPrice: number,
+  orderProducts: any[]
+) => {
+  try {
+    let productDetails = orderProducts
+      .map(
+        (product) =>
+          `<li>${product.productName} - ${product.totalCard} items - ${product.price}</li>`
+      )
+      .join("");
+
+    const mailOptions = {
+      from: `"BookMyStage" <${process.env.SMTP_USER}>`,
+      to: buyerEmail,
+      subject: "Transaction Confirmation",
+      html: `
+        <h2>Failed Purchase, Please try again!!, ${name}!</h2>
+        <p><strong>Products trying to order:</strong></p>
+        <ul>${productDetails}</ul>
+        <p><strong>Total Amount:</strong> ₹${totalPrice}</p>
+        <p>Please try again to complete your purchase.</p>
+      `,
+    };
+
+    await transporter.sendMail(mailOptions);
+    console.log("Failed transaction email sent successfully.");
+  } catch (error) {
+    console.error("Error sending failed transaction email:", error);
+  }
+};
+
 export const sendSignUpEmail = async (email: string, name: string) => {
   try {
     const transporter = nodemailer.createTransport({

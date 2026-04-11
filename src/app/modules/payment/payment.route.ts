@@ -1,5 +1,5 @@
 // import verifyToken from '../../../middleware/userVerify';
-import { CreatePaymentIntent, PaymentValidation } from './payment.controller';
+import { CreatePaymentIntent, PaymentFailure, PaymentValidation } from './payment.controller';
 import express from "express";
 const crypto = require("crypto");
 const Razorpay = require("razorpay");
@@ -12,5 +12,7 @@ const PaymentRoute = express.Router();
 PaymentRoute.post("/order", CreatePaymentIntent);
 
 PaymentRoute.post("/order/validate", PaymentValidation);
+
+PaymentRoute.post("/order/failure", PaymentFailure);
 
 export default PaymentRoute;

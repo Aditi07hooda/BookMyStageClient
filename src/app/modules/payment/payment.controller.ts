@@ -3,7 +3,7 @@ require("dotenv").config();
 const crypto = require("crypto");
 const Razorpay = require("razorpay");
 import { Order } from "../OrderProduct/orderSuccess.model";
-import { bookingConfirmationEmail, sendTransactionEmail } from "../email/email.controller"; // Import the email controller
+import { bookingConfirmationEmail, sendFailedTransactionEmail, sendTransactionEmail } from "../email/email.controller"; // Import the email controller
 import moment from "moment";
 import { EventSubmission } from "../submission/submission.model"; // Import the new EventSubmission model
 
@@ -98,6 +98,7 @@ export const PaymentValidation = async (req: Request, res: Response) => {
       })
     );
   } catch (emailError) {
+    await sendFailedTransactionEmail(buyerEmail, name, totalPrice, orderProducts);
     console.error("Error sending email:", emailError);
   }
   
@@ -107,3 +108,8 @@ export const PaymentValidation = async (req: Request, res: Response) => {
     paymentId: razorpay_payment_id,
   });
 };
+
+export const PaymentFailure = async (req: Request, res: Response) => {
+  const { buyerEmail, name, totalPrice, orderProducts } = req.body.user;
+  await sendFailedTransactionEmail(buyerEmail, name, totalPrice, orderProducts);
+}
