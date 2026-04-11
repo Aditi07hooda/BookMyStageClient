@@ -138,7 +138,7 @@ const ShopSectionSubCategoryWise = ({id}:propsType) => {
             </div>
             <div className="col-xxl-9 col-xl-8 col-lg-8">
               <div className="row">
-                <div className="col-xl-4">
+                {/* <div className="col-xl-4">
                   <div className="bd-top__filter-search p-relative mb-30">
                     <form className="bd-top__filter-input" action="#">
                       <input
@@ -152,7 +152,7 @@ const ShopSectionSubCategoryWise = ({id}:propsType) => {
                       </button>
                     </form>
                   </div>
-                </div>
+                </div> */}
                 <div className="col-xl-8">
                   <div className="bd-filter__tab-inner mb-30">
                     <div className="bd-top__filter">

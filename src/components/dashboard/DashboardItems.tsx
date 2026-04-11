@@ -133,7 +133,7 @@ const StarRating = ({
 
   const handleMouseMove = (
     e: React.MouseEvent<HTMLButtonElement>,
-    starIndex: number
+    starIndex: number,
   ) => {
     if (!disabled) {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -144,7 +144,7 @@ const StarRating = ({
 
   const handleClick = (
     starIndex: number,
-    e: React.MouseEvent<HTMLButtonElement>
+    e: React.MouseEvent<HTMLButtonElement>,
   ) => {
     if (!disabled) {
       const rect = e.currentTarget.getBoundingClientRect();
@@ -205,7 +205,7 @@ const StarRating = ({
 const DashboardItems = () => {
   const { user, header, myproducts } = useGlobalContext();
   const [submissionInfo, setSubmissionInfo] = useState<SubmissionInfoType[]>(
-    []
+    [],
   );
   const [ratings, setRatings] = useState<{ [key: string]: UserReviewType }>({});
   const [reviewSubmitted, setReviewSubmitted] = useState<
@@ -216,7 +216,7 @@ const DashboardItems = () => {
     useState<SubmissionInfoType | null>(null);
 
   const [uploadedItems, setUploadedItems] = useState<Record<string, boolean>>(
-    {}
+    {},
   );
 
   const handleVideoSubmit = async (video: File) => {
@@ -235,7 +235,7 @@ const DashboardItems = () => {
         headers: {
           "Content-Type": "multipart/form-data",
         },
-      }
+      },
     );
 
     if (res.status === 200) {
@@ -262,24 +262,27 @@ const DashboardItems = () => {
   };
 
   const handleFetchedData = (data: UserReviewType[]) => {
-    const formattedData = data.reduce((acc, review) => {
-      acc[review.productId] = review;
-      return acc;
-    }, {} as { [key: string]: UserReviewType });
+    const formattedData = data.reduce(
+      (acc, review) => {
+        acc[review.productId] = review;
+        return acc;
+      },
+      {} as { [key: string]: UserReviewType },
+    );
 
     setRatings(formattedData);
   };
 
-  const getPdfGenerator = async (
+  const getCertificateGenerator = async (
     evaluated: boolean,
     isReviewed: boolean,
     eventName: string,
     competitonName: string,
-    date: string
+    date: string,
   ) => {
     if (!evaluated) {
       toast.info(
-        "Your performance is not evaluated yet. Certificate will be available after evaluation."
+        "Your performance is not evaluated yet. Certificate will be available after evaluation.",
       );
       return;
     }
@@ -292,29 +295,76 @@ const DashboardItems = () => {
       `${process.env.BASE_URL}pdf/generate-certificate`,
       {
         eventName: eventName,
-        competititorName: competitonName,
+        competitorName: competitonName,
         date: date,
-      }
+      },
+      {
+        responseType: "blob",
+      },
     );
 
-    const pdfUrl = res.data.certificateUrl;
+    const blob = res.data;
+    const url = URL.createObjectURL(blob);
 
-    // 1️⃣ Open PDF in new tab
-    window.open(pdfUrl, "_blank");
+    // Auto-download
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${eventName}_certificate_${competitonName}_${date}.pdf`;
+    a.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
+  };
+
+    const getEvaluationGenerator = async (
+    evaluated: boolean,
+    isReviewed: boolean,
+    eventName: string,
+    competitonName: string,
+    date: string,
+  ) => {
+    if (!evaluated) {
+      toast.info(
+        "Your performance is not evaluated yet. Evaluation report will be available after evaluation.",
+      );
+      return;
+    }
+
+    const res = await axios.post(
+      `${process.env.BASE_URL}pdf/generate-evaluation-report`,
+      {
+        eventName: eventName,
+        competitorName: competitonName,
+        date: date,
+      },
+      {
+        responseType: "blob",
+      },
+    );
+
+    const blob = res.data;
+    const url = URL.createObjectURL(blob);
+
+    // Auto-download
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${eventName}_evaluation_report_${competitonName}_${date}.pdf`;
+    a.click();
+
+    setTimeout(() => URL.revokeObjectURL(url), 10_000);
   };
 
   useEffect(() => {
     axios
       .get(
         `${process.env.BASE_URL}submission/list?email=${user?.email}`,
-        header
+        header,
       )
       .then((res) => {
         if (res.data.message === "success") {
           const sorted = res.data.data.sort(
             (a: SubmissionInfoType, b: SubmissionInfoType) =>
               moment(b.submissionDate, "MM/DD/YY hh:mm a").valueOf() -
-              moment(a.submissionDate, "MM/DD/YY hh:mm a").valueOf()
+              moment(a.submissionDate, "MM/DD/YY hh:mm a").valueOf(),
           );
 
           setSubmissionInfo(sorted);
@@ -326,7 +376,7 @@ const DashboardItems = () => {
     if (user?.email) {
       axios
         .get(
-          `${process.env.BASE_URL}user-input/client-review?email=${user?.email}`
+          `${process.env.BASE_URL}user-input/client-review?email=${user?.email}`,
         )
         .then((res) => {
           handleFetchedData(res.data);
@@ -357,7 +407,7 @@ const DashboardItems = () => {
   const handleSubmitRating = async (
     eventid: string,
     eventname: string,
-    eventEmail: string
+    eventEmail: string,
   ) => {
     try {
       const rating = ratings[eventid];
@@ -375,7 +425,7 @@ const DashboardItems = () => {
       const response = await axios.put(
         `${process.env.BASE_URL}user-input/update-review?email=${eventEmail}`,
         reviewInfoData,
-        header
+        header,
       );
 
       if (response.data.message === "success") {
@@ -402,7 +452,7 @@ const DashboardItems = () => {
 
   const hasUserReviewedProduct = (
     eventUserId: string,
-    userEmail: string | undefined
+    userEmail: string | undefined,
   ): boolean => {
     if (!userEmail) return false;
 
@@ -418,7 +468,7 @@ const DashboardItems = () => {
 
     return Object.prototype.hasOwnProperty.call(
       rettings as unknown as Record<string, number>,
-      safeKey
+      safeKey,
     );
   };
 
@@ -457,7 +507,7 @@ const DashboardItems = () => {
                               reviewSubmitted[item.eventUserId] ||
                               hasUserReviewedProduct(
                                 item.eventUserId,
-                                user?.email
+                                user?.email,
                               );
 
                             return (
@@ -521,12 +571,12 @@ const DashboardItems = () => {
                                     <button
                                       className="bd-bn__btn-2"
                                       onClick={() => {
-                                        getPdfGenerator(
+                                        getCertificateGenerator(
                                           item.evaluated,
                                           isReviewed,
                                           item.eventname,
                                           item.userEmail,
-                                          item.submissionDate
+                                          item.submissionDate,
                                         );
                                       }}
                                       style={{
@@ -547,7 +597,13 @@ const DashboardItems = () => {
                                     <button
                                       className="bd-bn__btn-2"
                                       onClick={() => {
-                                        console.log(item.feedbackReportPath);
+                                        getEvaluationGenerator(
+                                          item.evaluated,
+                                          isReviewed,
+                                          item.eventname,
+                                          item.userEmail,
+                                          item.submissionDate,
+                                        );
                                       }}
                                       disabled={!item.evaluated}
                                     >
@@ -568,7 +624,7 @@ const DashboardItems = () => {
                                         onChange={(value) =>
                                           handleRatingChange(
                                             item.eventUserId,
-                                            value
+                                            value,
                                           )
                                         }
                                         disabled={false}
@@ -581,7 +637,7 @@ const DashboardItems = () => {
                                         onChange={(e) =>
                                           handleFeedbackChange(
                                             item.eventUserId,
-                                            e.target.value
+                                            e.target.value,
                                           )
                                         }
                                         placeholder="Reason input here..."
@@ -601,7 +657,7 @@ const DashboardItems = () => {
                                         handleSubmitRating(
                                           item.eventUserId,
                                           item.eventname,
-                                          item.userEmail
+                                          item.userEmail,
                                         )
                                       }
                                     >

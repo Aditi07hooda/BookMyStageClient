@@ -73,7 +73,7 @@ const BlogDetailsArea = () => {
             </div>
             <div className="col-xl-4 col-lg-8 col-md-8">
               <div className="sidebar-widget-wrapper mb-30">
-                <BlogSidebarSearch />
+                {/* <BlogSidebarSearch /> */}
                 <BlogSidebarAbout />
                 <BlogSidebarBlogs />
                 <BlogSidebarCategory />

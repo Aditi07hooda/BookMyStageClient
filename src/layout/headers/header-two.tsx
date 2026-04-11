@@ -65,7 +65,7 @@ const HeaderTwo = () => {
               </div>
               <div className="col-xxl-5 col-xl-5 col-lg-3 col-md-6 col-6">
                 <div className="bd-header__right header__right-3">
-                  <div className="bd-action__filter-wrapper d-none d-xl-block">
+                  {/* <div className="bd-action__filter-wrapper d-none d-xl-block">
                     <div className="bd-action__filter p-relative">
                       <form action="#">
                         <input type="text" placeholder="Search products..." />
@@ -74,7 +74,7 @@ const HeaderTwo = () => {
                         </button>
                       </form>
                     </div>
-                  </div>
+                  </div> */}
                   <div className="bd-action__cart-list list-3">
                     <div className="bd-action__item">
                       <div className="bd-action__cart-wrapper">
