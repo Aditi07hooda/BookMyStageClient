@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import EmailIcon from "@/sheardComponent/elements/icons/email-icon";
 import LocationIcon from "@/sheardComponent/elements/icons/location-icon";
 import PhoneIcon from "@/sheardComponent/elements/icons/phone-icon";
@@ -14,10 +14,10 @@ interface FormData {
   email: string;
   phone: string;
   message: string;
-} 
+}
 
 const ContactForm = () => {
-  const {user} = useGlobalContext()
+  const { user } = useGlobalContext();
   const {
     register,
     handleSubmit,
@@ -29,55 +29,73 @@ const ContactForm = () => {
   const date = now.format("MM/DD/YY hh:mm a");
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    const name = data.name;
-    const email = data.email;
-    const phone = data.phone;
-    const message = data.message;
+    const { name, email, phone, message } = data;
 
-    const userInfo = {
-      name,
-      email,
-      phone,
-      message,
-      date
-    };
+    const userInfo = { name, email, phone, message, date };
 
-
-    const sendEmail = () => {
-        const templateParams = {
-            name: name,
-            message: message,
-            email: email,
-        };
-      
-        emailjs
-          .send(
-            `${process.env.EMAIL_SERVICE_ID}`,
-            `${process.env.EMAIL_TEMPLATE_ID}`,
-            templateParams,
-            `${process.env.EMAIL_PUBLIC_KEY}`
-          )
-          .then(
-            function (response) {
-              console.info("SUCCESS!", response.status, response.text);
-            },
-            function (error) {
-              console.log("FAILED...", error);
-            }
-          );
+    // 1️⃣ Email to Admin (bookmystage@gmail.com)
+    const sendAdminEmail = () => {
+      const adminTemplateParams = {
+        name,
+        email,
+        phone,
+        message,
+        date,
+        to_email: "bookmystage@gmail.com",
       };
 
-    axios.post(`${process.env.BASE_URL}user-input/contact`,userInfo)
-    .then((res)=>{
-        if(res.data.message ==="success"){
-            reset()
-            sendEmail()
-            toast.success(`Message Send Success`);
+      return emailjs.send(
+        `${process.env.NEXT_PUBLIC_EMAIL_SERVICE_KEY}`,
+        `${process.env.NEXT_PUBLIC_EMAIL_ADMIN_TEMPLATE_ID}`, // admin template
+        adminTemplateParams,
+        `${process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY}`,
+      );
+    };
+
+    // 2️⃣ Confirmation Email to User
+    const sendUserEmail = () => {
+      const userTemplateParams = {
+        name,
+        email, // emailjs uses this as "to_email" if your template has {{email}}
+        message,
+        to_email: email,
+      };
+
+      return emailjs.send(
+        `${process.env.NEXT_PUBLIC_EMAIL_SERVICE_KEY}`,
+        `${process.env.NEXT_PUBLIC_EMAIL_USER_TEMPLATE_ID}`, // user confirmation template
+        userTemplateParams,
+        `${process.env.NEXT_PUBLIC_EMAIL_PUBLIC_KEY}`,
+      );
+    };
+
+    axios
+      .post(`${process.env.NEXT_PUBLIC_BASE_URL}user-input/contact`, userInfo)
+      .then(async (res) => {
+        if (res.data.message === "success") {
+          reset();
+
+          try {
+            await Promise.all([sendAdminEmail(), sendUserEmail()]);
+            toast.success(
+              "Message sent successfully! A confirmation has been sent to your email.",
+            );
+          } catch (emailError) {
+            console.error("Email sending failed:", emailError);
+            // DB save succeeded but email failed — still show partial success
+            toast.success(
+              "Message received! (Email notification may be delayed)",
+            );
+          }
         }
-        if(res.data.message ==="custom error"){
-            toast.error(`Message Send Faield`);
+
+        if (res.data.message === "custom error") {
+          toast.error("Message sending failed. Please try again.");
         }
-    })
+      })
+      .catch(() => {
+        toast.error("Something went wrong. Please try again later.");
+      });
   };
 
   return (
@@ -107,10 +125,15 @@ const ContactForm = () => {
                     </div>
                     <div className="col-md-6">
                       <div className="bd-single__form-input  mb-20">
-                        <input defaultValue={user?.phone && user?.phone} type="text" placeholder="Phone" {...register("phone", {
+                        <input
+                          defaultValue={user?.phone && user?.phone}
+                          type="text"
+                          placeholder="Phone"
+                          {...register("phone", {
                             required: "phone is required",
-                          })} />
-                          {errors.phone && <span>{errors.phone.message}</span>}
+                          })}
+                        />
+                        {errors.phone && <span>{errors.phone.message}</span>}
                       </div>
                     </div>
                     <div className="col-md-12">
@@ -134,14 +157,15 @@ const ContactForm = () => {
                     <div className="col-md-12">
                       <div className="bd-single__form-input  mb-20">
                         <textarea
-                          
                           id="message"
                           placeholder="Messages"
                           {...register("message", {
                             required: "message is required",
                           })}
                         />
-                        {errors.message && <span>{errors.message.message}</span>}
+                        {errors.message && (
+                          <span>{errors.message.message}</span>
+                        )}
                       </div>
                     </div>
                   </div>

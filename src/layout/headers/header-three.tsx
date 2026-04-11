@@ -236,7 +236,7 @@ const HeaderThree = () => {
                             </div>
                           </div>
                         </div>
-                        <div className="bd-header__filterbar d-none d-md-block">
+                        {/* <div className="bd-header__filterbar d-none d-md-block">
                           {pathName === "/performances" || pathName === "/blog" ? (
                             <>
                               <form className="bd-filter__input" action="#">
@@ -258,7 +258,7 @@ const HeaderThree = () => {
                           ) : (
                             <></>
                           )}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                     <div className="col-xxl-4 col-xl-4 col-md-4 col-sm-6">

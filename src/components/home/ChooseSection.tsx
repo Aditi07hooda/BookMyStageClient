@@ -30,8 +30,8 @@ const ChooseSection = () => {
                     </div>
                     <div className="bd-choose__icon choose-icon__left">
                       <Image
-                        width={500}
-                        height={500}
+                        width={60}
+                        height={60}
                         style={{ width: "100%", height: "auto" }}
                         src={item.timelineIcon}
                         alt="why-choose-img"
@@ -62,8 +62,8 @@ const ChooseSection = () => {
                     </div>
                     <div className="bd-choose__icon choose-icon__left">
                       <Image
-                        width={500}
-                        height={500}
+                        width={60}
+                        height={60}
                         style={{ width: "100%", height: "auto" }}
                         src={item.timelineIcon}
                         alt="why-choose-img"
