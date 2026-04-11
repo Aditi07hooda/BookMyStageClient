@@ -1,6 +1,7 @@
 import { PDFDocument, StandardFonts, rgb } from "pdf-lib";
 import fs from "fs";
 import path from "path";
+import axios from "axios";
 import { Request, Response } from "express";
 import { v4 as uuid } from "uuid";
 import { v2 as cloudinary } from "cloudinary";
@@ -12,7 +13,9 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-export const generateCertificate = async (req: Request, res: Response) => {
+const PDF_API_BASE = process.env.EXTERNAL_API_BASE;
+
+export const generateNewCertificate = async (req: Request, res: Response) => {
   try {
     const { eventName, competititorName, date } = req.body;
 
@@ -145,4 +148,130 @@ const checkCertificateExistence = async (
     };
   }
   return { check: false, certificatePath: null };
+};
+
+// ─── Helper ────────────────────────────────────────────────────────────────────
+
+const findSubmissionId = async (
+  eventName: string,
+  competitorName: string,
+  date: string
+): Promise<string | null> => {
+  const submission = await EventSubmission.findOne({
+    eventname: eventName,
+    userEmail: competitorName,
+    submissionDate: date,
+  });
+  return submission ? submission._id.toString() : null;
+};
+
+// ─── GET Evaluation Report (PDF) ───────────────────────────────────────────────
+
+export const getEvaluationReport = async (req: Request, res: Response) => {
+  try {
+    const { eventName, competitorName, date } = req.body;
+
+    if (!eventName || !competitorName || !date) {
+      return res.status(400).json({ message: "Missing required query parameters: eventName, competitorName, date" });
+    }
+
+    const id = await findSubmissionId(
+      eventName as string,
+      competitorName as string,
+      date as string
+    );
+
+    if (!id) {
+      return res.status(404).json({ message: "No submission found for the given details" });
+    }
+
+    const externalRes = await axios.post(
+      `${PDF_API_BASE}/evalrep`,
+      { id },
+      { responseType: "arraybuffer" }
+    );
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="${eventName}_${competitorName}_evaluation_report.pdf"`);
+    res.setHeader("Content-Length", externalRes.data.byteLength);
+    return res.status(200).send(Buffer.from(externalRes.data));
+  } catch (error) {
+    console.error("Error fetching evaluation report:", error);
+    return res.status(500).json({ message: "Internal server error while fetching evaluation report" });
+  }
+};
+
+// ─── GET Certificate (PDF) ─────────────────────────────────────────────────────
+
+export const generateCertificate = async (req: Request, res: Response) => {
+  try {
+    const { eventName, competitorName, date } = req.body;
+
+    if (!eventName || !competitorName || !date) {
+      return res.status(400).json({ message: "Missing required query parameters: eventName, competitorName, date" });
+    }
+
+    const id = await findSubmissionId(
+      eventName as string,
+      competitorName as string,
+      date as string
+    );
+
+    if (!id) {
+      return res.status(404).json({ message: "No submission found for the given details" });
+    }
+
+    const externalRes = await axios.post(
+      `${PDF_API_BASE}/cert`,
+      { id },
+      { responseType: "arraybuffer" }
+    );
+
+    res.setHeader("Content-Type", "application/pdf");
+    res.setHeader("Content-Disposition", `attachment; filename="${eventName}_${competitorName}_certificate.pdf"`);
+    res.setHeader("Content-Length", externalRes.data.byteLength);
+    return res.status(200).send(Buffer.from(externalRes.data));
+  } catch (error) {
+    console.error("Error generating certificate:", error);
+    return res.status(500).json({ message: "Internal server error while generating certificate" });
+  }
+};
+
+// ─── Verify Report ─────────────────────────────────────────────────────────────
+
+export const verifyReport = async (req: Request, res: Response) => {
+  try {
+    const { eventName, competitorName, date } = req.body;
+
+    if (!eventName || !competitorName || !date) {
+      return res.status(400).json({ message: "Missing required query parameters: eventName, competitorName, date" });
+    }
+
+    const id = await findSubmissionId(
+      eventName as string,
+      competitorName as string,
+      date as string
+    );
+
+    if (!id) {
+      return res.status(404).json({ message: "No submission found for the given details" });
+    }
+
+    const externalRes = await axios.post(
+      `${PDF_API_BASE}/verify`,
+      { id }
+    );
+
+    return res.status(200).json(externalRes.data);
+  } catch (error) {
+    if (axios.isAxiosError(error) && error.response) {
+      // Bubble up the external API's own error response
+      return res.status(error.response.status).json({
+        message: "Verification service error",
+        detail: error.response.data,
+      });
+    }
+    console.error("Error verifying report:", error);
+    return res.status(500).json({ message: "Internal server error while verifying report" });
+  }
 };
