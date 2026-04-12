@@ -70,7 +70,7 @@ const ContactForm = () => {
     };
 
     axios
-      .post(`${process.env.NEXT_PUBLIC_BASE_URL}user-input/contact`, userInfo)
+      .post(`${process.env.BASE_URL}user-input/contact`, userInfo)
       .then(async (res) => {
         if (res.data.message === "success") {
           reset();
