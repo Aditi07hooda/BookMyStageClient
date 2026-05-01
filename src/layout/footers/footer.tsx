@@ -9,8 +9,10 @@ import paypal from "../../../public/assets/img/icon/paypal.png";
 import visa from "../../../public/assets/img/icon/visa.png";
 import axios from "axios";
 import { CategoryType } from "@/interFace/api-interFace";
+import useGlobalContext from "@/hooks/use-context";
 const FooterOne = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
+  const { user } = useGlobalContext();
 
   const categoryData = [
     {
@@ -88,7 +90,7 @@ const FooterOne = () => {
                       <Link href="/performances">Performances</Link>
                     </li>
                     <li>
-                      <Link href="/performances">Age Categories</Link>
+                      <Link href={user ? "/dashboard" : "/login"}>Dashboard</Link>
                     </li>
                     <li>
                       <Link href="/blog">Blogs</Link>
@@ -143,7 +145,7 @@ const FooterOne = () => {
                     </button>
                   </form>
                 </div>
-                <div className="bd-footer__support-wrapper">
+                {/* <div className="bd-footer__support-wrapper">
                   <div className="bd-fotter__support-icon">
                     <Image src={support} alt="support-img" />
                   </div>
@@ -152,8 +154,8 @@ const FooterOne = () => {
                     <h4>
                       <Link href="tel:+58569502352">+585 695 023 52 </Link>{" "}
                     </h4>
-                  </div>
-                </div>
+                  </div>s
+                </div> */}
               </div>
             </div>
           </div>

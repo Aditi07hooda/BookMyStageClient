@@ -11,6 +11,7 @@ import axios from "axios";
 import { useDispatch } from "react-redux";
 import { clear_cart_after_payment } from "@/redux/slices/cartSlice";
 import { log } from "console";
+import DeclarationBox from "./DeclarationBox";
 
 declare global {
   interface Window {
@@ -33,8 +34,7 @@ const CheckOutMain = () => {
   const router = useRouter();
   const { user, header, setPaymentSuccess } = useGlobalContext();
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
-  const [parentConsent, setParentConsent] = useState(false);
-  const [recognitionConsent, setRecognitionConsent] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
   const now = moment();
   const date = now.format("MM/DD/YY hh:mm a");
   const cartProducts = useSelector(
@@ -166,30 +166,30 @@ const CheckOutMain = () => {
 
       const rzp1 = new window.Razorpay(options);
       rzp1.on("payment.failed", async function (response: any) {
-         const validateRes = await fetch(
-            `${process.env.BASE_URL}payment/order/failure`,
-            {
-              method: "POST",
-              body: JSON.stringify({
-                response: response,
-                user: {
-                  buyerEmail: data.EmailAddress,
-                  name: data.Fname + " " + data.Lname,
-                  EmailAddress: data.EmailAddress,
-                  totalPrice,
-                  orderProducts: cartProducts,
-                },
-              }),
-              headers: {
-                "Content-Type": "application/json",
+        const validateRes = await fetch(
+          `${process.env.BASE_URL}payment/order/failure`,
+          {
+            method: "POST",
+            body: JSON.stringify({
+              response: response,
+              user: {
+                buyerEmail: data.EmailAddress,
+                name: data.Fname + " " + data.Lname,
+                EmailAddress: data.EmailAddress,
+                totalPrice,
+                orderProducts: cartProducts,
               },
+            }),
+            headers: {
+              "Content-Type": "application/json",
             },
-          );
+          },
+        );
 
-          const jsonRes = await validateRes.json();
-          toast.error(`Payment Failed`, {
-              position: "top-left",
-            });
+        const jsonRes = await validateRes.json();
+        toast.error(`Payment Failed`, {
+          position: "top-left",
+        });
       });
 
       rzp1.open();
@@ -199,7 +199,7 @@ const CheckOutMain = () => {
   };
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    if (!parentConsent) {
+    if (!consentGiven) {
       toast.error(
         "You must confirm the Parent / Guardian Declaration before placing the order.",
       );
@@ -215,7 +215,8 @@ const CheckOutMain = () => {
           <div className="container small-container">
             <div className="coupon-accordion">
               <h3>
-                Hi, {user?.name} <span id="showlogin"> Welcome To Orgado </span>
+                Hi, {user?.name}{" "}
+                <span id="showlogin"> Welcome To Book My Stage</span>
               </h3>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} method="POST">
@@ -336,62 +337,31 @@ const CheckOutMain = () => {
                           </tr>
                         </tfoot>
                       </table>
-                      <div className="mt-4 p-3 border rounded">
-                        <h5 className="mb-3">
-                          Declaration Consent{" "}
-                          <span style={{ color: "red" }}>*</span>
-                        </h5>
-
-                        <div className="form-check mb-3">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="parentConsent"
-                            checked={parentConsent}
-                            onChange={(e) => setParentConsent(e.target.checked)}
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="parentConsent"
-                          >
-                            I confirm that I am the parent or legal guardian of
-                            the participant, or that this submission is made
-                            with their full knowledge and consent.
-                          </label>
-                        </div>
-
-                        <h5 className="mb-3 mt-4">Recognition Consent</h5>
-
-                        <div className="form-check">
-                          <input
-                            className="form-check-input"
-                            type="checkbox"
-                            id="recognitionConsent"
-                            checked={recognitionConsent}
-                            onChange={(e) =>
-                              setRecognitionConsent(e.target.checked)
-                            }
-                          />
-                          <label
-                            className="form-check-label"
-                            htmlFor="recognitionConsent"
-                          >
-                            I consent to Book My Stage showcasing this
-                            performance on its platform and official channels
-                            (including YouTube and social media) for recognition
-                            purposes.
-                          </label>
-                        </div>
-                      </div>
+                      <DeclarationBox onConsentChange={setConsentGiven} />
 
                       <div className="order-button-payment mt-20">
-                        {cartProducts.length ? (
+                        {cartProducts.length > 0 ? (
                           <button
                             type="submit"
-                            className="bd-fill__btn"
-                            disabled={!razorpayLoaded}
+                            className={`bd-fill__btn ${
+                              !consentGiven || !razorpayLoaded
+                                ? "disabled-btn"
+                                : ""
+                            }`}
+                            disabled={!razorpayLoaded || !consentGiven}
+                            title={
+                              !consentGiven
+                                ? "Please accept declaration to proceed"
+                                : !razorpayLoaded
+                                  ? "Payment gateway loading..."
+                                  : ""
+                            }
                           >
-                            Place Order
+                            {!razorpayLoaded
+                              ? "Loading Payment..."
+                              : !consentGiven
+                                ? "Accept Declaration to Continue"
+                                : "Place Order"}
                           </button>
                         ) : (
                           <button

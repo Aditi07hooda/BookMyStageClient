@@ -24,7 +24,7 @@ const HeroSection = () => {
               <div className="bd-banner__text">
                 <h2>
                   Pure Organic <br />
-                  Food Shop
+                  Food Performance
                 </h2>
               </div>
               <div className="row">
@@ -48,7 +48,7 @@ const HeroSection = () => {
                       <div className="bd-banner__button">
                         <div className="bd-button__inner">
                           <Link className="bd-bn__btn-1" href="/performances">
-                            Shop Now
+                            Performance Now
                           </Link>
                         </div>
                         <div className="bd-banner__link">

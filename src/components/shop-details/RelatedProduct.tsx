@@ -150,7 +150,7 @@ const RelatedProduct = ({ category, productID }: any) => {
                                     className="cart-btn"
                                     data-toggle="tooltip"
                                     data-placement="top"
-                                    title="Quick Shop"
+                                    title="Quick Performance"
                                     onClick={() => handleCart(item)}
                                   >
                                     <i className="fal fa-cart-arrow-down"></i>

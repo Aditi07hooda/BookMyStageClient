@@ -3,13 +3,13 @@ const timelineList = [
         id:1,
         timelineIcon:'/assets/img/why-choose/performance-focused-platform.png',
         timelineTitle:'Performance-Focused Platform',
-        timelineDesc:'Not just uploads — real evaluation.',
+        timelineDesc:'Not just uploads — real evaluation that supports learning and improvement',
     },
     {
         id:2,
         timelineIcon:'/assets/img/why-choose/age-based-categories.png',
         timelineTitle:'Age-Based Categories',
-        timelineDesc:'Fair comparison within age groups.',
+        timelineDesc:'Fair comparison within age groups through age-appropriate evaluation',
     },
     {
         id:3,

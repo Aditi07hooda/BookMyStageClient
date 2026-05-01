@@ -50,7 +50,7 @@ const HeroSectionThree = () => {
                               className="bd-bn__btn-3"
                               href={`/performance-details/${item.productId}`}
                             >
-                              Shop Now
+                              Performance Now
                             </Link>
                           </div>
                         </div>

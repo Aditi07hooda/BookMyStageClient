@@ -97,7 +97,7 @@ const ShopDetailsMain = ({ id }: any) => {
 
   return (
     <>
-      <Breadcrumb breadHome={"Home"} breadMenu={"Shop Details"} />
+      <Breadcrumb breadHome={"Home"} breadMenu={"Performance Details"} />
 
       <div className="bd__shop-details-area pt-115 pb-75">
         <div className="container small-container">

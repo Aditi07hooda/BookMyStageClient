@@ -70,7 +70,7 @@ const GridViewProduct = ({ products, limit }: any) => {
                         className="cart-btn"
                         data-toggle="tooltip"
                         data-placement="top"
-                        title="Quick Shop"
+                        title="Quick Performance"
                         onClick={() => handleAddToCart(item)}
                       >
                         <i className="fal fa-cart-arrow-down"></i>

@@ -12,7 +12,7 @@ const ShopPageCategoryWize = async ({ params }: { params: Params }) => {
         <>
             <Wrapper>
                 <main>
-                    <Breadcrumb breadHome="Home" breadMenu="Shop"/>
+                    <Breadcrumb breadHome="Home" breadMenu="Performance"/>
                     <ShopSectionCategoryWize category={category}/>
                 </main>
             </Wrapper>

@@ -19,7 +19,7 @@ const HurryupBanner = () => {
               </h3>
               <p>Feed your family fresh</p>
               <Link className="bd-bn__btn-3" href="/performances">
-                Shop Now
+                Performance Now
               </Link>
             </div>
           </div>

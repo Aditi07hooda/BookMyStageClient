@@ -16,9 +16,9 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 🎯
                             </div>
-                            <div className="bd-features__content text-center">
+                            <div className="bd-features__content">
                                 <h4><Link href="/performances">Evaluation Report</Link></h4>
-                                <span>From Experienced Juries</span>
+                                <span>Through Structured Parameters</span>
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 📜
                             </div>
-                            <div className="bd-features__content text-center">
+                            <div className="bd-features__content">
                                 <h4><Link href="/performances">Digital Certificate</Link></h4>
                                 <span>Shareable & Verifiable</span>
                             </div>
@@ -38,7 +38,7 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 🏆
                             </div>
-                            <div className="bd-features__content text-center">
+                            <div className="bd-features__content">
                                 <h4><Link href="/performances">Awards</Link></h4>
                                 <span>For Top Performers</span>
                             </div>
@@ -49,7 +49,7 @@ const FeatureSection = () => {
                             <div className="bd-features__icon">
                                 🔒
                             </div>
-                            <div className="bd-features__content text-center">
+                            <div className="bd-features__content">
                                 <h4><Link href="/performances">Safe & Secure</Link></h4>
                                 <span>Child-Friendly & Trusted</span>
                             </div>

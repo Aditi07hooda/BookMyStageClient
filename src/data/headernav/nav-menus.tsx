@@ -26,11 +26,11 @@ const nav_menus_list:NavMenuItem[] = [
   // },
   // {id:2,
   //   link: '',
-  //   title: 'Shop',
+  //   title: 'Performance',
   //   hasDropdown: true,
   //   megamenu: false,
   //   dropdownItems: [
-  //     { link: '/performances', title: 'Shop' },
+  //     { link: '/performances', title: 'Performance' },
   //     { link: '/wishlist', title: 'Wishlist' },
   //     { link: '/cart', title: 'Cart' },
   //     { link: '/checkout', title: 'Checkout' },

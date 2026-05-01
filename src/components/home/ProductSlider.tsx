@@ -202,7 +202,7 @@ const ProductSlider = () => {
                                                     className="cart-btn"
                                                     data-toggle="tooltip"
                                                     data-placement="top"
-                                                    title="Quick Shop"
+                                                    title="Quick Performance"
                                                     onClick={() =>
                                                       dispatch(
                                                         cart_product(item)

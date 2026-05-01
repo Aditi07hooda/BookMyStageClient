@@ -8,6 +8,7 @@ import TrendingProducts from './TrendingProducts';
 import BrandSlider from './BrandSlider';
 import BlogSection from '../home-three/BlogSection';
 import ChooseSection from '../home/ChooseSection';
+import YoutubeVideoSlider from '../youtube/YoutubeVideoSlider';
 
 const HomeTwoMain = () => {
     return (
@@ -23,6 +24,7 @@ const HomeTwoMain = () => {
             {/* <BrandSlider/> */}
             <ChooseSection />
             <BlogSection/>
+            <YoutubeVideoSlider />
         </>
     );
 };

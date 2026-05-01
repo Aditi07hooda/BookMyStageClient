@@ -233,7 +233,7 @@ const TrendingProductSlider = ({ trending_product_title }: any) => {
                                             className="cart-btn"
                                             data-toggle="tooltip"
                                             data-placement="top"
-                                            title="Quick Shop"
+                                            title="Quick Performance"
                                             onClick={() =>
                                               dispatch(cart_product(item))
                                             }
@@ -408,7 +408,7 @@ const TrendingProductSlider = ({ trending_product_title }: any) => {
                                         className="cart-btn"
                                         data-toggle="tooltip"
                                         data-placement="top"
-                                        title="Quick Shop"
+                                        title="Quick Performance"
                                         onClick={() => {
                                           setSelectedProduct(item);
                                           setAgeCategory("");

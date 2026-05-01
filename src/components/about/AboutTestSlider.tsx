@@ -32,7 +32,7 @@ const AboutTestSlider = () => {
                         prevEl: ".testimonial-button-prev",
                       }}
                     >
-                      {testimonialList.slice(3, 5).map((item, num) => {
+                      {testimonialList.map((item, num) => {
                         return (
                           <SwiperSlide key={num}>
                             <div className="swiper-slides">

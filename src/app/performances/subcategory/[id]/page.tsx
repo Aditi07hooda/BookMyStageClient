@@ -12,7 +12,7 @@ const SubCategoryWizeProductPage = async ({ params }: { params: Params }) => {
     <>
       <Wrapper>
         <main>
-          <Breadcrumb breadHome="Home" breadMenu="Shop" />
+          <Breadcrumb breadHome="Home" breadMenu="Performance" />
           <ShopSectionSubCategoryWise id={id} />
         </main>
       </Wrapper>

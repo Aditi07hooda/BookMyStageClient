@@ -69,7 +69,7 @@ const HeroSliderThree = ({ product }: productsType) => {
                           className="bd-bn__btn-4"
                           href={`/performance-details/${item.productId}`}
                         >
-                          Shop Now
+                          Performance Now
                         </Link>
                       </div>
                     </div>

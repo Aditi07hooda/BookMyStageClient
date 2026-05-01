@@ -3,12 +3,12 @@ import Breadcrumb from "@/components/common/breadcrumb/Breadcrumb";
 import ShopMain from "@/components/shop/ShopMain";
 import Wrapper from "@/layout/DefaultWrapper";
 
-const Shop = () => {
+const Performance = () => {
     return (
         <>
             <Wrapper>
                 <main>
-                    <Breadcrumb breadHome="Home" breadMenu="Shop"/>
+                    <Breadcrumb breadHome="Home" breadMenu="Performance"/>
                     <ShopMain />
                 </main>
             </Wrapper>
@@ -16,4 +16,4 @@ const Shop = () => {
     );
 }
 
-export default Shop
+export default Performance

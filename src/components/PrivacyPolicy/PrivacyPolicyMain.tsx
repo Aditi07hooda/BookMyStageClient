@@ -1,6 +1,7 @@
 import React from "react";
 import PrivacyPolicy from "./PrivacyPolicy";
 import TermsAndConditions from "./TermsAndConditions";
+import RefundPolicy from "./RefundPolicy";
 
 const PrivacyPolicyMain = () => {
   return (
@@ -38,6 +39,18 @@ const PrivacyPolicyMain = () => {
                     <span>Terms & Conditions</span>
                   </button>
                 </li>
+                <li role="presentation">
+                  <button
+                    data-bs-toggle="tab"
+                    data-bs-target="#tab_refund_policy"
+                    type="button"
+                    role="tab"
+                    aria-selected="true"
+                  >
+                    <i className="fas fa-circle"></i>
+                    <span>Refund Policy</span>
+                  </button>
+                </li>
               </ul>
             </div>
             <div className="col-lg-9">
@@ -58,6 +71,15 @@ const PrivacyPolicyMain = () => {
                 >
                   <div className="terms_conditions_content">
                     <TermsAndConditions />
+                  </div>
+                </div>
+                <div
+                  className="tab-pane fade"
+                  id="tab_refund_policy"
+                  role="tabpanel"
+                >
+                  <div className="terms_conditions_content">
+                    <RefundPolicy />
                   </div>
                 </div>
               </div>
