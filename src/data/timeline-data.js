@@ -31,7 +31,7 @@ const timelineList = [
     },
     {
         id:6,
-        timelineIcon:'/assets/img/why-choose/child-safe-and-trusted-platform.png',
+        timelineIcon:'/assets/img/why-choose/child-Safe-and-trusted-platform.png',
         timelineTitle:'Child-Safe & Trusted Platform',
         timelineDesc:'Built specifically for school students with privacy in mind.',
     },
