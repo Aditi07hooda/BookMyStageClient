@@ -24,7 +24,9 @@ const FROM = `BookMyStage <${process.env.RESEND_FROM_EMAIL_DOMAIN}>`;
 
 const sendEmail = async (to: string, subject: string, html: string, attachments?: any[]) => {
   try {
+    console.log(`sending email to ${to} from ${FROM}`);
     await resend.emails.send({ from: FROM, to, subject, html, attachments });
+    console.log(`email sent to ${to} from ${FROM}`);
     return true;
   } catch (error) {
     console.error("Error sending email:", error);
@@ -40,7 +42,7 @@ export const sendTransactionEmail = async (
     .map(p => `<li>${p.productName} - ${p.totalCard} items - ${p.price}</li>`)
     .join("");
 
-  await sendEmail(buyerEmail, "Transaction Confirmation", `
+  const success = await sendEmail(buyerEmail, "Transaction Confirmation", `
     <h2>Thank you for your purchase, ${name}!</h2>
     <p><strong>Order ID:</strong> ${orderId}</p>
     <p><strong>Payment ID:</strong> ${paymentId}</p>
@@ -49,6 +51,7 @@ export const sendTransactionEmail = async (
     <ul>${productDetails}</ul>
     <p>We appreciate your business and hope you enjoy your purchase!</p>
   `);
+  console.log(`Transaction email sent to ${buyerEmail}: ${success}`);
 };
 
 export const sendFailedTransactionEmail = async (

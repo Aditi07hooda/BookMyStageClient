@@ -470,6 +470,7 @@ export const signinByGoogle = async (req: Request, res: Response) => {
         console.log("user table data " + user);
         await user.save();
         console.log("data saved to user table");
+        sendSignUpEmail(email, name);
       } catch (err) {
         console.error("Error saving Google user to DB:", err);
         return res.status(500).json({
@@ -563,6 +564,7 @@ export const signinByFacebook = async (req: Request, res: Response) => {
         });
         console.log("user table data " + user);
         await user.save();
+        sendSignUpEmail(userInfo.email, userInfo.name);
       } catch (error) {
         return res.status(500).json({
           success: false,
