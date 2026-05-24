@@ -27,12 +27,6 @@ export const CreatePaymentIntent = async (req: Request, res: Response) => {
       });
     }
 
-    if (options.amount < 100) {
-      return res.status(400).json({
-        msg: "Minimum amount is 100 paise",
-      });
-    }
-
     const order = await razorpay.orders.create({
       amount: options.amount,
       currency: options.currency || "INR",
