@@ -186,7 +186,7 @@ const ContactForm = () => {
                 </div>
                 <div className="bd-sidebar__content">
                   <div className="bd-contact__list">
-                    <div className="bd-contact__item">
+                    {/* <div className="bd-contact__item">
                       <div className="bd-contact__item-list">
                         <div className="bd-contact__icon">
                           <PhoneIcon />
@@ -209,7 +209,7 @@ const ContactForm = () => {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                     <div className="bd-contact__item">
                       <div className="bd-contact__item-list">
                         <div className="bd-contact__icon">
@@ -224,11 +224,11 @@ const ContactForm = () => {
                               bookmystage.in@gmail.com
                             </a>
                           </span>
-                          <span>
+                          {/* <span>
                             <a href="mailto:bookmystage.in@gmail.com">
                               Contact@example.com
                             </a>
-                          </span>
+                          </span> */}
                         </div>
                       </div>
                     </div>

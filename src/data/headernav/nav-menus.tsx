@@ -39,7 +39,7 @@ const nav_menus_list:NavMenuItem[] = [
   //       title: 'Track Order',
   //     },
   //   ]
-  // },
+  // }, 
   {id:2,
     link: '/performances',
     title: 'Performances',
@@ -48,7 +48,7 @@ const nav_menus_list:NavMenuItem[] = [
   {
     id:3,
     link: '/dashboard',
-    title: 'Upload',
+    title: 'Dashboard',
     hasDropdown: false,
     megamenu: false,
     dropdownItems: []

@@ -8,7 +8,7 @@ const Performance = () => {
         <>
             <Wrapper>
                 <main>
-                    <Breadcrumb breadHome="Home" breadMenu="Performance"/>
+                    {/* <Breadcrumb breadHome="Home" breadMenu="Performance"/> */}
                     <ShopMain />
                 </main>
             </Wrapper>

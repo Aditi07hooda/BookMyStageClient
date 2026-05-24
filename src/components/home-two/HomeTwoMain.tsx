@@ -22,9 +22,9 @@ const HomeTwoMain = () => {
             <CategorySection/>
             <TrendingProducts/>
             {/* <BrandSlider/> */}
+            <YoutubeVideoSlider />
             <ChooseSection />
             <BlogSection/>
-            <YoutubeVideoSlider />
         </>
     );
 };

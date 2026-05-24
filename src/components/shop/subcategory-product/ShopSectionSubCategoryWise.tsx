@@ -130,8 +130,8 @@ const ShopSectionSubCategoryWise = ({id}:propsType) => {
             <div className="col-xxl-3 col-xl-4 col-lg-4">
               <div className="bd-sidebar__widget-warpper mb-60">
                 <div className="bd-product__filters">
-                  <ShopSidebarCategories />
-                  <ShopSidebarRetting />
+                  {/* <ShopSidebarCategories /> */}
+                  {/* <ShopSidebarRetting /> */}
                   <FlashBanner />
                 </div>
               </div>

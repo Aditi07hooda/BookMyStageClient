@@ -35,6 +35,11 @@ const FooterOne = () => {
       name: "Privacy Policy",
       link: "/privacy-policy",
     },
+    {
+      id: 5,
+      name: "Refund Policy",
+      link: "/refund-policy",
+    },
   ];
 
   useEffect(() => {
@@ -90,7 +95,9 @@ const FooterOne = () => {
                       <Link href="/performances">Performances</Link>
                     </li>
                     <li>
-                      <Link href={user ? "/dashboard" : "/login"}>Dashboard</Link>
+                      <Link href={user ? "/dashboard" : "/login"}>
+                        Dashboard
+                      </Link>
                     </li>
                     <li>
                       <Link href="/blog">Blogs</Link>

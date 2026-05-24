@@ -8,10 +8,12 @@ const CategoryItem = () => {
   const [subCategories, setSubCategories] = useState<SubCategoryType[]>([]);
   const [category, setcategory] = useState("");
   useEffect(() => {
-    axios.get(`${process.env.BASE_URL}setting/category`).then((res) => {
-      setCategories(res.data);
-    })
-    .catch((e) => console.log(e));
+    axios
+      .get(`${process.env.BASE_URL}setting/category`)
+      .then((res) => {
+        setCategories(res.data);
+      })
+      .catch((e) => console.log(e));
   }, []);
 
   const handleSubCategory = (item: any) => {
@@ -29,19 +31,29 @@ const CategoryItem = () => {
     }
   }, [category]);
 
-  
   return (
     <>
       <nav>
         <ul>
-          {categories.length ?
+          <li className="has-dropdown">
+            <Link className="text-capitalize" href="/performances">
+              <i className="fa-solid"></i>
+              All Performances
+            </Link>
+          </li>
+          {categories.length ? (
             categories.map((item) => (
               <li key={item._id} className="has-dropdown">
-                <Link className="text-capitalize" onMouseOver={() => handleSubCategory(item)} href="/performances">
+                <Link
+                  className="text-capitalize"
+                  href={`/performances/${encodeURIComponent(
+                    item.categoryName,
+                  )}`}
+                >
                   <i className={item.categoryclass}></i>
                   {item.categoryName}
                 </Link>
-                <ul className="category-submenu"> 
+                {/* <ul className="category-submenu"> 
                   {subCategories.length ?
                     subCategories.map((item) => (
                       <li key={item._id}>
@@ -55,13 +67,14 @@ const CategoryItem = () => {
                     <p className="text-center">No Brand Found</p>
                    </>
                     }
-                </ul>
+                </ul> */}
               </li>
-            )):
+            ))
+          ) : (
             <>
-             <p className="text-center">No Category Added</p>
+              <p className="text-center">No Category Added</p>
             </>
-            }
+          )}
         </ul>
       </nav>
     </>

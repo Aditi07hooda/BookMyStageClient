@@ -261,7 +261,7 @@ const HeaderThree = () => {
                         </div> */}
                       </div>
                     </div>
-                    <div className="col-xxl-4 col-xl-4 col-md-4 col-sm-6">
+                    {/* <div className="col-xxl-4 col-xl-4 col-md-4 col-sm-6">
                       <div className="bd-action__support d-flex justify-content-end">
                         <div className="bd-support__inner">
                           <div className="bd-support__icon">
@@ -273,7 +273,7 @@ const HeaderThree = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>

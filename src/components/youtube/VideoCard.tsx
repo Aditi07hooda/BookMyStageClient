@@ -22,7 +22,6 @@ const VideoCard = ({
 
   return (
     <div className="bd-trending__item text-center mb-30">
-      
       {/* Thumbnail */}
       <div className="bd-trending__product-thumb position-relative group">
         <Image
@@ -40,8 +39,10 @@ const VideoCard = ({
           data-bs-target="#videoModal"
           className="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center border-0 bg-transparent"
         >
-          <div className="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center"
-               style={{ width: "50px", height: "50px" }}>
+          <div
+            className="bg-danger text-white rounded-circle d-flex align-items-center justify-content-center"
+            style={{ width: "50px", height: "50px" }}
+          >
             ▶
           </div>
         </button>
@@ -57,15 +58,21 @@ const VideoCard = ({
         <h4 className="bd-product__title">{video.title}</h4>
         <div className="text-muted small">{video.channel}</div>
         <div className="bd-product__price">
-          <span className="bd-product__new-price">
-            {video.views} views
-          </span>
+          <span className="bd-product__new-price">{video.views} views</span>
         </div>
       </div>
 
       {/* Tag */}
       <div className="bd-product__tag">
-        <span className="tag-text danger-bg">Trending</span>
+        <span
+          className="tag-text"
+          style={{
+            backgroundColor: "#e91e8c",
+            color: "#fff",
+          }}
+        >
+          Trending
+        </span>
       </div>
     </div>
   );

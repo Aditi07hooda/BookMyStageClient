@@ -1,6 +1,3 @@
- 
- 
-
 "use client";
 import React, { useState, useEffect } from "react";
 import GridIcon from "@/svg/GridIcon";
@@ -16,10 +13,11 @@ import ListViewProduct from "../ListViewProduct";
 import Pagination from "@/components/elements/product/Pagination";
 import PaginationTwo from "@/components/elements/product/PaginationTwo";
 import ProductModal from "../ProductModal";
-interface propsType{
-    category:string
+import CategoryItem from "@/components/home-three/CategoryItem";
+interface propsType {
+  category: string;
 }
-const ShopSectionCategoryWize = ({category}:propsType) => {
+const ShopSectionCategoryWize = ({ category }: propsType) => {
   const {
     products,
     setProducts,
@@ -34,7 +32,7 @@ const ShopSectionCategoryWize = ({category}:propsType) => {
   } = useGlobalContext();
   const [searchValue, setSearchValue] = useState("");
   const [apiEndPoint, setapiEndPoint] = useState<string>("");
-  
+  const [catMenuOpen, setCatMenuOpen] = useState(false);
 
   const menuData = [
     {
@@ -65,7 +63,7 @@ const ShopSectionCategoryWize = ({category}:propsType) => {
 
     axios
       .get(
-        `${process.env.BASE_URL}product/search-products?search=${searchValue}&page=${page}&limit=${limit}`
+        `${process.env.BASE_URL}product/search-products?search=${searchValue}&page=${page}&limit=${limit}`,
       )
       .then((res) => {
         setProducts(res.data.products);
@@ -80,7 +78,7 @@ const ShopSectionCategoryWize = ({category}:propsType) => {
     if (category) {
       axios
         .get(
-          `${process.env.BASE_URL}product/search-products?search=${category}&page=${page}&limit=${limit}`
+          `${process.env.BASE_URL}product/search-products?search=${category}&page=${page}&limit=${limit}`,
         )
         .then((res) => {
           setProducts(res.data.products);
@@ -99,14 +97,14 @@ const ShopSectionCategoryWize = ({category}:propsType) => {
     limit,
     setPage,
   ]);
- 
+
   useEffect(() => {
     setProdcutLoadding(true);
     async function fetchData() {
       try {
         if (apiEndPoint != " ") {
           const response = await axios.get(
-            `${process.env.BASE_URL}product/${apiEndPoint}`
+            `${process.env.BASE_URL}product/${apiEndPoint}`,
           );
           setProducts(response.data);
           setProdcutLoadding(false);
@@ -123,18 +121,58 @@ const ShopSectionCategoryWize = ({category}:propsType) => {
 
   const selectHandler = () => {};
 
-  console.log(products)
+  console.log(products);
 
   return (
     <>
+      <div className="bd-header__buttom d-none d-sm-block">
+        <div className="container">
+          <div className="row align-items-center">
+            <div className="col-xxl-8 col-xl-8 col-md-8 col-sm-6">
+              <div className="bd-header__butttom-left">
+                <div className="bd-header__category-nav p-relative">
+                  <div
+                    className={
+                      catMenuOpen
+                        ? "bd-category__click items-open"
+                        : "bd-category__click"
+                    }
+                    onClick={() => {
+                      setCatMenuOpen(!catMenuOpen);
+                    }}
+                  >
+                    <div className="bd-bar__icon">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                    </div>
+                    <span>All Categories</span>
+                  </div>
+                  <div
+                    className={
+                      catMenuOpen
+                        ? "category__items d-block"
+                        : "category__items"
+                    }
+                  >
+                    <div className="category-item">
+                      <CategoryItem />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <section className="bd-shop__area pt-115 pb-85">
         <div className="container">
           <div className="row">
             <div className="col-xxl-3 col-xl-4 col-lg-4">
               <div className="bd-sidebar__widget-warpper mb-60">
                 <div className="bd-product__filters">
-                  <ShopSidebarCategories />
-                  <ShopSidebarRetting />
+                  {/* <ShopSidebarCategories /> */}
+                  {/* <ShopSidebarRetting /> */}
                   <FlashBanner />
                 </div>
               </div>

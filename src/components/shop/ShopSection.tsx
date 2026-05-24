@@ -125,7 +125,7 @@ const ShopSection = () => {
               <div className="bd-sidebar__widget-warpper mb-60">
                 <div className="bd-product__filters">
 
-                  <ShopSidebarRetting />
+                  {/* <ShopSidebarRetting /> */}
                   <FlashBanner />
                 </div>
               </div>

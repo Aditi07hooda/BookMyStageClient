@@ -18,7 +18,7 @@ const FeatureSection = () => {
                             </div>
                             <div className="bd-features__content">
                                 <h4><Link href="/performances">Evaluation Report</Link></h4>
-                                <span>Through Structured Parameters</span>
+                                <span>Using Structured Parameters</span>
                             </div>
                         </div>
                     </div>

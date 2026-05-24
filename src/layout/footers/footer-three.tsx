@@ -35,6 +35,11 @@ const FooterThree = () => {
       name: "Privacy Policy",
       link: "/privacy-policy",
     },
+    {
+      id: 5,
+      name: "Refund Policy",
+      link: "/refund-policy",
+    },
   ];
 
   useEffect(() => {
