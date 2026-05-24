@@ -14,6 +14,46 @@ const FooterThree = () => {
   const [categories, setCategories] = useState<CategoryType[]>([]);
   const { user } = useGlobalContext();
 
+  const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleNewsletterSubmit = async (
+    e: React.FormEvent<HTMLFormElement>,
+  ) => {
+    e.preventDefault();
+
+    if (!email) return;
+
+    try {
+      setLoading(true);
+
+      const response = await fetch(
+        `${process.env.BASE_URL}newsletter/subscribe`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        },
+      );
+
+      const data = await response.json();
+
+      if (data.success) {
+        alert("Subscribed successfully!");
+        setEmail("");
+      } else {
+        alert(data.message);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const categoryData = [
     {
       id: 1,
@@ -95,7 +135,9 @@ const FooterThree = () => {
                       <Link href="/performances">Performances</Link>
                     </li>
                     <li>
-                      <Link href={user ? "/dashboard" : "/login"}>Dashboard</Link>
+                      <Link href={user ? "/dashboard" : "/login"}>
+                        Dashboard
+                      </Link>
                     </li>
                     <li>
                       <Link href="/blog">Blogs</Link>
@@ -143,24 +185,24 @@ const FooterThree = () => {
                   <h4>Newsletter</h4>
                 </div>
                 <div className="bd-footer__subcribe p-relative mb-40">
-                  <form action="#">
-                    <input type="text" placeholder="Enter Your Email" />
-                    <button className="bd-footer__s-btn">
+                  <form onSubmit={handleNewsletterSubmit}>
+                    <input
+                      type="email"
+                      placeholder="Enter Your Email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      required
+                    />
+
+                    <button
+                      type="submit"
+                      className="bd-footer__s-btn"
+                      disabled={loading}
+                    >
                       <i className="fa-solid fa-arrow-right-long"></i>
                     </button>
                   </form>
                 </div>
-                {/* <div className="bd-footer__support-wrapper">
-                  <div className="bd-fotter__support-icon">
-                    <Image src={support} alt="support-img" />
-                  </div>
-                  <div className="bd-footer__support-inner">
-                    <span>8:30 AM - 9:30 PM</span>
-                    <h4>
-                      <Link href="tel:+58569502352">+585 695 023 52 </Link>{" "}
-                    </h4>
-                  </div>
-                </div> */}
               </div>
             </div>
           </div>
