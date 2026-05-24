@@ -227,4 +227,5 @@ export interface SubmissionInfoType {
   feedbackReportPath: string;
   evaluated: boolean;
   ageCategory: "Tiny Stars" | "Super Kids" | "Cool Champs" | "Teen Titans";
+  youtube?: boolean;
 }

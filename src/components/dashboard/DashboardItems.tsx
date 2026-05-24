@@ -10,6 +10,8 @@ import moment from "moment";
 import { ProductType, UserReviewType } from "@/interFace/api-interFace";
 import { toast } from "react-toastify";
 import VideoUpload from "./VideoUpload";
+import { Modal } from "react-bootstrap";
+import YoutubeModal from "../youtube/YoutubeModal";
 
 const styles = {
   container: {
@@ -219,6 +221,33 @@ const DashboardItems = () => {
     {},
   );
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedVideo, setSelectedVideo] = useState<any>(null);
+
+  const getYoutubeId = (url: string) => {
+    const regex = /(?:youtube\.com\/watch\?v=|youtu\.be\/)([^&]+)/;
+
+    const match = url.match(regex);
+
+    return match ? match[1] : "";
+  };
+
+  const openVideoModal = (youtubeUrl: string, title: string) => {
+    const youtubeId = getYoutubeId(youtubeUrl);
+
+    setSelectedVideo({
+      youtubeId,
+      title,
+    });
+
+    setShowModal(true);
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    setSelectedVideo(null);
+  };
+
   const handleVideoSubmit = async (video: File) => {
     if (!eventSubmission || !user?.email) return;
 
@@ -315,7 +344,7 @@ const DashboardItems = () => {
     setTimeout(() => URL.revokeObjectURL(url), 10_000);
   };
 
-    const getEvaluationGenerator = async (
+  const getEvaluationGenerator = async (
     evaluated: boolean,
     isReviewed: boolean,
     eventName: string,
@@ -546,6 +575,26 @@ const DashboardItems = () => {
                                       {item.ageCategory}
                                     </span>
                                   </Link>
+                                  {item.youtube ? (
+                                    <p
+                                      className="text-danger cursor-pointer"
+                                      style={{
+                                        cursor: "pointer",
+                                        fontWeight: 700,
+                                        marginTop: "6px",
+                                      }}
+                                      onClick={() =>
+                                        openVideoModal(
+                                          item.videoPath,
+                                          item.eventname,
+                                        )
+                                      }
+                                    >
+                                      🎬 Play your Performance Video
+                                    </p>
+                                  ) : (
+                                    <p></p>
+                                  )}
                                 </td>
                                 <td className="product-subtotal">
                                   <div className="bd-banner__btn">
@@ -696,6 +745,13 @@ const DashboardItems = () => {
                 </div>
               </div>
             </div>
+
+            {/* ⭐ MODAL FOR YOUTUBE VIDEO */}
+            <YoutubeModal
+              show={showModal}
+              selectedVideo={selectedVideo}
+              handleModalClose={handleModalClose}
+            />
             <hr />
           </div>
         </>

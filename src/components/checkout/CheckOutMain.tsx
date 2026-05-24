@@ -7,10 +7,8 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import { toast } from "react-toastify";
 import moment from "moment";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import { useDispatch } from "react-redux";
 import { clear_cart_after_payment } from "@/redux/slices/cartSlice";
-import { log } from "console";
 import DeclarationBox from "./DeclarationBox";
 
 declare global {
@@ -32,9 +30,10 @@ interface FormData {
 const CheckOutMain = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { user, header, setPaymentSuccess } = useGlobalContext();
+  const { user, setPaymentSuccess } = useGlobalContext();
   const [razorpayLoaded, setRazorpayLoaded] = useState(false);
   const [consentGiven, setConsentGiven] = useState(false);
+  const [paymentLoading, setPaymentLoading] = useState(false);
   const now = moment();
   const date = now.format("MM/DD/YY hh:mm a");
   const cartProducts = useSelector(
@@ -78,17 +77,23 @@ const CheckOutMain = () => {
   } = useForm<FormData>();
 
   const paymentHandler = async (data: FormData) => {
+    if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID) {
+      toast.error("Payment gateway configuration missing");
+      return;
+    }
+
     if (!razorpayLoaded) {
       console.error("Razorpay SDK is not loaded");
       return;
     }
+    setPaymentLoading(true);
 
     try {
       const response = await fetch(`${process.env.BASE_URL}payment/order`, {
         method: "POST",
         body: JSON.stringify({
           options: {
-            amount: totalPrice * 100, // Convert to paise for Razorpay
+            amount: 1, // Convert to paise for Razorpay
             currency: "INR",
             receipt: `receipt_${Math.random().toString(36).substring(7)}`,
           },
@@ -141,15 +146,20 @@ const CheckOutMain = () => {
           );
 
           const jsonRes = await validateRes.json();
-          if ((jsonRes.msg = "success")) {
+          if (jsonRes.msg === "success") {
             router.push("/profile");
             dispatch(clear_cart_after_payment());
             setPaymentSuccess(true);
             toast.success(`Payment Success`, {
               position: "top-left",
             });
+            setPaymentLoading(false);
           }
         },
+        retry: {
+          enabled: true,
+        },
+        timeout: 300,
         prefill: {
           name: data.Fname,
           email: data.EmailAddress,
@@ -161,6 +171,12 @@ const CheckOutMain = () => {
         },
         theme: {
           color: "#3399cc",
+        },
+        modal: {
+          ondismiss: function () {
+            toast.error("Payment cancelled");
+            setPaymentLoading(false);
+          },
         },
       };
 
@@ -187,14 +203,17 @@ const CheckOutMain = () => {
         );
 
         const jsonRes = await validateRes.json();
-        toast.error(`Payment Failed`, {
+        toast.error(response.error.description || "Payment Failed", {
           position: "top-left",
         });
+        setPaymentLoading(false);
       });
 
       rzp1.open();
     } catch (error) {
       console.error("Payment initialization failed", error);
+      setPaymentLoading(false);
+      toast.error("Unable to initialize payment");
     }
   };
 
@@ -344,24 +363,30 @@ const CheckOutMain = () => {
                           <button
                             type="submit"
                             className={`bd-fill__btn ${
-                              !consentGiven || !razorpayLoaded
+                              !consentGiven || !razorpayLoaded || paymentLoading
                                 ? "disabled-btn"
                                 : ""
                             }`}
-                            disabled={!razorpayLoaded || !consentGiven}
+                            disabled={
+                              !razorpayLoaded || !consentGiven || paymentLoading
+                            }
                             title={
                               !consentGiven
                                 ? "Please accept declaration to proceed"
                                 : !razorpayLoaded
                                   ? "Payment gateway loading..."
-                                  : ""
+                                  : paymentLoading
+                                    ? "Processing Payment..."
+                                    : ""
                             }
                           >
-                            {!razorpayLoaded
-                              ? "Loading Payment..."
-                              : !consentGiven
-                                ? "Accept Declaration to Continue"
-                                : "Place Order"}
+                            {paymentLoading
+                              ? "Processing Payment..."
+                              : !razorpayLoaded
+                                ? "Loading Payment..."
+                                : !consentGiven
+                                  ? "Accept Declaration to Continue"
+                                  : "Place Order"}
                           </button>
                         ) : (
                           <button

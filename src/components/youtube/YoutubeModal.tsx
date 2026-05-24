@@ -1,51 +1,46 @@
-import React from 'react'
+"use client";
+
+import React from "react";
+import Modal from "react-bootstrap/Modal";
 import { VideoItem } from "./VideoCard";
 
 interface YoutubeModalProps {
+  show: boolean;
   selectedVideo: VideoItem | null;
   handleModalClose: () => void;
 }
 
 const YoutubeModal: React.FC<YoutubeModalProps> = ({
+  show,
   selectedVideo,
   handleModalClose,
 }) => {
   return (
-    <>
-      <div
-          className="modal fade"
-          id="videoModal"
-          tabIndex={-1}
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-centered modal-lg">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title">{selectedVideo?.title}</h5>
-                <button
-                  type="button"
-                  className="btn-close"
-                  data-bs-dismiss="modal"
-                  onClick={handleModalClose}
-                ></button>
-              </div>
+    <Modal
+      show={show}
+      onHide={handleModalClose}
+      centered
+      size="lg"
+    >
+      <Modal.Header closeButton>
+        <Modal.Title>
+          {selectedVideo?.title}
+        </Modal.Title>
+      </Modal.Header>
 
-              <div className="modal-body p-0">
-                {selectedVideo && (
-                  <iframe
-                    className="w-100"
-                    style={{ height: "400px" }}
-                    src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
-                    allow="autoplay; encrypted-media"
-                    allowFullScreen
-                  />
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-    </>
-  )
-}
+      <Modal.Body className="p-0">
+        {selectedVideo && (
+          <iframe
+            width="100%"
+            height="400"
+            src={`https://www.youtube.com/embed/${selectedVideo.youtubeId}?autoplay=1`}
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+          />
+        )}
+      </Modal.Body>
+    </Modal>
+  );
+};
 
-export default YoutubeModal
+export default YoutubeModal;

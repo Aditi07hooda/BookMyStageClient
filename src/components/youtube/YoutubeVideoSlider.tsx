@@ -113,6 +113,7 @@ const YoutubeVideoSlider: React.FC<YoutubeSliderProps> = ({
         </div>
         {/* Modal */}
         <YoutubeModal
+          show={!!selectedVideo}
           selectedVideo={selectedVideo}
           handleModalClose={handleModalClose}
         />
