@@ -15,6 +15,7 @@ import VideoManagerRoute from "./app/modules/video-manager/video-manager.route";
 import PDFManagerRoute from "./app/modules/pdf-manager/pdf-manger.route";
 import evaluatorRoutes from "./app/modules/evaluators/evaluators.route";
 import pdfGenerationRoutes from "./app/modules/pdf/pdf-generation.route";
+import NewsLetterRoute from "./app/modules/newsletter/newsletter.route";
 const app: Application = express();
 
 // cors
@@ -36,7 +37,7 @@ app.use("/blog", blogRoute);
 app.use("/team", teamRoute);
 app.use("/evaluator", evaluatorRoutes);
 app.use("/pdf", pdfGenerationRoutes);
-
+app.use("/newsletter", NewsLetterRoute);
 app.use("/email", emailRouter);
 app.use("/pdf", PDFManagerRoute);
 app.use("/dashboard", dashboardRoute);

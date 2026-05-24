@@ -13,6 +13,8 @@ import {
   ratingRequestEmailHtml,
   signupEmailHtml,
   videoUploadedEmailHtml,
+  contactQueryAcknowledgementEmailHtml,
+  newsletterSubscriptionEmailHtml,
 } from "./email.template";
 import dotenv from "dotenv";
 dotenv.config();
@@ -73,7 +75,7 @@ export const sendFailedTransactionEmail = async (
 export const sendSignUpEmail = async (email: string, name: string) => {
   await sendEmail(
     email,
-    "SignUp Confirmation",
+    "Welcome to Book My Stage — Your Child's Stage Awaits! 🎭",
     signupEmailHtml({ name, dashboardUrl: process.env.FRONTEND_URL + "/dashboard" })
   );
 };
@@ -84,7 +86,7 @@ export const bookingConfirmationEmail = async (
 ) => {
   await sendEmail(
     buyerEmail,
-    "Your Product Details & Submission Guidelines",
+    `Booking Confirmed! 🎉 ${name}'s Performance is Booked — Book My Stage`,
     bookingConfirmationEmailHtml({ name, eventName: productName, eventDetail: productDetail, eventDate, orderId, dashboardUrl })
   );
 };
@@ -94,7 +96,7 @@ export const sendSubmissionEmail = async (
 ) => {
   await sendEmail(
     buyerEmail,
-    "You Have Successfully Submitted",
+    `Video Received! 🎬 ${name}'s Performance is Now Under Evaluation — Book My Stage`,
     videoUploadedEmailHtml({ name, eventName: productName, dashboardUrl })
   );
 };
@@ -104,7 +106,7 @@ export const sendReviewSubmissionEmail = async (
 ) => {
   await sendEmail(
     buyerEmail,
-    "You Have Successfully Submitted the Review",
+    `Review Received! ⭐ Thank you for your feedback on your recent performance — Book My Stage`,
     ratingRequestEmailHtml({ name, eventName: productName, ratingUrl: dashboardUrl })
   );
 };
@@ -114,7 +116,7 @@ export const sendEvaluationDoneEmail = async (
 ) => {
   await sendEmail(
     buyerEmail,
-    "Evaluation Completed for Your Submission",
+    `🎓 ${name}'s Evaluation is Ready! Download Report & Certificate — Book My Stage`,
     evaluationDoneEmailHtml({ name, eventName: productName, feedbackUrl: dashboardUrl })
   );
 };
@@ -124,7 +126,7 @@ export const sendCertificateReadyEmail = async (
 ) => {
   await sendEmail(
     buyerEmail,
-    "Your Certificate is Ready",
+    `🎓 ${name}'s Certificate is Ready! Download Now — Book My Stage`,
     certificateReadyEmailHtml({ name, eventName: productName, certificateUrl: dashboardUrl })
   );
 };
@@ -134,55 +136,27 @@ export const sendprofileUpdatedEmail = async (
 ) => {
   await sendEmail(
     buyerEmail,
-    "Your Profile has been Updated",
+    "Profile Updated Successfully! 🎉 Your Book My Stage Profile Has Been Updated",
     profileUpdatedEmailHtml({ name, dashboardUrl })
   );
 };
-export const sendRepairRequest = async (req: Request, res: Response) => {
-  const { name, email, phoneNumber, body, to } = req.body as RepairRequest;
-  const files = req.files as Express.Multer.File[];
-  const attachments = files.map(f => ({ filename: f.originalname, path: f.path }));
 
-  const sent = await sendEmail(to, "New Repair Request", `
-    <h2>New Repair Request</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phoneNumber}</p>
-    <p><strong>Description:</strong> ${body}</p>
-  `, attachments);
+export const sendContactQueryAcknowledgementEmail = async (
+  buyerEmail: string, name: string, email: string, mobile: string, message: string, submittedOn: string, websiteUrl: string
+  ) => {
+    await sendEmail(
+      buyerEmail,
+      "We've Received Your Query! 📬 Book My Stage Support Team Will Get Back to You Soon",
+      contactQueryAcknowledgementEmailHtml({ name, email, mobile, message, submittedOn, websiteUrl })
+    );
+  };
 
-  res.status(sent ? 200 : 500).json({ success: sent });
-};
-
-export const sendDonationRequest = async (req: Request, res: Response) => {
-  const { name, email, phoneNumber, numberOfToys, donationDetails, to } = req.body as DonationRequest;
-  const files = req.files as Express.Multer.File[];
-  const attachments = files.map(f => ({ filename: f.originalname, path: f.path }));
-
-  const sent = await sendEmail(to, "New Donation Request", `
-    <h2>New Donation Request</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phoneNumber}</p>
-    <p><strong>Number of Toys:</strong> ${numberOfToys}</p>
-    <p><strong>Details:</strong> ${donationDetails}</p>
-  `, attachments);
-
-  res.status(sent ? 200 : 500).json({ success: sent });
-};
-
-export const sendCustomizationRequest = async (req: Request, res: Response) => {
-  const { name, email, phoneNumber, customizationDetails, to } = req.body as CustomizationRequest;
-  const files = req.files as Express.Multer.File[];
-  const attachments = files.map(f => ({ filename: f.originalname, path: f.path }));
-
-  const sent = await sendEmail(to, "New Customization Request", `
-    <h2>New Customization Request</h2>
-    <p><strong>Name:</strong> ${name}</p>
-    <p><strong>Email:</strong> ${email}</p>
-    <p><strong>Phone:</strong> ${phoneNumber}</p>
-    <p><strong>Details:</strong> ${customizationDetails}</p>
-  `, attachments);
-
-  res.status(sent ? 200 : 500).json({ success: sent });
+export const sendNewsletterSubscriptionEmail = async (
+  buyerEmail: string, exploreUrl: string
+) => {
+  await sendEmail(
+    buyerEmail,
+    "Welcome to the Book My Stage Newsletter! 🎉 Stay Tuned for the Latest Updates, Tips, and Exclusive Offers",
+    newsletterSubscriptionEmailHtml({exploreUrl})
+   );
 };

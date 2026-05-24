@@ -2,7 +2,10 @@ import { Product } from "./../product/product.model";
 import { Request, Response } from "express";
 import { ContactInfo, RefundInfo, Reviews } from "./user-input.model";
 import { Types } from "mongoose";
-import { sendReviewSubmissionEmail } from "../email/email.controller";
+import {
+  sendContactQueryAcknowledgementEmail,
+  sendReviewSubmissionEmail,
+} from "../email/email.controller";
 import { User } from "../user/user.model";
 
 export const createReview = async (req: Request, res: Response) => {
@@ -11,7 +14,7 @@ export const createReview = async (req: Request, res: Response) => {
     await reviewInfo.save();
     const sendProdutReview = await Product.updateOne(
       { _id: reviewInfo.productId },
-      { $push: { rettings: reviewInfo.retting } }
+      { $push: { rettings: reviewInfo.retting } },
     );
 
     res.send({ message: "success", data: sendProdutReview });
@@ -78,7 +81,7 @@ export const deleteReview = async (req: Request, res: Response) => {
           $pull: {
             rettings: retting,
           },
-        }
+        },
       );
 
       res.send({ message: "success" });
@@ -103,7 +106,7 @@ export const updateReview = async (req: Request, res: Response) => {
       // Attempt to update the existing review
       result = await Reviews.updateOne(
         { _id: id },
-        { $set: { retting, review } }
+        { $set: { retting, review } },
       );
     }
 
@@ -136,14 +139,23 @@ export const updateReview = async (req: Request, res: Response) => {
 
       const updatedReview = await Product.updateOne(
         { productName },
-        { $set: { [`rettings.${safeEmailKey}`]: retting } }
+        { $set: { [`rettings.${safeEmailKey}`]: retting } },
       );
 
-      const username = await User.findOne({ email: email }).then((user) => user?.name || "Participant");
+      const username = await User.findOne({ email: email }).then(
+        (user) => user?.name || "Participant",
+      );
 
-      await sendReviewSubmissionEmail(email, username, productName, process.env.FRONTEND_URL + "/dashboard")
+      await sendReviewSubmissionEmail(
+        email,
+        username,
+        productName,
+        process.env.FRONTEND_URL + "/dashboard",
+      );
 
-      return res.status(200).send({ message: "success", Review: updatedReview });
+      return res
+        .status(200)
+        .send({ message: "success", Review: updatedReview });
     } else {
       return res
         .status(400)
@@ -166,6 +178,15 @@ export const createConatact = async (req: Request, res: Response) => {
       res.send({ message: "custom error" });
     } else {
       await contactdata.save();
+      await sendContactQueryAcknowledgementEmail(
+        contactdata.email,
+        contactdata.name,
+        contactdata.email,
+        contactdata.phone,
+        contactdata.message,
+        contactdata.date,
+        `${process.env.FRONTEND_URL}/performances`,
+      );
       res.send({ message: "success" });
     }
   } catch (e) {
