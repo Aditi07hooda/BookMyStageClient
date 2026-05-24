@@ -93,7 +93,7 @@ const CheckOutMain = () => {
         method: "POST",
         body: JSON.stringify({
           options: {
-            amount: 1, // Convert to paise for Razorpay
+            amount: 100, // Convert to paise for Razorpay
             currency: "INR",
             receipt: `receipt_${Math.random().toString(36).substring(7)}`,
           },
@@ -111,7 +111,7 @@ const CheckOutMain = () => {
 
       const options = {
         key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Your Razorpay Key ID
-        amount: totalPrice * 100, // Amount in currency subunits
+        amount: 100, // Amount in currency subunits
         currency: "INR",
         name: "Book My Stage",
         description: payment_description,

@@ -69,14 +69,12 @@ const FooterOne = () => {
       const data = await response.json();
 
       if (data.success) {
-        alert("Subscribed successfully!");
         setEmail("");
       } else {
         alert(data.message);
       }
     } catch (error) {
       console.error(error);
-      alert("Something went wrong");
     } finally {
       setLoading(false);
     }
