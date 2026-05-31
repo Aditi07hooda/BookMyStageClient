@@ -6,17 +6,16 @@ import { cart_product } from "@/redux/slices/cartSlice";
 import { wishlist_product } from "@/redux/slices/wishlistSlice";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 const GridViewProduct = ({ products, limit }: any) => {
+  const [showCategoryModal, setShowCategoryModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState<any>(null);
+  const [ageCategory, setAgeCategory] = useState("");
   const { openModal, setOpenModal, setModalId, prodcutLoadding } =
     useGlobalContext();
   const dispatch = useDispatch();
-
-  const handleAddToCart = (product: CartProductType) => {
-    dispatch(cart_product(product));
-  };
   const handleAddToWishlist = (product: CartProductType) => {
     dispatch(wishlist_product(product));
   };
@@ -40,7 +39,7 @@ const GridViewProduct = ({ products, limit }: any) => {
 
             const sum = rettingsArray.reduce(
               (acc: number, currentValue: number) => acc + currentValue,
-              0
+              0,
             );
 
             const rettingsLength = rettingsArray.length;
@@ -71,7 +70,11 @@ const GridViewProduct = ({ products, limit }: any) => {
                         data-toggle="tooltip"
                         data-placement="top"
                         title="Quick Performance"
-                        onClick={() => handleAddToCart(item)}
+                        onClick={() => {
+                          setSelectedProduct(item);
+                          setAgeCategory("");
+                          setShowCategoryModal(true);
+                        }}
                       >
                         <i className="fal fa-cart-arrow-down"></i>
                       </span>
@@ -189,6 +192,72 @@ const GridViewProduct = ({ products, limit }: any) => {
             <p className="text center">No Product</p>
           )}
         </>
+      )}
+      {showCategoryModal && (
+        <div
+          className="modal fade show d-block"
+          style={{ background: "rgba(0,0,0,0.5)" }}
+        >
+          <div className="modal-dialog modal-dialog-centered">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title">Select Age Category</h5>
+                <button
+                  type="button"
+                  className="btn-close"
+                  onClick={() => setShowCategoryModal(false)}
+                />
+              </div>
+
+              <div className="modal-body">
+                <p className="mb-2 fw-medium">{selectedProduct?.productName}</p>
+
+                <select
+                  className="form-select"
+                  value={ageCategory}
+                  onChange={(e) => setAgeCategory(e.target.value)}
+                >
+                  <option value="">-- Select Category --</option>
+                  <option value="Tiny Stars">
+                    🌟 Tiny Stars (Playschool–UKG)
+                  </option>
+                  <option value="Super Kids">🚀 Super Kids (Grades 1–4)</option>
+                  <option value="Cool Champs">
+                    ⭐ Cool Champs (Grades 5–8)
+                  </option>
+                  <option value="Teen Titans">
+                    🔥 Teen Titans (Grades 9–12)
+                  </option>
+                </select>
+              </div>
+
+              <div className="modal-footer">
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowCategoryModal(false)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="btn btn-primary"
+                  disabled={!ageCategory}
+                  onClick={() => {
+                    dispatch(
+                      cart_product({
+                        ...selectedProduct,
+                        ageCategory,
+                      }),
+                    );
+                    setShowCategoryModal(false);
+                  }}
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </>
   );
